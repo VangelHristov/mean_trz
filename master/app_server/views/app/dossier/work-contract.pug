@@ -1,0 +1,162 @@
+#work-contract.tab-pane(role='tabpanel')
+    .row
+        .col-xs-12
+            button.btn.btn-default.col-xs-12.col-lg-2(type='button')
+                i.fa.fa-print
+                |  Принтирай
+            button.btn.btn-default.col-xs-12.col-lg-2(type='button')
+                i.fa.fa-file-pdf-o
+                |  Запази в pdf
+            button.btn.btn-default.col-xs-12.col-lg-2(type='button')
+                i.fa.fa-file-word-o
+                |  Запази в doc
+            button.btn.btn-default.col-xs-12.col-lg-2(type='button', data-toggle='modal', data-target='#dossers-table-modal')
+                i.fa.fa-list
+                |  Друго досие
+
+
+    form.form
+        fieldset.margin-bottom
+            legend
+            // 1.Вид осигурен
+            .form-group
+                label.col-lg-3.control-label.margin-top(for='insured-type')
+                    | Вид осигурен
+                    span.required  *
+                .col-lg-3
+                    select#insured-type.form-control.margin-top(name='insured-type')
+                        option(value='1') 1
+                        option(value='2') 2
+
+            // 2.Номер на трудов договор
+            .form-group
+                label.col-lg-3.control-label(for='contract-number')
+                    | Номер на трудов
+                    | договор
+                    span.required  *
+                .col-lg-3
+                    input#contract-number.form-control.input-md(name='contract-number', required='', type='text')
+
+            // 3.Дата на сключване
+            .form-group
+                label.col-lg-3.control-label(for='signing-date')
+                    | Дата на сключване
+                    span.required  *
+                .col-lg-3
+                    input#signing-date.form-control.input-md.datepicker(name='signing-date', required='', type='text')
+
+            // 4.Дата на започване
+            .form-group
+                label.col-lg-3.control-label(for='start-date')
+                    | Дата на започване
+                    span.required  *
+                .col-lg-3
+                    input#start-date.form-control.input-md.datepicker(name='start-date', required='', type='text')
+
+            // 5.Основна заплата
+            .form-group
+                label.col-lg-3.control-label(for='principal-salary')
+                    | Основна заплата
+                    span.required  *
+                .col-lg-3
+                    input#principal-salary.form-control.input-md(name='principal-salary', required='', type='text')
+            // 6.Срок на договора
+            .form-group
+                label.col-lg-3.control-label(for='contract-length')
+                    | Срок на
+                    | договора
+                .col-lg-3
+                    input#contract-length.form-control.input-md(name='contract-length', type='text')
+
+            // 7.Работно време
+            .form-group
+                label.col-lg-3.control-label(for='work-hours')
+                    | Работно време
+                    span.required  *
+                .col-lg-3
+                    input#work-hours.form-control.input-md(name='work-hours', required='', type='text')
+
+            // 8.Длъжност НКПД
+            .form-group
+                label.col-lg-3.control-label(for='nkpd')
+                    | Длъжност НКПД
+                    span.required  *
+                .col-lg-3
+                    input#nkpd.form-control.input-md(name='nkpd', required='', type='text')
+
+            // 9.КИД
+            .form-group
+                label.col-lg-3.control-label(for='kid')
+                    | КИД
+                    span.required  *
+                .col-lg-3
+                    input#kid.form-control.input-md(name='kid', required='', type='text')
+
+            // 10.Срок на предизвестие
+            .form-group
+                label.col-lg-3.control-label(for='notice')
+                    | Срок на предизвестие
+                    span.required  *
+                .col-lg-3
+                    input#notice.form-control.input-md(name='notice', required='', type='text')
+
+            // 11.Отпуск размер
+            .form-group
+                label.col-lg-3.control-label(for='payed-vacation')
+                    | Отпуск размер
+                    span.required  *
+                .col-lg-3
+                    input#payed-vacation.form-control.input-md(name='payed-vacation', required='', type='text')
+            // 12.Срок на изпитване
+            .form-group
+                label.col-lg-3.control-label(for='trail-period')
+                    | Срок на
+                    | изпитване
+                .col-lg-3
+                    input#trail-period.form-control.input-md(name='trail-period', type='text')
+
+            // 13.Общ стаж
+            .form-group
+                label.col-lg-3.control-label(for='work-experience')
+                    | Общ стаж
+                    span.required  *
+                .col-lg-3
+                    input#work-experience.form-control.input-md(name='work-experience', required='', type='text')
+            // 14.Стаж по специалност
+            .form-group
+                label.col-lg-3.control-label(for='speciality-experience')
+                    | Стаж по
+                    | специалност
+                    span.required  *
+                .col-lg-3
+                    input#speciality-experience.form-control.input-md(name='speciality-experience', required='', type='text')
+            // 15.Осигурителен стаж
+            .form-group
+                label.col-lg-3.control-label(for='insured-experience')
+                    | Осигурителен стаж
+                    span.required  *
+                .col-lg-3
+                    input#insured-experience.form-control.input-md(name='insured-experience', required='', type='text')
+
+            // 16.Дата на прекратяване
+            .form-group
+                label.col-lg-3.control-label(for='end-date')
+                    | Дата на прекратяване
+                    span.required  *
+                .col-lg-3
+                    input#end-date.form-control.input-md.datepicker(name='end-date', required='', type='text')
+
+            // 17.Последен ден в осигуряване
+            .form-group
+                label.col-lg-3.control-label(for='last-day')
+                    | Последен ден в
+                    | осигуряване
+                    span.required  *
+                .col-lg-3
+                    input#last-day.form-control.input-md.datepicker(name='last-day', required='', type='text')
+
+            // Бутон `Зпази`
+            .form-group
+                .col-lg-3.col-lg-offset-3
+                    button.btn.btn-default(type='button')
+                        | Запази

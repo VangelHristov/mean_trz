@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        title ТРЗВВ Вход
+        link(href='css/authentication.css', rel='stylesheet')
+        script(src='js/prefixfree.min.js')
+    body
+        .body
+        .grad
+        .header
+            div
+                | ТРЗ
+                span ВВ
+        br
+        .login
+            input(type='text', placeholder='потребителско име', name='user')
+            br
+            input(type='password', placeholder='парола', name='password')
+            br
+            input(type='button', value='Влез', onclick="window.location='companies'")
+            a(href="forgotten-password") Забравена парола?
+        // add js file to handle click event
+        script(src='bower_components/jquery/dist/jquery.min.js')

@@ -1,0 +1,24 @@
+{
+  "name": "trzvv",
+  "homepage": "https://github.com/VangelHristov/trzvv",
+  "authors": [
+    "Vangel Hristov <vangel.hristov@yahoo.com>"
+  ],
+  "description": "accounting",
+  "main": "",
+  "license": "AGPLv3",
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "jquery.easing": "jquery-easing-original#^1.4.1",
+    "isotope": "^3.0.1",
+    "wow": "wowjs#^1.1.2",
+    "animate.css": "^3.5.2",
+    "pretty-photo": "^1.0.1",
+    "jquery-old": "jquery#1.12.x",
+    "bootstrap-datepicker": "^1.6.4",
+    "datatables.net": "^1.10.13",
+    "datatables.net-dt": "^3.2.2"
+  }
+}

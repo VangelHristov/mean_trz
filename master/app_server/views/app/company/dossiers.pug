@@ -1,0 +1,43 @@
+#dossiers.tab-pane(role='tabpanel')
+    .row
+        .col-xs-12.btn-group
+            button.btn.btn-default.col-xs-12.col-lg-2(type='button')
+                i.fa.fa-upload
+                |  Добави от xlsx
+            button.btn.btn-default.col-xs-12.col-lg-2(type='button', onclick='window.location="dossier"')
+                i.fa.fa-user-plus
+                | Добави ново досие
+            .dropdown.col-xs-12.col-lg-2
+                a.btn.btn-default.col-xs-12.col-lg-12(type='button', data-toggle='dropdown', data-target='#', href='#')
+                    | Масови операции
+                    span.caret
+                ul.dropdown-menu.multi-level(role='menu', aria-labelledby='dropdownMenu')
+                    li.dropdown-submenu
+                        a(tabindex='-1', href='#') За отдел
+                        ul.dropdown-menu
+                            li.dropdown-submenu
+                                a(href='#') Служебни бележки
+                                ul.dropdown-menu
+                                    li
+                                        a(href='#') За доход
+                                    li
+                                        a(href='#') За данък
+                            li.divider
+                            li
+                                a(href='#') Преизчисляване на данък
+                    li.divider
+                    li.dropdown-submenu
+                        a(tabindex='-1', href='#') За обект
+                        ul.dropdown-menu
+                            li.dropdown-submenu
+                                a(href='#') Служебни бележки
+                                ul.dropdown-menu
+                                    li
+                                        a(href='#') За доход
+                                    li
+                                        a(href='#') За данък
+                            li.divider
+                            li
+                                a(href='#') Преизчисляване на данък
+
+    include dossiers-table.pug

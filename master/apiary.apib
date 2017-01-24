@@ -1,0 +1,869 @@
+FORMAT: 1A
+HOST: http://trzvv.herokuapp.com
+
+# TRZVV
+
+TRZVV is basic accounting application
+
+## Users [/api/users]
+
+### Register [POST]
+
++ Request (application/json)
+
+        {
+            "username": "Bond",
+            "password": "pass",
+            "email": "tomorrow_never_dies@mi6.co.uk"
+        }
+
++ Response 201 (application/json)
+
+        {  
+            "_id":"587f4d2ec11393131769121b"
+        }
+        
+        
+### Login [PUT]
+
++ Request (application/json)
+
+        {
+            "username": "Bond_James_Bond",
+            "password": "TopSecret"
+        }
+        
++ Response  200 (application/json)
+
+        {
+            "_id": "587f4d2ec11393131769121b",
+            "companies": [{
+                "_id": "587f524873261b14ec07355f",
+                "director": "Вангел Христов",
+                "companyInfo": {
+                    "name": "ТРЗ",
+                    "bulstat": "123456786"
+                }
+            }]
+        }
+
+## Users by id [/api/users/{id}]
+
++ Parameters
+    + id  - The _id of the user
+    
+### Update [PUT]
+
++ Request (application/json)
+
+        {
+            "email": "Bruce.Wayne@GothamCity.com",
+            "password": "batman_forever",
+            "username": "Batman"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "587bedf6638daa4b8cc2cf3f"
+        }
+        
+        
+### DELETE [DELETE]
+
++ Response 204
+
+        
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+            "_id": "587f4d2ec11393131769121b",
+            "companies": [{
+                "_id": "587f524873261b14ec07355f",
+                "director": "Вангел Христов",
+                "companyInfo": {
+                    "name": "ТРЗ",
+                    "bulstat": "123456786"
+                }
+            }]
+        }
+
+## Companies [/api/companies]
+
+### POST [POST]
+
++ Request (application/json)
+
+        {  
+            "owner":"587f7327e393c31fdd7329d1",
+            "director":"Вангел Христов",
+            "companyInfo":{  
+                "name":"ТРЗ",
+                "bulstat":"123456786",
+                "mainEconomicActivity":"Услуги",
+                "registeredAddress":{  
+                    "street":"Свобода 4",
+                    "city":"Благоевград",
+                    "postalCode":"2700",
+                    "country":"България"
+                },
+                "correspondenceAddress":{  
+                    "street":"Никола Вапцаров 35",
+                    "city":"Благоевград",
+                    "postalCode":"2700",
+                    "country":"България"
+                }
+            }
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "__v": 0,
+            "owner": "587f4d2ec11393131769121b",
+            "director": "Вангел Христов",
+            "companyInfo": {
+                "name": "ТРЗ",
+                "bulstat": "123456786",
+                "mainEconomicActivity": "Услуги",
+                "registeredAddress": {
+                    "street": "Свобода 4",
+                    "city": "Благоевград",
+                    "postalCode": "2700",
+                    "country": "България"
+                },
+                "correspondenceAddress": {
+                    "street": "Никола Вапцаров 35",
+                    "city": "Благоевград",
+                    "postalCode": "2700",
+                    "country": "България"
+                }
+            },
+            "_id": "587f524873261b14ec07355f",
+            "dossiers": []
+        }
+
+
+## Companies by id [/api/companies/{userId}]
+
+### GET [GET]
+
++ Parameters
+    + userId - The _id of the owner of the companies
+
+        
++ Response 200 (application/json)
+
+        {
+            "_id": "587f73f1e393c31fdd7329d2",
+            "director": "Вангел Христов",
+            "companyInfo": {
+                "name": "ТРЗ",
+                "bulstat": "123456786"
+            },
+            "dossiers": []
+        }
+        
+        
+### Update [PUT]
+
++ Request (application/json)
+
+        {  
+            "director": "Владислав Христов",
+            "companyInfo": {  
+                "mainEconomicActivity": "Продажби"
+              
+              }
+        }
+
++ Response 200 (application/json)
+
+        {
+            "_id": "587f74a9b9f1962024d48128",
+            "owner": "587f7327e393c31fdd7329d1",
+            "director": "Владислав Христов",
+            "companyInfo": {
+                "name": "ТРЗ",
+                "bulstat": "123456786",
+                "mainEconomicActivity": "Продажби",
+                "registeredAddress": {
+                    "street": "Свобода 4",
+                    "city": "Благоевград",
+                    "postalCode": "2700",
+                    "country": "България"
+                },
+                "correspondenceAddress": {
+                    "street": "Никола Вапцаров 35",
+                    "city": "Благоевград",
+                    "postalCode": "2700",
+                    "country": "България"
+                }
+            },
+            "__v": 0,
+            "dossiers": []
+        }
+        
+## Companies settings [/api/companies-settings]
+
+### POST [POST]
+
++ Request (application/json)
+
+        {  
+            "owner": "587f74a9b9f1962024d48128",
+            "pkpv": "3"
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "__v": 0,
+            "owner": "587f74a9b9f1962024d48128",
+            "pkpv": "3",
+            "_id": "587f75b6b9f1962024d48129"
+        }
+        
+## Companies settings by id [/api/companies-settings/{id}]
+
++ Parameters
+    + id - The _id of the company settings
+
+### Update [PUT]
+
++ Request (application/json)
+
+        {  
+            "pkpv": "33"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "_id": "587f75b6b9f1962024d48129",
+            "owner": "587f74a9b9f1962024d48128",
+            "pkpv": "33",
+            "__v": 0
+        }
+        
+        
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+            "_id": "587f75b6b9f1962024d48129",
+            "owner": "587f74a9b9f1962024d48128",
+            "pkpv": "33",
+            "__v": 0
+        }
+        
+## Dossiers [/api/dossiers]
+
+### POST [POST]
+
++ Request (application/json)
+
+        {  
+            "owner":"587f74a9b9f1962024d48128",
+            "personalInfo":{  
+                "id":{  
+                    "bulgarian":{  
+                        "egn":"8601110000",
+                        "idCardNumber":"000000000"
+                    }
+                },
+                "names":{  
+                    "first":"Вангел",
+                    "middle":"Ванчов",
+                    "last":"Христов"
+                },
+                "address":{  
+                    "street":"Свобода 4",
+                    "city":"София",
+                    "postalCode":"2700",
+                    "country":"България"
+                }
+            }
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "__v": 0,
+            "owner": "587f74a9b9f1962024d48128",
+            "personalInfo": {
+                "id": {
+                    "bulgarian": {
+                        "egn": "8601110000",
+                        "idCardNumber": "000000000"
+                    }
+                },
+                "names": {
+                    "first": "Вангел",
+                    "middle": "Ванчов",
+                    "last": "Христов"
+                },
+                "address": {
+                    "street": "Свобода 4",
+                    "city": "София",
+                    "postalCode": "2700",
+                    "country": "България"
+                }
+            },
+            "_id": "587f76f0b9f1962024d4812a",
+            "sickLeaves": [],
+            "vacations": [],
+            "civilContracts": [],
+            "workContracts": []
+        }
+        
++ Request (application/json)
+
+        {  
+            "owner":"587f74a9b9f1962024d48128",
+            "personalInfo":{  
+                "id":{  
+                    "foreign":{  
+                        "lnch":"000000000",
+                        "sex":"Мъж",
+                        "dob":"1986-01-11T00:00:00.000Z",
+                        "idCardNumber":"000000000"
+                    }
+                },
+                "names":{  
+                    "first":"Вангел",
+                    "middle":"Ванчов",
+                    "last":"Христов"
+                },
+                "address":{  
+                    "street":"Свобода 4",
+                    "city":"София",
+                    "postalCode":"2700",
+                    "country":"България"
+                }
+            }
+        }
+        
++ Response 201 (application/json) 
+
+        {
+            "__v": 0,
+            "owner": "587f74a9b9f1962024d48128",
+            "personalInfo": {
+                "id": {
+                    "foreign": {
+                        "lnch": "000000000",
+                        "sex": "Мъж",
+                        "dob": "1986-01-11T00:00:00.000Z",
+                        "idCardNumber": "000000000"
+                    }
+                },
+                "names": {
+                    "first": "Вангел",
+                    "middle": "Ванчов",
+                    "last": "Христов"
+                },
+                "address": {
+                    "street": "Свобода 4",
+                    "city": "София",
+                    "postalCode": "2700",
+                    "country": "България"
+                }
+            },
+            "_id": "587f91dd5253852606f9e7ba",
+            "sickLeaves": [],
+            "vacations": [],
+            "civilContracts": [],
+            "workContracts": []
+        }
+        
+## Dossiers by id [/api/dossiers/{id}]
+
+### Update [PUT]
+
++ Parameters
+    + id - The _id of the dossier
+    
++ Request (application/json)
+
+        {  
+            "personalInfo":{  
+                "address":{  
+                    "street":"Кирил и Методий  44"
+                }
+            }
+        }
+    
++ Response 200 (application/json)
+
+        {
+            "_id": "587f91dd5253852606f9e7ba",
+            "owner": "587f74a9b9f1962024d48128",
+            "personalInfo": {
+                "id": {
+                    "foreign": {
+                        "lnch": "000000000",
+                        "sex": "Мъж",
+                        "dob": "1986-01-11T00:00:00.000Z",
+                        "idCardNumber": "000000000"
+                    }
+                },
+                "names": {
+                    "first": "Вангел",
+                    "middle": "Ванчов",
+                    "last": "Христов"
+                },
+                "address": {
+                    "street": "Кирил и Методий  44",
+                    "city": "Благоевград",
+                    "postalCode": "2700",
+                    "country": "България"
+                }
+            },
+            "__v": 0,
+            "sickLeaves": [],
+            "vacations": [],
+            "civilContracts": [],
+            "workContracts": []
+        }
+        
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+            "_id": "587f91dd5253852606f9e7ba",
+            "owner": "587f74a9b9f1962024d48128",
+            "personalInfo": {
+                "id": {
+                    "foreign": {
+                        "lnch": "000000000",
+                        "sex": "Мъж",
+                        "dob": "1986-01-11T00:00:00.000Z",
+                        "idCardNumber": "000000000"
+                    }
+                },
+                "names": {
+                    "first": "Вангел",
+                    "middle": "Ванчов",
+                    "last": "Христов"
+                },
+                "address": {
+                    "street": "Кирил и Методий  44",
+                    "city": "Благоевград",
+                    "postalCode": "2700",
+                    "country": "България"
+                }
+            },
+            "__v": 0,
+            "sickLeaves": [],
+            "vacations": [],
+            "civilContracts": [],
+            "workContracts": []
+        }
+        
+## Work contracts [/api/work-contracts]
+
+### POST [POST]
+
++ Request (application/json)
+
+        {  
+            "owner":"587f91dd5253852606f9e7ba",
+            "typeInsured":"04",
+            "contractNumber":"A004",
+            "signingDate":"2016-01-11T00:00:00.000Z",
+            "startingDate":"2016-03-11T00:00:00.000Z",
+            "principalSalary":"4000",
+            "contractLength":"24",
+            "workHours":"8",
+            "occupationNKPD":"04",
+            "kid":"004",
+            "noticeLength":"2",
+            "payedVacationLength":"25",
+            "trialPeriod":"0",
+            "experience":{  
+                "total":"12",
+                "speciality":"12",
+                "insurable":"12"
+            }
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "__v": 0,
+            "owner": "587f91dd5253852606f9e7ba",
+            "typeInsured": "04",
+            "contractNumber": "A004",
+            "signingDate": "2016-01-11T00:00:00.000Z",
+            "startingDate": "2016-03-11T00:00:00.000Z",
+            "principalSalary": 4000,
+            "contractLength": 24,
+            "workHours": 8,
+            "occupationNKPD": "04",
+            "kid": "004",
+            "noticeLength": 2,
+            "payedVacationLength": 25,
+            "trialPeriod": 0,
+            "_id": "587fb59d3022362aab5f8e65",
+            "experience": {
+                "total": 12,
+                "speciality": 12,
+                "insurable": 12
+            }
+        }
+        
+## Work contracts by id [/api/work-contracts/{id}]
+
++ Parameters
+    + id - The _id of the contract
+
+### Update [PUT]
+
++ Request (application/json)
+
+        {  
+            "typeInsured":"09",
+            "principalSalary":"5000",
+            "experience":{  
+                "total":"15"
+            }
+        }
+        
++ Response 200 (application/json)        
+
+        {
+            "_id": "587fb59d3022362aab5f8e65",
+            "owner": "587f91dd5253852606f9e7ba",
+            "typeInsured": "09",
+            "contractNumber": "A004",
+            "signingDate": "2016-01-11T00:00:00.000Z",
+            "startingDate": "2016-03-11T00:00:00.000Z",
+            "principalSalary": 5000,
+            "contractLength": 24,
+            "workHours": 8,
+            "occupationNKPD": "04",
+            "kid": "004",
+            "noticeLength": 2,
+            "payedVacationLength": 25,
+            "trialPeriod": 0,
+            "__v": 0,
+            "experience": {
+                "total": 15,
+                "speciality": 12,
+                "insurable": 12
+            }
+        }
+        
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+            "_id": "587fb59d3022362aab5f8e65",
+            "owner": "587f91dd5253852606f9e7ba",
+            "typeInsured": "04",
+            "contractNumber": "A004",
+            "signingDate": "2016-01-11T00:00:00.000Z",
+            "startingDate": "2016-03-11T00:00:00.000Z",
+            "principalSalary": 4000,
+            "contractLength": 24,
+            "workHours": 8,
+            "occupationNKPD": "04",
+            "kid": "004",
+            "noticeLength": 2,
+            "payedVacationLength": 25,
+            "trialPeriod": 0,
+            "__v": 0,
+            "experience": {
+                "total": 12,
+                "speciality": 12,
+                "insurable": 12
+            }
+        }
+        
+## Civil contracts [/api/civil-contracts]
+
+### POST [POST]
+
++ Request (application/json)
+
+        {
+            "owner": "587e917dbbe1a2362ab7b433",
+            "typeInsured": "04",
+            "isRetired": "false",
+            "contractNumber": "A0001",
+            "period": "Май"
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "__v": 0,
+            "owner": "587e917dbbe1a2362ab7b433",
+            "typeInsured": "04",
+            "isRetired": false,
+            "contractNumber": "A0001",
+            "period": "Май",
+            "_id": "587fba6d2b69712cb0750f89",
+            "deductibleExpenses": []
+        }
+        
+## Civil contracts by id [/api/civil-contracts/{id}]
+
++ Parameters
+    + id - The _id of the contract
+
+### Update [PUT]
+
++ Request (application/json)
+
+        {
+            "typeInsured": "09"
+        }
+        
++ Response 200 (application/json)        
+
+        {
+            "_id": "587fba6d2b69712cb0750f89",
+            "owner": "587e917dbbe1a2362ab7b433",
+            "typeInsured": "09",
+            "isRetired": false,
+            "contractNumber": "A0001",
+            "period": "Май",
+            "__v": 0,
+            "deductibleExpenses": []
+        }
+        
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+            "_id": "587fba6d2b69712cb0750f89",
+            "owner": "587e917dbbe1a2362ab7b433",
+            "typeInsured": "04",
+            "isRetired": false,
+            "contractNumber": "A0001",
+            "period": "Май",
+            "__v": 0,
+            "deductibleExpenses": []
+        }
+        
+## Pay stubs [/api/pay-stubs]
+
+### POST [POST]
+
++ Request (application/json)
+
+        {
+            
+        }
+        
++ Response 201 (application/json)
+
+        {
+            
+        }
+        
+## Pay stubs by id [/api/pay-stubs/{id}]
+
++ Parameters
+    + id - The _id of the pay stub
+
+### Update [PUT]
+
++ Request (application/json)
+
+        {  
+           "owner":"587f90b5b8858f25b3737fb3",
+           "rows":"[['hello','world']]"
+        }
+        
++ Response 200 (application/json)        
+
+        {
+            "__v": 0,
+            "owner": "587f90b5b8858f25b3737fb3",
+            "_id": "587fd2f7c781703543cbc210",
+            "rows": [{
+                "data": []
+            }]
+        }
+        
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+            "__v": 0,
+            "owner": "587f90b5b8858f25b3737fb3",
+            "_id": "587fd2f7c781703543cbc210",
+            "rows": [{
+                "data": []
+            }]
+        }
+        
+## Vacations [/api/vacations]
+
+### POST [POST]
+
++ Request (application/json)
+
+        {  
+            "owner":"587f90b5b8858f25b3737fb3",
+            "type": "първичен",
+            "from": "2017-01-01T00:02:02.000Z",
+            "to": "2017-01-05T00:02:02.000Z",
+            "decreeDate":"2017-01-01T00:02:02.000Z"   
+         }
+        
++ Response 201 (application/json)
+
+        {
+            "__v": 0,
+            "owner": "587f90b5b8858f25b3737fb3",
+            "type": "първичен",
+            "from": "2017-01-01T00:02:02.000Z",
+            "to": "2017-01-05T00:02:02.000Z",
+            "decreeDate": "2017-01-01T00:02:02.000Z",
+            "_id": "587fd575e578b7361dbd4ff0"
+        }
+        
+## Vacations by id [/api/vacations/{id}]
+
++ Parameters
+    + id - The _id of the vacation
+
+### Update [PUT]
+
++ Request (application/json)
+
+        {  
+            "type": "Продължение" 
+        }
+        
++ Response 200 (application/json)        
+
+        {
+            "_id": "587fd575e578b7361dbd4ff0",
+            "owner": "587f90b5b8858f25b3737fb3",
+            "type": "Продължение",
+            "from": "2017-01-01T00:02:02.000Z",
+            "to": "2017-01-05T00:02:02.000Z",
+            "decreeDate": "2017-01-01T00:02:02.000Z",
+            "__v": 0
+        }
+        
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+            "_id": "587fd575e578b7361dbd4ff0",
+            "owner": "587f90b5b8858f25b3737fb3",
+            "type": "Продължение",
+            "from": "2017-01-01T00:02:02.000Z",
+            "to": "2017-01-05T00:02:02.000Z",
+            "decreeDate": "2017-01-01T00:02:02.000Z",
+            "__v": 0
+        }
+        
+## Sick leaves [/api/sick-leaves]
+
+### POST [POST]
+
++ Request (application/json)
+
+        {  
+            "owner":"587f90b5b8858f25b3737fb3",
+            "series":"A-2017",
+            "continuation":"false",
+            "type":"12",
+            "number":"1234567",
+            "from":"2017-01-01T00:02:02.000Z",
+            "to":"2017-01-05T00:02:02.000Z",
+            "presentedAt":"2017-01-07T00:02:02.000Z",
+            "decreeDate":"2017-01-01T00:02:02.000Z",
+            "diagnosis":"W34.5",
+            "hasMinInsurableExperience":"true"
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "__v": 0,
+            "owner": "587f90b5b8858f25b3737fb3",
+            "series": "A-2017",
+            "continuation": false,
+            "type": "12",
+            "number": "1234567",
+            "from": "2017-01-01T00:02:02.000Z",
+            "to": "2017-01-05T00:02:02.000Z",
+            "presentedAt": "2017-01-07T00:02:02.000Z",
+            "decreeDate": "2017-01-01T00:02:02.000Z",
+            "diagnosis": "W34.5",
+            "hasMinInsurableExperience": true,
+            "_id": "587fd81777e26e363e496ff5",
+            "isSent": true,
+            "additionalDocs": []
+        }
+        
+## Sick leaves by id [/api/sick-leaves/{id}]
+
++ Parameters
+    + id - The _id of the contract
+
+### Update [PUT]
+
++ Request (application/json)
+
+        {  
+            "series":"C-2017"
+        }
+        
++ Response 200 (application/json)        
+
+        {
+            "__v": 0,
+            "owner": "587f90b5b8858f25b3737fb3",
+            "series": "C-2017",
+            "continuation": false,
+            "type": "12",
+            "number": "1234567",
+            "from": "2017-01-01T00:02:02.000Z",
+            "to": "2017-01-05T00:02:02.000Z",
+            "presentedAt": "2017-01-07T00:02:02.000Z",
+            "decreeDate": "2017-01-01T00:02:02.000Z",
+            "diagnosis": "W34.5",
+            "hasMinInsurableExperience": true,
+            "_id": "587fd81777e26e363e496ff5",
+            "isSent": true,
+            "additionalDocs": []
+        }
+        
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+            "__v": 0,
+            "owner": "587f90b5b8858f25b3737fb3",
+            "series": "A-2017",
+            "continuation": false,
+            "type": "12",
+            "number": "1234567",
+            "from": "2017-01-01T00:02:02.000Z",
+            "to": "2017-01-05T00:02:02.000Z",
+            "presentedAt": "2017-01-07T00:02:02.000Z",
+            "decreeDate": "2017-01-01T00:02:02.000Z",
+            "diagnosis": "W34.5",
+            "hasMinInsurableExperience": true,
+            "_id": "587fd81777e26e363e496ff5",
+            "isSent": true,
+            "additionalDocs": []
+        }

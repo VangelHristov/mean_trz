@@ -1,0 +1,214 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+        title ТРЗВВ
+        link(href='bower_components/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+        link(href='bower_components/font-awesome/css/font-awesome.css', rel='stylesheet')
+        link(href='bower_components/animate.css/animate.min.css', rel='stylesheet')
+        link(href="bower_components/pretty-photo/css/prettyPhoto.css", rel="stylesheet")
+        link(href='css/about.css', rel='stylesheet')
+
+    body(data-spy='scroll', data-target='munu')
+        nav.navbar.navbar-default.navbar-fixed-top
+            .container
+                .row
+                    .site-logo
+                        a.brand(href='#') ТРЗВВ
+                    // Brand and toggle get grouped for better mobile display
+                    .navbar-header
+                        button.navbar-toggle(type='button', data-toggle='collapse', data-target='#menu')
+                            i.fa.fa-bars
+                    // Collect the nav links, forms, and other content for toggling
+                    #menu.collapse.navbar-collapse
+                        ul.nav.navbar-nav.navbar-right
+                            li
+                                a(href='#home') Начало
+                            li
+                                a(href='#about') За продукта
+                            li
+                                a(href='#features') Характеристики
+                            li
+                                a(href='#contact') Контакти
+                            li
+                                a(href='login') Вход
+                            li
+                                a(href='register') Регистрация
+        #home
+            .slider
+                #about-slider
+                    #carousel-slider.carousel.slide(data-ride='carousel')
+                        // Indicators
+                        ol.carousel-indicators.visible-xs
+                            li.active(data-target='#carousel-slider', data-slide-to='0')
+                            li(data-target='#carousel-slider', data-slide-to='1')
+                            li(data-target='#carousel-slider', data-slide-to='2')
+                        .carousel-inner
+                            .item.active
+                                img.img-responsive(src='img/slider/slide1.jpg', alt='')
+                                .container
+                                    .carousel-caption
+                                        h1 Характеристика 1.
+                            .item
+                                img.img-responsive(src='img/slider/slide2.jpg', alt='')
+                                .container
+                                    .carousel-caption
+                                        h1 Характеристика 2.
+                            .item
+                                img.img-responsive(src='img/slider/slide3.jpg', alt='')
+                                .container
+                                    .carousel-caption
+                                        h1 Характеристика 3.
+                        a.left.carousel-control.hidden-xs(href='#carousel-slider', data-slide='prev')
+                            i.fa.fa-angle-left
+                        a.right.carousel-control.hidden-xs(href='#carousel-slider', data-slide='next')
+                            i.fa.fa-angle-right
+        section#about
+            .container
+                .center
+                    .col-md-6.col-md-offset-3
+                        h2 За продукта
+                        hr
+                        p.lead На кратко
+                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cum debitis dicta dolore eius minima modi nemo repellat!
+                        br
+                        br
+            .container
+                .row
+                    .col-sm-6.wow.fadeInRight
+                        img.img-responsive(src='img/accordion/accountant.jpg')
+                        p Защо да изберат нашия продукт
+                        p
+                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lorem dolor sit amet, consectetur adipisicing elit, sed do
+                        p
+                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+
+                    .col-sm-6.wow.fadeInDown
+                        .accordion
+                            #accordion1.panel-group
+                                .panel.panel-default
+                                    .panel-heading.active
+                                        h3.panel-title
+                                            a.accordion-toggle(data-toggle='collapse', data-parent='#accordion1', href='#collapseOne1')
+                                                | Причина 1
+                                                i.fa.fa-angle-right.pull-right
+                                    #collapseOne1.panel-collapse.collapse.in
+                                        .panel-body
+                                            .media.accordion-inner
+                                                .pull-left
+                                                    img.img-responsive(src='img/accordion/accordion1.png')
+                                                .media-body
+                                                    h4 Подзаглавие за причина 1
+                                                    p Детайли за причина 1
+                                .panel.panel-default
+                                    .panel-heading
+                                        h3.panel-title
+                                            a.accordion-toggle(data-toggle='collapse', data-parent='#accordion1', href='#collapseTwo1')
+                                                | Причина 2
+                                                i.fa.fa-angle-right.pull-right
+                                    #collapseTwo1.panel-collapse.collapse
+                                        .panel-body
+                                            p
+                                            | Детайли за причина 2.
+                                            br
+                                            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                            | non cupidatat skateboard dolor brunch.
+
+                                .panel.panel-default
+                                    .panel-heading
+                                        h3.panel-title
+                                            a.accordion-toggle(data-toggle='collapse', data-parent='#accordion1', href='#collapseThree1')
+                                                | Причина 3
+                                                i.fa.fa-angle-right.pull-right
+                                    #collapseThree1.panel-collapse.collapse
+                                        .panel-body
+                                            p
+                                                | Детайли за причина 3.
+                                                br
+                                                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                                | non cupidatat skateboard dolor brunch.
+                                .panel.panel-default
+                                    .panel-heading
+                                        h3.panel-title
+                                            a.accordion-toggle(data-toggle='collapse', data-parent='#accordion1', href='#collapseFour1')
+                                                | Причина 4
+                                                i.fa.fa-angle-right.pull-right
+                                    #collapseFour1.panel-collapse.collapse
+                                        .panel-body
+                                            p
+                                                | Детайли за причина 4.
+                                                br
+                                                | .................
+        section#features
+            .container
+                .row
+                    .center
+                        .col-md-6.col-md-offset-3
+                            h2 Характеристики
+                            hr
+                            p.lead
+                                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                    .col-md-4.wow.fadeInLeft
+                        h3 Иновативен
+                        img(src='img/features/cloud.jpg', alt='cloud')
+                        p
+                            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            | non cupidatat skateboard dolor brunch.
+                    .col-md-4.wow.fadeInUp
+                        h3 Достъпен
+                        img(src='img/features/affordable.png', alt='affordable')
+                        p
+                            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            | non cupidatat skateboard dolor brunch.
+                    .col-md-4.wow.fadeInRight
+                        h3 Продуктивност
+                        img(src='img/features/productivity.jpg', alt='')
+                        p
+                            | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                            | non cupidatat skateboard dolor brunch.
+        section#contact
+            .contact-page
+                .container
+                    .center
+                        h2 Контакти
+                    .row.contact-wrap
+                        .col-md-8.col-md-offset-2
+                            #sendmessage Вашето съобщение беше изпратено успешно. Благодарим ви!
+                            #errormessage Грешка, моля опитайте пак.
+                            form.contactForm(action='#', method='', role='form')
+                                .form-group
+                                    input#name.form-control(type='text', name='name', placeholder='Име', data-rule='minlen:4', data-msg='')
+                                    .validation
+                                .form-group
+                                    input#email.form-control(type='email', name='email', placeholder='Имейл', data-rule='email', data-msg='Моля въведете валиден имейл')
+                                    .validation
+                                .form-group
+                                    input#subject.form-control(type='text', name='subject', placeholder='Относно', data-rule='minlen:4', data-msg='')
+                                    .validation
+                                .form-group
+                                    textarea.form-control(name='message', rows='5', data-rule='required', data-msg='', placeholder='Вашият въпрос...')
+                                    .validation
+                                .text-center
+                                    button.btn.btn-primary.btn-lg(type='submit') Изпрати
+                    // /.row
+                // /.container
+            // /#contact-page
+        footer#footer.midnight-blue
+            .container
+                .row
+                    .col-md-6.col-md-offset-3
+                        .text-center
+                            a.scrollup(href='#home')
+                                i.fa.fa-angle-up.fa-3x
+                        | © ТРЗВВ
+        // jQuery (necessary for Bootstrap's JavaScript plugins)
+        script(src='bower_components/jquery/dist/jquery.min.js')
+        script(src='bower_components/bootstrap/dist/js/bootstrap.js')
+        script(src='bower_components/pretty-photo/js/jquery.prettyPhoto.js')
+        script(src='bower_components/isotope/dist/isotope.pkgd.min.js')
+        script(src='bower_components/wow/dist/wow.min.js')
+        script(src='bower_components/jquery.easing/jquery.easing.min.js')
+        script(src='js/about.js')

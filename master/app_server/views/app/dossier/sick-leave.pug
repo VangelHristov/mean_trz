@@ -1,0 +1,99 @@
+#sick-leave.tab-pane(role='tabpanel')
+    .row
+        .col-xs-12
+            button.btn.btn-default.col-xs-12.col-lg-3(type='button')
+                i.fa.fa-print
+                |  Принтирай приложение 15
+            button.btn.btn-default.col-xs-12.col-lg-2(type='button', data-toggle='modal', data-target='#dossers-table-modal')
+                i.fa.fa-list
+                |  Друго досие
+    form.form-horizontal
+        fieldset
+            legend
+            // 1. Серия
+            .form-group
+                label.col-lg-4.control-label.margin-top(for='series') Серия
+                .col-lg-4.margin-top
+                    input#series.form-control.input-md(name='series', required='', type='text')
+            // 2.Номер
+            .form-group
+                label.col-lg-4.control-label(for='number') Номер
+                .col-lg-4
+                    input#number.form-control.input-md(name='number', required='', type='text')
+            // 3.Вид
+            .form-group
+                label.col-lg-4.control-label(for='type-sick-leave') Вид
+                .col-lg-4
+                    select#type-sick-leave.form-control(name='type-sick-leave')
+                        option(value='1') 1
+                        option(value='2') 2
+            // 4.Първичен/продължение
+            .form-group
+                label.col-lg-4.control-label(for='primary') Първичен/продължение
+                #primary.col-lg-4
+                    label.radio-inline(for='primary-0')
+                        input#primary-0(name='primary', value='първичен', checked='checked', type='radio')
+                        |                                                 първичен
+                    label.radio-inline(for='primary-1')
+                        input#primary-1(name='primary', value='продължение', type='radio')
+                        |                                                 продължение
+            // 5.Болнични От дата
+            .form-group
+                label.col-lg-4.control-label(for='sick-from') От
+                .col-lg-4
+                    input#sick-from.form-control.input-md.datepicker(name='sick-from', required='', type='text')
+            // 6.Болнични До дата
+            .form-group
+                label.col-lg-4.control-label(for='sick-till') До
+                .col-lg-4
+                    input#sick-till.form-control.input-md.datepicker(name='sick-till', required='', type='text')
+            // 7.Дата на издаване
+            .form-group
+                label.col-lg-4.control-label(for='issue-date') Дата на издаване
+                .col-lg-4
+                    input#issue-date.form-control.input-md.datepicker(name='issue-date', required='', type='text')
+            // 8.Дата на представяне
+            .form-group
+                label.col-lg-4.control-label(for='presentation-date')
+                    | Дата на
+                    | представяне
+                .col-lg-4
+                    input#presentation-date.form-control.input-md.datepicker(name='presentation-date', required='', type='text')
+            // 9.Диагноза
+            .form-group
+                label.col-lg-4.control-label(for='diagnosis') Диагноза
+                .col-lg-4
+                    input#diagnosis.form-control.input-md.datepicker(name='diagnosis', required='', type='text')
+            // 10.Приложения
+            .form-group
+                label.col-lg-4.control-label(for='applications') Приложения
+                .col-lg-4
+                    select#applications.form-control(name='applications', multiple='multiple')
+                        option(value='1') 1
+                        option(value='2') 2
+            // 11.Осигурителен стаж
+            .form-group
+                label.col-lg-4.control-label(for='has-min-experience')
+                    | Има 6/12 месеца
+                    | осигурителен стаж
+                #has-min-experience.col-lg-4
+                    label.radio-inline(for='has-min-experience-0')
+                        input#has-min-experience-0(name='has-min-experience', value='да', type='radio')
+                        |                                                 да
+                    label.radio-inline(for='has-min-experience-1')
+                        input#has-min-experience-1(name='has-min-experience', value='не', type='radio')
+                        |                                                 не
+            // 12.Маркирай като не изпратен
+            .form-group
+                label.col-lg-4.control-label(for='mark-as-sent')
+                    | Маркирай като не
+                    | изпратен
+                #mark-as-sent.col-lg-4
+                    label.checkbox-inline(for='mark-sent-0')
+                        input#mark-sent-0(name='mark-sent', value='да', type='checkbox')
+                        |                                                 да
+            // 13.Маркирай като не изпратен
+            .form-group
+                .col-lg-4.col-md-offset-4
+                    button.btn.btn-default(type='button')
+                        | Запази
