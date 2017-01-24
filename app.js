@@ -1,17 +1,18 @@
 'use strict';
 
 const
-    express      = require('express'),
-    path         = require('path'),
-    favicon      = require('serve-favicon'),
-    logger       = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    bodyParser   = require('body-parser'),
-    compression  = require('compression'),
-    helmet       = require('helmet'),
-    serverRoutes = require('./app_server/routes/index'),
-    apiRoutes    = require('./app_api/routes/index'),
-    app          = express();
+  express      = require('express'),
+  path         = require('path'),
+  favicon      = require('serve-favicon'),
+  logger       = require('morgan'),
+  cookieParser = require('cookie-parser'),
+  bodyParser   = require('body-parser'),
+  compression  = require('compression'),
+  helmet       = require('helmet'),
+  passport     = require('./passport'),
+  serverRoutes = require('./app_server/routes/index'),
+  apiRoutes    = require('./app_api/routes/index'),
+  app          = express();
 
 // connect to users database
 require('./app_api/models/db');
@@ -29,6 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 // routes
 app.use('/', serverRoutes);
