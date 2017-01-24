@@ -4,34 +4,25 @@ block content
     #edit-profile.tab-pane.active
         section.panel
             .panel-body.bio-graph-info
-                h3  Профил
                 form.form-horizontal(role='form')
                     .form-group
-                        label.col-lg-2.control-label Име
-                        .col-lg-6
+                        label.col-lg-4.control-label Име
+                        .col-lg-4
                             input#first-name.form-control(value=' Иван', type='text')
                     .form-group
-                        label.col-lg-2.control-label Фамилия
-                        .col-lg-6
+                        label.col-lg-4.control-label Фамилия
+                        .col-lg-4
                             input#last-name.form-control(value=' Иванов', type='text')
                     .form-group
-                        label.col-lg-2.control-label Имейл
-                        .col-lg-6
+                        label.col-lg-4.control-label Имейл
+                        .col-lg-4
                             input.form-control(name='email', value='ivan.ivanov@abv.bg', type='email')
                     .form-group
-                        label.col-lg-2.control-label Промени имейл
-                        .col-lg-6
+                        label.col-lg-4.control-label Промени имейл
+                        .col-lg-4
                             input#email.form-control(placeholder=' нов имейл', type='text')
-                    .form-group
-                        label.col-lg-2.control-label План
-                        .col-lg-6
-                            .form-control Изтича на 31.12.2017
                 .form-group
                     .row
-                        .col-xs-12.col-lg-offset-2
-                            button.btn.btn-default.col-xs-12.col-lg-2(type='button')
-                                |  Поднови абонамент
-                            button.btn.btn-default.col-xs-12.col-lg-2(type='button')
+                        .col-lg-offset-4
+                            button.btn.btn-default(type='button')
                                 |  Запази
-                            button.btn.btn-default.col-xs-12.col-lg-2(type='button')
-                                |  Откажи

@@ -5,9 +5,6 @@
                 i.fa.fa-print
                 |  Принтирай
             button.btn.btn-default.col-xs-12.col-lg-2(type='button')
-                i.fa.fa-file-pdf-o
-                |  Запази в pdf
-            button.btn.btn-default.col-xs-12.col-lg-2(type='button')
                 i.fa.fa-file-word-o
                 |  Запази в doc
             button.btn.btn-default.col-xs-12.col-lg-2(type='button', data-toggle='modal', data-target='#dossers-table-modal')
@@ -27,7 +24,14 @@
                     select#insured-type.form-control.margin-top(name='insured-type')
                         option(value='1') 1
                         option(value='2') 2
-
+            .form-group
+                label.col-lg-3.control-label(for='reason-for-contract')
+                    | Основание за сключване
+                    span.required  *
+                .col-lg-3
+                    select#reason-for-contract.form-control(name='reason-for-contract')
+                        option(value='1') 1
+                        option(value='2') 2
             // 2.Номер на трудов договор
             .form-group
                 label.col-lg-3.control-label(for='contract-number')
@@ -107,13 +111,6 @@
                     span.required  *
                 .col-lg-3
                     input#payed-vacation.form-control.input-md(name='payed-vacation', required='', type='text')
-            // 12.Срок на изпитване
-            .form-group
-                label.col-lg-3.control-label(for='trail-period')
-                    | Срок на
-                    | изпитване
-                .col-lg-3
-                    input#trail-period.form-control.input-md(name='trail-period', type='text')
 
             // 13.Общ стаж
             .form-group
@@ -145,15 +142,6 @@
                     span.required  *
                 .col-lg-3
                     input#end-date.form-control.input-md.datepicker(name='end-date', required='', type='text')
-
-            // 17.Последен ден в осигуряване
-            .form-group
-                label.col-lg-3.control-label(for='last-day')
-                    | Последен ден в
-                    | осигуряване
-                    span.required  *
-                .col-lg-3
-                    input#last-day.form-control.input-md.datepicker(name='last-day', required='', type='text')
 
             // Бутон `Зпази`
             .form-group

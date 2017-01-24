@@ -16,12 +16,12 @@
                             button.close(type='button', data-dismiss='modal') ×
                             lable(for='dob')
                                 | Дата на раждане
-                            input#dob.datepicker.col-sm-4(type='text', name='dob')
+                            input#dob.datepicker.col-sm-4(type='text', name='dob', required='')
                             br
                             br
                             label(for='male')
                                 |  Мъж
-                            input(type='radio', name='sex', value='Мъж' id='male')
+                            input(type='radio', name='sex', value='Мъж' id='male', required='')
                             label(for='female')
                                 | Жена
                             input(type='radio', name='sex', value='Жена' id='female')

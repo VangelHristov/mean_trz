@@ -1,16 +1,29 @@
 'use strict';
 
 const
-  mongoose   = require('mongoose'),
-  Schema     = mongoose.Schema,
-  objectId   = mongoose.Schema.Types.ObjectId,
-  infoSchema = require('./info');
+  mongoose          = require('mongoose'),
+  Schema            = mongoose.Schema,
+  objectId          = mongoose.Schema.Types.ObjectId,
+  patterns          = require('./../validations/patterns'),
+  enums             = require('./../validations/enums'),
+  addressSchema     = require('./../common/address'),
+  bankAccountSchema = require('./bank-account'),
+  idSchema          = require('./id'),
+  namesSchema       = require('./names'),
+  checkHasId        = require('./../validations/validate-has-id'),
 
-module.exports = new Schema({
-      owner         : {type: objectId, required: true},
-      personalInfo  : {type: infoSchema, autoIndex: false},
-      workContracts : [{type: objectId, ref: 'WorkContract', required: true}],
-      civilContracts: [{type: objectId, ref: 'CivilContract', required: true}],
-      vacations     : [{type: objectId, ref: 'Vacation', required: true}],
-      sickLeaves    : [{type: objectId, ref: 'SickLeave', required: true}]
+  dossierSchema     = new Schema({
+      company      : {type: objectId, required: true},
+      id           : idSchema,
+      names        : namesSchema,
+      address      : addressSchema,
+      phoneNumber  : {type: String, match: patterns.phoneNumber},
+      education    : {type: String, enum: enums.education},
+      email        : {type: String, match: patterns.email},
+      bankAccount  : bankAccountSchema,
+      workContracts: [{type: objectId, ref: 'WorkContract', required: true}]
   });
+
+dossierSchema.pre('save', checkHasId);
+
+module.exports = dossierSchema;

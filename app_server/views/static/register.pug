@@ -5,7 +5,6 @@ html
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
         title ТРЗВВ регистрация
         link(href='css/authentication.css', rel='stylesheet')
-        script(src='js/prefixfree.min.js')
     body
         .body
         .grad
@@ -15,13 +14,11 @@ html
                 span ВВ
         br
         .login
-            input(type='text', placeholder='потребителско име', name='user')
-            br
             input(type='email', placeholder='имейл', name='email')
             br
             input(type='password', placeholder='парола', name='password')
             br
+            input(type='password', placeholder='потвърди паролате', name='confirm-password')
+            br
             input(type='button', value='Регистрация', onclick="window.location='login'")
-        // link local copy of jquery
-        // add js file to handle click event
         script(src='bower_components/jquery/dist/jquery.min.js')

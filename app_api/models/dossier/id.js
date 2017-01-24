@@ -7,10 +7,12 @@ const
   isValidLNCH     = require('../validations/lnch'),
   enums           = require('../validations/enums'),
   minAge          = require('../validations/validate-age'),
+
   bulgarianSchema = new Schema({
       egn         : {type: String, validate: isValidEGN},
       idCardNumber: {type: String, match: patterns.bulgarianIdCardNumber},
   }),
+
   foreignSchema   = new Schema({
       lnch        : {type: String, validate: isValidLNCH},
       sex         : {type: String, enum: enums.sex},
