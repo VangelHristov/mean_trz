@@ -13,12 +13,11 @@ html
                 | ТРЗ
                 span ВВ
         br
-        .login
+        form.login(action='', method='post')
             input(type='email', placeholder='имейл', name='email')
             br
             input(type='password', placeholder='парола', name='password')
             br
             input(type='password', placeholder='потвърди паролате', name='confirm-password')
             br
-            input(type='button', value='Регистрация', onclick="window.location='login'")
-        script(src='bower_components/jquery/dist/jquery.min.js')
+            input(type='submit', value='Регистрация')

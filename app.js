@@ -9,13 +9,18 @@ const
   bodyParser   = require('body-parser'),
   compression  = require('compression'),
   helmet       = require('helmet'),
-  passport     = require('./passport'),
-  serverRoutes = require('./app_server/routes/index'),
-  apiRoutes    = require('./app_api/routes/index'),
-  app          = express();
+  passport     = require('passport');
 
 // connect to users database
 require('./app_api/models/db');
+
+// configure passport
+require('./app_api/config/passport');
+
+const
+  serverRoutes = require('./app_server/routes/index'),
+  apiRoutes    = require('./app_api/routes/index'),
+  app          = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server/views'));
@@ -23,17 +28,28 @@ app.set('view engine', 'pug');
 
 // middle wares
 app.use(helmet());
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(compression());
 app.use(passport.initialize());
 
 // routes
 app.use('/', serverRoutes);
 app.use('/api', apiRoutes);
+
+app.use((err, req, res, next) => {
+    if (!err) {
+        return next();
+    }
+    if (process.env.NODE_ENV === 'development') {
+        console.log(err);
+    }
+    res.status(400);
+    res.render('static/error');
+});
 
 module.exports = app;

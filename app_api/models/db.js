@@ -1,34 +1,36 @@
-let
-    usersURI  = 'mongodb://localhost:27017/users',
-    mongoose  = require('mongoose'),
-    addModels = require('./index'),
-    usersDbConnection;
+'use strict';
 
-// In production use mongolab, in development use localhost
-if (process.env.NODE_ENV === 'production') {
-    usersURI = process.env.MONGOLAB_URI;
-}
+const
+  dbURI              = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/users',
+  mongoose           = require('mongoose'),
+  userSchema         = require('./user/user'),
+  companySchema      = require('./company/company'),
+  dossierSchema      = require('./dossier/dossier'),
+  workContractSchema = require('./dossier/work-contaract'),
+  dbConnection       = mongoose.createConnection(dbURI);
 
-usersDbConnection = mongoose.createConnection(usersURI);
-addModels(usersDbConnection);
+dbConnection.model('WorkContract', workContractSchema);
+dbConnection.model('Dossier', dossierSchema);
+dbConnection.model('Company', companySchema);
+dbConnection.model('User', userSchema);
 
 function shutDown(msg, callback) {
-    usersDbConnection.close(function () {
+    dbConnection.close(function () {
         console.log(`Mongoose disconnected through: ${msg}`);
         callback();
     });
 }
 
 // Log on the console for each event
-usersDbConnection.on('connected', function () {
-    console.log(`Mongoose connected to ${usersURI}`);
+dbConnection.on('connected', function () {
+    console.log(`Mongoose connected to ${dbURI}`);
 });
 
-usersDbConnection.on('error', function (error) {
+dbConnection.on('error', function (error) {
     console.log(`Mongoose error: ${error}`);
 });
 
-usersDbConnection.on('disconnected', function () {
+dbConnection.on('disconnected', function () {
     console.log('Mongoose disconnected');
 });
 
@@ -53,4 +55,4 @@ process.on('SIGTERM', function () {
     });
 });
 
-module.exports = usersDbConnection;
+module.exports = dbConnection;

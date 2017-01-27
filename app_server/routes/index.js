@@ -1,10 +1,10 @@
 'use strict';
 
 const
-  appRouter  = require('express').Router(),
-  ctrlApp    = require('../controllers/app'),
-  ctrlStatic = require('../controllers/static'),
-  users      = require('../controllers/users');
+  appRouter      = require('express').Router(),
+  ctrlApp        = require('../controllers/app'),
+  ctrlStatic     = require('../controllers/static'),
+  authentication = require('../controllers/authentication');
 
 appRouter.get('/companies', ctrlApp.companies);
 appRouter.get('/company', ctrlApp.company);
@@ -12,19 +12,9 @@ appRouter.get('/profile', ctrlApp.profile);
 appRouter.get('/dossier', ctrlApp.dossier);
 appRouter.get('/', ctrlStatic.about);
 appRouter.get('/login', ctrlStatic.login);
-appRouter.post('/login', users.authenticate);
+appRouter.post('/login', authentication.authenticate);
 appRouter.get('/register', ctrlStatic.register);
-appRouter.post('/register', users.register);
+appRouter.post('/register', authentication.register);
 appRouter.get('/forgotten-password', ctrlStatic.forgottenPassword);
-
-// catch 404 and forward to error handler
-appRouter.use(function (error, req, res, next) {
-    if (!error) {
-        return next();
-    }
-
-    res.status(404);
-    res.json({message: 'Not found'});
-});
 
 module.exports = appRouter;

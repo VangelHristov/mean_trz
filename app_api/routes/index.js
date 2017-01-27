@@ -1,17 +1,26 @@
 'use strict';
 
-const apiRouter = require('express').Router();
+const
+  apiRouter      = require('express').Router(),
+  jwt            = require('express-jwt'),
+  authentication = jwt({
+      secret      : process.env.JWT_SECRET,
+      userProperty: 'payload'
+  });
 
-require('./users')(apiRouter);
-require('./companies')(apiRouter);
-require('./dossiers')(apiRouter);
+require('./users')(apiRouter, authentication);
+require('./companies')(apiRouter, authentication);
+require('./dossiers')(apiRouter, authentication);
 
-apiRouter.use(function (error, req, res, next) {
-    if (!error) {
-        return next();
+apiRouter.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+        res
+          .status(401)
+          .json({message: `${err.name}: ${err.message}`});
+
+    } else {
+        next(err);
     }
-    res.status(404);
-    res.json({message: 'Not found'});
 });
 
 module.exports = apiRouter;

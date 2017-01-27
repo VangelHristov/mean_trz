@@ -10,37 +10,6 @@ $(function () {
     });
 });
 
-$(function () {
-    let
-      tableOptions = {
-          bJQueryUI: true,
-          paging   : false,
-          language : {
-              "emptyTable"    : "Таблицата е празна",
-              "info"          : "",
-              "infoEmpty"     : "",
-              "infoFiltered"  : "",
-              "infoPostFix"   : "",
-              "thousands"     : "",
-              "lengthMenu"    : "",
-              "loadingRecords": "Зареждане...",
-              "processing"    : "Търсене...",
-              "search"        : "Търси:",
-              "zeroRecords"   : "Няма намерени",
-          }
-      },
-      dossiers     = $('#dossiers-table').DataTable(tableOptions),
-      companies    = $('#companies-table').DataTable(tableOptions);
-
-    window.yadcf.initMultipleColumns(dossiers, [{
-        column_number: [0, 1] // ЕГН/ЛНЧ, Име
-    }]);
-
-    window.yadcf.initMultipleColumns(companies, [{
-        column_number: [0, 1]   //Име, Булстат
-    }]);
-});
-
   $(function() {
        let i = 1,
        		minColsCount = 3,

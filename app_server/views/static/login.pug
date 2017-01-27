@@ -13,12 +13,10 @@ html
                 | ТРЗ
                 span ВВ
         br
-        .login
+        form.login(action='', method='post')
             input(type='email', placeholder='имейл', name='email')
             br
             input(type='password', placeholder='парола', name='password')
             br
-            input(type='button', value='Влез', onclick="window.location='companies'")
+            input(type='submit', value='Влез')
             a(href="forgotten-password") Забравена парола?
-        // add js file to handle click event
-        script(src='bower_components/jquery/dist/jquery.min.js')
