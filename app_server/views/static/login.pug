@@ -14,9 +14,9 @@ html
                 span ВВ
         br
         form.login(action='', method='post')
-            input(type='email', placeholder='имейл', name='email')
+            input(type='email', placeholder='имейл', name='email', required)
             br
-            input(type='password', placeholder='парола', name='password')
+            input(type='password', placeholder='парола', name='password', required, pattern='^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%_.\-]).{8,20})$')
             br
             input(type='submit', value='Влез')
             a(href="forgotten-password") Забравена парола?
