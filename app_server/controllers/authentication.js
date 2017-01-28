@@ -6,17 +6,19 @@ const User     = require('../../app_api/models/db').model('User'),
 
 function authenticate(req, res, done) {
     if (!req.body.email || !req.body.password) {
-        sendJson(res, 400, {message: 'All email and password are required'});
+        sendJson(res, 400, {message: 'Email and password are required'});
         return;
     }
 
     passport.authenticate('local', (err, user, info) => {
         if (err) {
-            return done(error);
+            return done(err);
         }
 
         if (user) {
-            sendJson(res, 200, {_id: user._id, token: user.generateJwt()});
+            res.body = {_id:user._id, token:user.generateJwt()};
+            res.redirect('/companies');
+            //sendJson(res, 200, {_id: user._id, token: user.generateJwt()});
         } else {
             sendJson(res, 401, info);
         }
@@ -39,7 +41,7 @@ function register(req, res) {
             return;
         }
 
-        sendJson(res, 201, {_id: user._id, token: user.generateJwt()})
+        sendJson(res, 201, {_id: user._id, token: user.generateJwt()});
     });
 }
 

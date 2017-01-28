@@ -6,9 +6,7 @@ const
   usersDbConnection = require('../models/db'),
   User              = usersDbConnection.model('User');
 
-passport.use(new LocalStrategy({
-    usernameField: 'email'
-}, (username, password, done) => {
+passport.use(new LocalStrategy({usernameField: 'email'}, (username, password, done) => {
     User.findOne({email: username}, (error, user) => {
         if (error) {
             return done(error);
