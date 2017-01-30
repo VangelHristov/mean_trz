@@ -29,6 +29,7 @@
     "express-jwt": "latest"
   },
   "devDependencies": {
+    "jspm": "^0.16.51",
     "nodemon": "^1.11.0"
   }
 }
