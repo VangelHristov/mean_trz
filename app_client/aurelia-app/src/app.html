@@ -1,0 +1,24 @@
+<template>
+
+    <md-colors md-primary-color.bind="primaryColor" md-accent-color.bind="accentColor" md-error-color.bind="errorColor"></md-colors>
+    <app-colors primary-color.bind="primaryColor" accent-color.bind="accentColor"></app-colors>
+
+    <require from="./layout/nav-bar.html"></require>
+    <require from="./layout/side-menu.html"></require>
+
+    <loading-indicator></loading-indicator>
+
+    <header>
+        <nav-bar router.bind="router"></nav-bar>
+    </header>
+
+    <side-menu></side-menu>
+
+    <div class="page-host">
+        <router-view></router-view>
+    </div>
+
+    <footer>
+
+    </footer>
+</template>

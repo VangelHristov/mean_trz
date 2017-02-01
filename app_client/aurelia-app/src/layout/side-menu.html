@@ -1,0 +1,34 @@
+<template>
+    <div class="col m4">
+        <div md-pushpin="top: 320; offset: 150;">
+            <md-card md-title="Меню">
+                <div>
+                    <div class="actions">
+                        <a md-button md-dropdown="activates: companies; below-origin: true; constrain-width: false;in-duration: 1000;">&nbsp; Фирми&nbsp; </a>
+                    </div>
+                    <div class="actions">
+                        <a md-button md-dropdown="activates: export; below-origin: true; constrain-width: false;in-duration: 1000;">Експорт</a>
+                    </div>
+                    <ul id="companies">
+                        <li><a href="companies">Покажи всички</a></li>
+
+                        <li class="divider"></li>
+                        <li><a href="companies/add-new">Запиши нова</a></li>
+                    </ul>
+                    <ul id="export">
+                        <li><a href="exports/declaration-1">Декларация образец 1</a></li>
+
+                        <li class="divider"></li>
+                        <li><a href="exports/declaration-6">Декларация образец 6</a></li>
+
+                        <li class="divider"></li>
+                        <li><a href="exports/notice-62">Уведомление по чл. 62</a></li>
+
+                        <li class="divider"></li>
+                        <li><a href="exports/noi-file">Файл за НОИ</a></li>
+                    </ul>
+                </div>
+            </md-card>
+        </div>
+    </div>
+</template>
