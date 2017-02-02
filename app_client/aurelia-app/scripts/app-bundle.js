@@ -643,33 +643,6 @@ define('resources/services/authenticator',['exports'], function (exports) {
         return Authenticator;
     }();
 });
-define('resources/services/toast-service',["exports"], function (exports) {
-    "use strict";
-
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-
-    function _classCallCheck(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-            throw new TypeError("Cannot call a class as a function");
-        }
-    }
-
-    var MdToastService = exports.MdToastService = function () {
-        function MdToastService() {
-            _classCallCheck(this, MdToastService);
-        }
-
-        MdToastService.prototype.show = function show(message, length, type) {
-            return new Promise(function (resolve) {
-                Materialize.toast(message, length, type, resolve);
-            });
-        };
-
-        return MdToastService;
-    }();
-});
 define('text!app.html', ['module'], function(module) { module.exports = "<template><md-colors md-primary-color.bind=primaryColor md-accent-color.bind=accentColor md-error-color.bind=errorColor></md-colors><app-colors primary-color.bind=primaryColor accent-color.bind=accentColor></app-colors><require from=./layout/nav-bar.html></require><require from=./layout/side-menu.html></require><loading-indicator></loading-indicator><header><nav-bar router.bind=router></nav-bar></header><side-menu router.bind=router></side-menu><div class=page-host><router-view></router-view></div><footer></footer></template>"; });
 define('text!about/about.html', ['module'], function(module) { module.exports = "<template>${message}</template>"; });
 define('text!authentication/login.html', ['module'], function(module) { module.exports = "<template>${message}</template>"; });

@@ -6,6 +6,10 @@
     "type": "???",
     "url": "???"
   },
+  "scripts": {
+    "build-fonts":"./node_modules/.bin/r.js -o rbuild.js",
+    "prep-materialize":"cd aurelia_project/tasks & au prepare-materialize"
+  },
   "license": "MIT",
   "dependencies": {
     "aurelia-animator-css": "^1.0.0",
