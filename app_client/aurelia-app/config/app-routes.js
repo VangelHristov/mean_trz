@@ -2,30 +2,6 @@
 
 export const routes = [
     {
-        name    : 'about',
-        route   : ['', 'about'],
-        moduleId: 'about/about',
-        title   : 'ТРЗ'
-    },
-    {
-        name    : 'login',
-        route   : 'login',
-        moduleId: 'authentication/login',
-        title   : 'Вход'
-    },
-    {
-        name    : 'register',
-        route   : 'register',
-        moduleId: 'authentication/register',
-        title   : 'Регистрация'
-    },
-    {
-        name    : 'help',
-        route   : 'help',
-        moduleId: 'help/help',
-        title   : 'Помощ'
-    },
-    {
         name    : 'companies',
         route   : 'companies',
         moduleId: 'companies/list-all',
@@ -104,4 +80,4 @@ export const routes = [
     }
 ];
 
-export const fallback = 'about';
+export const notFound = 'not-found';

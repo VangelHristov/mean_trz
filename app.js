@@ -18,7 +18,6 @@ require('./app_api/models/db');
 require('./app_api/config/passport');
 
 const
-  serverRoutes = require('./app_server/routes/index'),
   apiRoutes    = require('./app_api/routes/index'),
   app          = express();
 
@@ -33,13 +32,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client/aurelia-app')));
 app.use(compression());
 app.use(passport.initialize());
 
 // routes
-app.use('/', serverRoutes);
+app.get('/', (req, res) => res.sendFile('./app_client/aurelia-app/index.html'));
 app.use('/api', apiRoutes);
 
 app.use((err, req, res, next) => {

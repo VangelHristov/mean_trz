@@ -1,3 +1,24 @@
 <template>
-    ${message}
+    <div class="container">
+        <div class="row">
+            <div id="login" class="col s4 offset-s2" md-modal="dismissible: false;">
+                <div class="modal-content">
+                    <div>
+                        <md-input md-type="email" md-label="Имейл" md-validate="true" md-validate-error="Невалиден имейл"
+                                  md-value.bind="email">
+                        </md-input>
+                        <br/>
+                    </div>
+                    <div>
+                        <md-input md-type="password" md-label="Парола" md-value.bind="password"></md-input>
+                        <br/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a md-button="flat: true;" md-waves="color: accent;" class="modal-action modal-close">Затвори</a>
+                    <a md-button="flat: true;" md-waves="color: accent;" class="modal-action modal-close">Влез</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

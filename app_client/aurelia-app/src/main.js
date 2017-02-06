@@ -21,5 +21,6 @@ export function configure(aurelia) {
     }
 
     aurelia.use.plugin('aurelia-materialize-bridge', b => b.useAll().useDropdownFix());
+    aurelia.use.plugin('aurelia-fetch-client');
     aurelia.start().then(() => aurelia.setRoot());
 }

@@ -1,18 +1,19 @@
 <template>
-
-    <md-colors md-primary-color.bind="primaryColor" md-accent-color.bind="accentColor" md-error-color.bind="errorColor"></md-colors>
+    <md-colors md-primary-color.bind="primaryColor" md-accent-color.bind="accentColor"
+               md-error-color.bind="errorColor"></md-colors>
     <app-colors primary-color.bind="primaryColor" accent-color.bind="accentColor"></app-colors>
 
-    <require from="./layout/nav-bar.html"></require>
-    <require from="./layout/side-menu.html"></require>
+    <require from="./navigation/nav-bar"></require>
+    <require from="./authentication/login"></require>
+    <require from="./authentication/register"></require>
 
     <loading-indicator></loading-indicator>
 
     <header>
-        <nav-bar router.bind="router"></nav-bar>
+        <nav-bar user.bind="user"></nav-bar>
     </header>
-
-    <side-menu router.bind="router"></side-menu>
+    <login user.bind="user"></login>
+    <register user.bind="user"></register>
 
     <div class="page-host">
         <router-view></router-view>

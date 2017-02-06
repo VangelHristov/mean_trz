@@ -7,13 +7,14 @@
     "url": "???"
   },
   "scripts": {
-    "build-fonts":"./node_modules/.bin/r.js -o rbuild.js",
-    "prep-materialize":"cd aurelia_project/tasks & au prepare-materialize"
+    "build-fonts": "./node_modules/.bin/r.js -o rbuild.js",
+    "prep-materialize": "cd aurelia_project/tasks & au prepare-materialize"
   },
   "license": "MIT",
   "dependencies": {
     "aurelia-animator-css": "^1.0.0",
     "aurelia-bootstrapper": "^1.0.0",
+    "aurelia-fetch-client": "^1.1.0",
     "aurelia-materialize-bridge": "^0.23.0",
     "aurelia-validation": "^1.0.0-beta.1.0.1",
     "bluebird": "^3.4.1",
