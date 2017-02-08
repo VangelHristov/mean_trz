@@ -24,9 +24,4 @@ export class App {
         config.mapUnknownRoutes('not-found/not-found');
         this.router = router;
     }
-
-    logOut() {
-        this.user.logOut();
-        this.router.navigateToRoute('about');
-    }
 }

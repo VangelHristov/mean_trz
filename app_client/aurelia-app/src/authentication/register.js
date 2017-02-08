@@ -1,25 +1,26 @@
 'use strict';
 
-import {bindable, inject} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
 import {DataUsers} from '../resources/services/data-users';
 import {MdToastService} from 'aurelia-materialize-bridge';
 import {json} from 'aurelia-router';
+import {User} from '../resources/services/user';
 
-@inject(DataUsers, MdToastService)
+@inject(DataUsers, User, MdToastService)
 export class Register {
-    constructor(users, toast) {
+    constructor(db, user, toast) {
         this.email          = '';
         this.password       = '';
         this.passwordRepeat = '';
-        this.users          = users;
+        this.db             = db;
+        this.user           = user;
         this.toast          = toast;
     }
 
     register() {
-        this.users
+        this.db
             .create(this.email, this.password)
-            .then(res => this.toast.show(json(res)));
+            .then((res) => this.toast.show(res.message, 5000))
+            .catch((err) => this.toast.show(err, 6000));
     }
-
-    @bindable user = null;
 }

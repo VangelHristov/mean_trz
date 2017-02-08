@@ -1,7 +1,11 @@
 'use strict';
 
-import {bindable} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
+import {User} from '../resources/services/user';
 
+@inject(User)
 export class NavBar {
-    @bindable user = null;
+    constructor(user){
+       this.user = user;
+   }
 }

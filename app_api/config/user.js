@@ -1,9 +1,8 @@
 'use strict';
 
 module.exports = {
-    model   : 'User',
-    owner   : null,
-    required: ['username', 'password', 'email'],
+    required: ['email'],
+    immutable: ['_id', 'companies'],
     populate: {
         path  : 'companies',
         select: 'companyInfo.name companyInfo.bulstat director _id'

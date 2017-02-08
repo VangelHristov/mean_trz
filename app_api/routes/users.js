@@ -1,9 +1,9 @@
 'use strict';
 
-const ctrlUsers = require('../controllers/index').user;
+const ctrl = require('../controllers/user-controller');
 
 module.exports = (router, authentication) => {
-    router.post('/users', ctrlUsers.createNew);
-    router.put('/users/:id', authentication, ctrlUsers.updateById);
-    router.get('/users/:id', authentication, ctrlUsers.getById);
+    router.post('/users', ctrl.register);
+    router.get('/users/:id', ctrl.getById);
+    router.put('/users/:id', authentication, ctrl.updateById);
 };

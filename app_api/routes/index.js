@@ -9,8 +9,8 @@ const
   });
 
 require('./users')(apiRouter, authentication);
-require('./companies')(apiRouter, authentication);
-require('./dossiers')(apiRouter, authentication);
+//require('./companies')(apiRouter, authentication);
+//require('./dossiers')(apiRouter, authentication);
 
 apiRouter.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {

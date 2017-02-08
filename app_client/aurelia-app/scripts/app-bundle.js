@@ -32,11 +32,6 @@ define('app',['exports', './resources/services/authorize-step', './resources/ser
             this.router = router;
         };
 
-        App.prototype.logOut = function logOut() {
-            this.user.logOut();
-            this.router.navigateToRoute('about');
-        };
-
         return App;
     }()) || _class);
 });
@@ -188,7 +183,7 @@ define('authentication/login',['exports', 'aurelia-framework'], function (export
 define('authentication/logout',[], function () {
   "use strict";
 });
-define('authentication/register',['exports', 'aurelia-framework', '../resources/services/data-users', 'aurelia-materialize-bridge'], function (exports, _aureliaFramework, _dataUsers, _aureliaMaterializeBridge) {
+define('authentication/register',['exports', 'aurelia-framework', '../resources/services/data-users', 'aurelia-materialize-bridge', 'aurelia-router', '../resources/services/user'], function (exports, _aureliaFramework, _dataUsers, _aureliaMaterializeBridge, _aureliaRouter, _user) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -196,85 +191,38 @@ define('authentication/register',['exports', 'aurelia-framework', '../resources/
     });
     exports.Register = undefined;
 
-    function _initDefineProp(target, property, descriptor, context) {
-        if (!descriptor) return;
-        Object.defineProperty(target, property, {
-            enumerable: descriptor.enumerable,
-            configurable: descriptor.configurable,
-            writable: descriptor.writable,
-            value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
-        });
-    }
-
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
             throw new TypeError("Cannot call a class as a function");
         }
     }
 
-    function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
-        var desc = {};
-        Object['ke' + 'ys'](descriptor).forEach(function (key) {
-            desc[key] = descriptor[key];
-        });
-        desc.enumerable = !!desc.enumerable;
-        desc.configurable = !!desc.configurable;
+    var _dec, _class;
 
-        if ('value' in desc || desc.initializer) {
-            desc.writable = true;
-        }
-
-        desc = decorators.slice().reverse().reduce(function (desc, decorator) {
-            return decorator(target, property, desc) || desc;
-        }, desc);
-
-        if (context && desc.initializer !== void 0) {
-            desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
-            desc.initializer = undefined;
-        }
-
-        if (desc.initializer === void 0) {
-            Object['define' + 'Property'](target, property, desc);
-            desc = null;
-        }
-
-        return desc;
-    }
-
-    function _initializerWarningHelper(descriptor, context) {
-        throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
-    }
-
-    var _dec, _class, _desc, _value, _class2, _descriptor;
-
-    var Register = exports.Register = (_dec = (0, _aureliaFramework.inject)(_dataUsers.DataUsers, _aureliaMaterializeBridge.MdToastService), _dec(_class = (_class2 = function () {
-        function Register(users, toast) {
+    var Register = exports.Register = (_dec = (0, _aureliaFramework.inject)(_dataUsers.DataUsers, _user.User, _aureliaMaterializeBridge.MdToastService), _dec(_class = function () {
+        function Register(db, user, toast) {
             _classCallCheck(this, Register);
-
-            _initDefineProp(this, 'user', _descriptor, this);
 
             this.email = '';
             this.password = '';
             this.passwordRepeat = '';
-            this.users = users;
+            this.db = db;
+            this.user = user;
             this.toast = toast;
         }
 
         Register.prototype.register = function register() {
             var _this = this;
 
-            this.users.create(this.email, this.password).then(function (res) {
-                return _this.toast.show(res._id);
+            this.db.create(this.email, this.password).then(function (res) {
+                return _this.toast.show(res.message, 5000);
+            }).catch(function (err) {
+                return _this.toast.show(err, 6000);
             });
         };
 
         return Register;
-    }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'user', [_aureliaFramework.bindable], {
-        enumerable: true,
-        initializer: function initializer() {
-            return null;
-        }
-    })), _class2)) || _class);
+    }()) || _class);
 });
 define('companies/add-new',['exports'], function (exports) {
     'use strict';
@@ -525,75 +473,27 @@ define('navigation/breadcrumbs',["exports"], function (exports) {
         return Breadcrumbs;
     }();
 });
-define('navigation/nav-bar',['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
-    'use strict';
+define('navigation/nav-bar',['exports', 'aurelia-framework', '../resources/services/user'], function (exports, _aureliaFramework, _user) {
+   'use strict';
 
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.NavBar = undefined;
+   Object.defineProperty(exports, "__esModule", {
+      value: true
+   });
+   exports.NavBar = undefined;
 
-    function _initDefineProp(target, property, descriptor, context) {
-        if (!descriptor) return;
-        Object.defineProperty(target, property, {
-            enumerable: descriptor.enumerable,
-            configurable: descriptor.configurable,
-            writable: descriptor.writable,
-            value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
-        });
-    }
+   function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+         throw new TypeError("Cannot call a class as a function");
+      }
+   }
 
-    function _classCallCheck(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-            throw new TypeError("Cannot call a class as a function");
-        }
-    }
+   var _dec, _class;
 
-    function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
-        var desc = {};
-        Object['ke' + 'ys'](descriptor).forEach(function (key) {
-            desc[key] = descriptor[key];
-        });
-        desc.enumerable = !!desc.enumerable;
-        desc.configurable = !!desc.configurable;
+   var NavBar = exports.NavBar = (_dec = (0, _aureliaFramework.inject)(_user.User), _dec(_class = function NavBar(user) {
+      _classCallCheck(this, NavBar);
 
-        if ('value' in desc || desc.initializer) {
-            desc.writable = true;
-        }
-
-        desc = decorators.slice().reverse().reduce(function (desc, decorator) {
-            return decorator(target, property, desc) || desc;
-        }, desc);
-
-        if (context && desc.initializer !== void 0) {
-            desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
-            desc.initializer = undefined;
-        }
-
-        if (desc.initializer === void 0) {
-            Object['define' + 'Property'](target, property, desc);
-            desc = null;
-        }
-
-        return desc;
-    }
-
-    function _initializerWarningHelper(descriptor, context) {
-        throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
-    }
-
-    var _desc, _value, _class, _descriptor;
-
-    var NavBar = exports.NavBar = (_class = function NavBar() {
-        _classCallCheck(this, NavBar);
-
-        _initDefineProp(this, 'user', _descriptor, this);
-    }, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'user', [_aureliaFramework.bindable], {
-        enumerable: true,
-        initializer: function initializer() {
-            return null;
-        }
-    })), _class);
+      this.user = user;
+   }) || _class);
 });
 define('navigation/side-menu',["exports"], function (exports) {
   "use strict";
@@ -699,26 +599,35 @@ define('resources/services/data-users',['exports', 'aurelia-fetch-client', 'aure
             _classCallCheck(this, DataUsers);
 
             this.xhr = xhr.configure(function (config) {
-                return config.withBaseUrl('api/users');
+                return config.withBaseUrl('api/');
             });
         }
 
         DataUsers.prototype.create = function create(email, password) {
-            return this.xhr.fetch('', {
-                method: 'POST',
-                body: (0, _aureliaFetchClient.json)({ email: email, password: password })
+            var _this = this;
+
+            return new Promise(function (resolve, reject) {
+                _this.xhr.fetch('users', {
+                    method: 'POST',
+                    body: (0, _aureliaFetchClient.json)({ email: email, password: password })
+                }).then(function (result) {
+                    return resolve(result);
+                }).catch(function (err) {
+                    return reject(err);
+                });
             });
         };
 
         return DataUsers;
     }()) || _class);
 });
-define('resources/services/user',['exports'], function (exports) {
+define('resources/services/user',['exports', 'aurelia-router', 'aurelia-framework', 'aurelia-materialize-bridge'], function (exports, _aureliaRouter, _aureliaFramework, _aureliaMaterializeBridge) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
+    exports.User = undefined;
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -744,26 +653,37 @@ define('resources/services/user',['exports'], function (exports) {
         };
     }();
 
-    var User = exports.User = function () {
-        function User() {
+    var _dec, _class;
+
+    var User = exports.User = (_dec = (0, _aureliaFramework.inject)(_aureliaRouter.Router, _aureliaMaterializeBridge.MdToastService), _dec(_class = function () {
+        function User(router, toast) {
             _classCallCheck(this, User);
 
+            this.theRouter = router;
+            this.toast = toast;
             this._token = localStorage.getItem('token');
             this._isLoggedIn = this._token && this._token !== 'null';
         }
 
-        User.prototype.login = function login(token) {
+        User.prototype.logIn = function logIn(token) {
             if (token && token !== 'null') {
                 this._token = token;
                 window.localStorage.setItem('token', JSON.stringify(token));
                 this._isLoggedIn = true;
+            } else {
+                this.toast.show('Missing token!!!', 5000);
             }
         };
 
         User.prototype.logOut = function logOut() {
+            var _this = this;
+
             localStorage.removeItem('token');
             this._token = null;
             this._isLoggedIn = false;
+            this.theRouter.navigateToRoute('about').then(function () {
+                return _this.toast.show('Good bye', 4000);
+            });
         };
 
         _createClass(User, [{
@@ -779,7 +699,7 @@ define('resources/services/user',['exports'], function (exports) {
         }]);
 
         return User;
-    }();
+    }()) || _class);
 });
 define('aurelia-materialize-bridge/exports',['exports', './autocomplete/autocomplete', './badge/badge', './box/box', './breadcrumbs/breadcrumbs', './breadcrumbs/instructionFilter', './button/button', './card/card', './carousel/carousel-item', './carousel/carousel', './char-counter/char-counter', './checkbox/checkbox', './chip/chip', './chip/chips', './collapsible/collapsible', './collection/collection-header', './collection/collection-item', './collection/collection', './collection/md-collection-selector', './colors/colorValueConverters', './colors/md-colors', './common/attributeManager', './common/attributes', './common/constants', './common/events', './datepicker/datepicker-default-parser', './datepicker/datepicker', './dropdown/dropdown-element', './dropdown/dropdown', './dropdown/dropdown-fix', './fab/fab', './file/file', './footer/footer', './input/input-prefix', './input/input-update-service', './input/input', './modal/modal', './modal/modal-trigger', './navbar/navbar', './pagination/pagination', './parallax/parallax', './progress/progress', './pushpin/pushpin', './radio/radio', './range/range', './scrollfire/scrollfire-patch', './scrollfire/scrollfire-target', './scrollfire/scrollfire', './scrollspy/scrollspy', './select/select', './sidenav/sidenav-collapse', './sidenav/sidenav', './slider/slider', './switch/switch', './tabs/tabs', './toast/toastService', './tooltip/tooltip', './transitions/fadein-image', './transitions/staggered-list', './validation/validationRenderer', './waves/waves'], function (exports, _autocomplete, _badge, _box, _breadcrumbs, _instructionFilter, _button, _card, _carouselItem, _carousel, _charCounter, _checkbox, _chip, _chips, _collapsible, _collectionHeader, _collectionItem, _collection, _mdCollectionSelector, _colorValueConverters, _mdColors, _attributeManager, _attributes, _constants, _events, _datepickerDefaultParser, _datepicker, _dropdownElement, _dropdown, _dropdownFix, _fab, _file, _footer, _inputPrefix, _inputUpdateService, _input, _modal, _modalTrigger, _navbar, _pagination, _parallax, _progress, _pushpin, _radio, _range, _scrollfirePatch, _scrollfireTarget, _scrollfire, _scrollspy, _select, _sidenavCollapse, _sidenav, _slider, _switch, _tabs, _toastService, _tooltip, _fadeinImage, _staggeredList, _validationRenderer, _waves) {
   'use strict';
@@ -7990,10 +7910,10 @@ define('aurelia-materialize-bridge/common/polyfills',['exports'], function (expo
     }
   }
 });
-define('text!app.html', ['module'], function(module) { module.exports = "<template><md-colors md-primary-color.bind=primaryColor md-accent-color.bind=accentColor md-error-color.bind=errorColor></md-colors><app-colors primary-color.bind=primaryColor accent-color.bind=accentColor></app-colors><require from=./navigation/nav-bar></require><require from=./authentication/login></require><require from=./authentication/register></require><loading-indicator></loading-indicator><header><nav-bar user.bind=user></nav-bar></header><login user.bind=user></login><register user.bind=user></register><div class=page-host><router-view></router-view></div><footer></footer></template>"; });
+define('text!app.html', ['module'], function(module) { module.exports = "<template><md-colors md-primary-color.bind=primaryColor md-accent-color.bind=accentColor md-error-color.bind=errorColor></md-colors><app-colors primary-color.bind=primaryColor accent-color.bind=accentColor></app-colors><require from=./navigation/nav-bar></require><require from=./authentication/login></require><require from=./authentication/register></require><loading-indicator></loading-indicator><header><nav-bar></nav-bar></header><login></login><register></register><div class=page-host><router-view></router-view></div><footer></footer></template>"; });
 define('text!about/about.html', ['module'], function(module) { module.exports = "<template><section id=about class=container><h2 class=center-align>За приложението</h2><hr><p class=center-align>Приложение за трз, в процес на разработка.</p></section><footer id=footer class=container><div class=center-align>© Вангел Христов 2017</div></footer></template>"; });
 define('text!authentication/login.html', ['module'], function(module) { module.exports = "<template><div class=container><div class=row><div id=login class=\"col s4 offset-s2\" md-modal=\"dismissible: false;\"><div class=modal-content><div><md-input md-type=email md-label=Имейл md-validate=true md-validate-error=\"Невалиден имейл\" md-value.bind=email></md-input><br></div><div><md-input md-type=password md-label=Парола md-value.bind=password></md-input><br></div></div><div class=modal-footer><a md-button=\"flat: true;\" md-waves=\"color: accent;\" class=\"modal-action modal-close\">Затвори</a><a md-button=\"flat: true;\" md-waves=\"color: accent;\" class=\"modal-action modal-close\">Влез</a></div></div></div></div></template>"; });
-define('text!authentication/register.html', ['module'], function(module) { module.exports = "<template><div class=container><div class=row><div id=register class=\"col s4 offset-s2\" md-modal=\"dismissible: false;\"><div class=modal-content><div><md-input md-type=email md-label=Имейл md-validate=true md-validate-error=\"Невалиден имейл\" md-value.bind=email></md-input><br></div><div><md-input md-type=password md-label=Парола md-value.bind=password></md-input><br></div><div><md-input md-type=password md-label=\"Потвърди паролата\" md-value.bind=passwordRepeat></md-input><br></div></div><div class=modal-footer><a md-button=\"flat: true;\" md-waves=\"color: accent;\" class=\"modal-action modal-close\">Затвори</a><a click.delegate=register() md-button=\"flat: true;\" md-waves=\"color: accent;\" class=\"modal-action modal-close\">Регистрирай се</a></div></div></div></div></template>"; });
+define('text!authentication/register.html', ['module'], function(module) { module.exports = "<template><div class=container><div class=row><div id=register class=\"col s4 offset-s2\" md-modal=\"dismissible: false;\"><div class=modal-content><div><md-input md-type=email md-label=Имейл md-validate=true md-validate-error=\"Невалиден имейл\" md-value.one-time=email></md-input><br></div><div><md-input md-type=password md-label=Парола md-value.one-time=password></md-input><br></div><div><md-input md-type=password md-label=\"Потвърди паролата\" md-value.one-time=passwordRepeat></md-input><br></div></div><div class=modal-footer><a md-button=\"flat: true;\" md-waves=\"color: accent;\" class=\"modal-action modal-close\">Затвори</a><a click.delegate=register() md-button=\"flat: true;\" md-waves=\"color: accent;\" class=\"modal-action modal-close\">Регистрирай се</a></div></div></div></div></template>"; });
 define('text!companies/add-new.html', ['module'], function(module) { module.exports = "<template>${message}</template>"; });
 define('text!companies/details.html', ['module'], function(module) { module.exports = "<template>${message}</template>"; });
 define('text!companies/list-all.html', ['module'], function(module) { module.exports = "<template><require from=../layout/breadcrumbs.html></require><breadcrumbs></breadcrumbs></template>"; });
@@ -8006,7 +7926,7 @@ define('text!file-exports/noi-file.html', ['module'], function(module) { module.
 define('text!file-exports/notice-62.html', ['module'], function(module) { module.exports = "<template>${message}</template>"; });
 define('text!help/help.html', ['module'], function(module) { module.exports = "<template><section class=container><div><p class=center-align>Документация на продукта</p></div></section></template>"; });
 define('text!navigation/breadcrumbs.html', ['module'], function(module) { module.exports = "<template><md-breadcrumbs></md-breadcrumbs></template>"; });
-define('text!navigation/nav-bar.html', ['module'], function(module) { module.exports = "<template><md-navbar><a href=#/about class=\"hide-on-small-and-down left brand-logo\"><span>ТРЗ</span></a><ul class=right><li md-waves show.bind=!user.isLoggedIn><a href=#register>Регистрация</a></li><li md-waves show.bind=!user.isLoggedIn><a href=#login>Вход</a></li><li md-waves><a href=#/help>Помощ</a></li><li md-waves show.bind=user.isLoggedIn><a click.delegate=logOut()>Изход</a></li></ul></md-navbar></template>"; });
+define('text!navigation/nav-bar.html', ['module'], function(module) { module.exports = "<template><md-navbar><a href=#/about class=\"hide-on-small-and-down left brand-logo\"><span>ТРЗ</span></a><ul class=right><li md-waves show.bind=!user.isLoggedIn><a href=#register>Регистрация</a></li><li md-waves show.bind=!user.isLoggedIn><a href=#login>Вход</a></li><li md-waves><a href=#/help>Помощ</a></li><li md-waves show.bind=user.isLoggedIn><a click.delegate=user.logOut()>Изход</a></li></ul></md-navbar></template>"; });
 define('text!navigation/side-menu.html', ['module'], function(module) { module.exports = "<template><div class=\"col m4\"><div md-pushpin=\"top: 320; offset: 150;\"><md-card md-title=Меню><div><div class=actions><a md-button md-dropdown=\"activates: companies; below-origin: true; constrain-width: false;in-duration: 1000;\">&nbsp; Фирми&nbsp;</a></div><div class=actions><a md-button md-dropdown=\"activates: export; below-origin: true; constrain-width: false;in-duration: 1000;\">Експорт</a></div><ul id=companies><li><a route-href=\"route: companies\">Покажи всички</a></li><li class=divider></li><li><a route-href=\"route: companies/add-new\">Запиши нова</a></li></ul><ul id=export><li><a route-href=\"route: exports/declaration-1\">Декларация образец 1</a></li><li class=divider></li><li><a route-href=\"route: exports/declaration-6\">Декларация образец 6</a></li><li class=divider></li><li><a route-href=\"route: exports/notice-62\">Уведомление по чл. 62</a></li><li class=divider></li><li><a route-href=\"route: exports/noi-file\">Файл за НОИ</a></li></ul></div></md-card></div></div></template>"; });
 define('text!not-found/not-found.html', ['module'], function(module) { module.exports = "<template><h1>Грешка</h1><p>Страницата която търсите не съществува</p></template>"; });
 //# sourceMappingURL=app-bundle.js.map

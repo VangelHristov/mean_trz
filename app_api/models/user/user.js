@@ -12,7 +12,7 @@ const
       hash     : String,
       salt     : String,
       email    : {type: String, required: true, match: patterns.email},
-      companies: [{type: objectId, ref: 'Company', required: true}]
+      companies: [{type: objectId, ref: 'Company'}]
   });
 
 userSchema.methods.setPassword = function (password) {

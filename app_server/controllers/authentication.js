@@ -2,7 +2,7 @@
 
 const User     = require('../../app_api/models/db').model('User'),
       passport = require('passport'),
-      sendJson = require('../../app_api/controllers/common/send-json');
+      sendJson = require('.././send-json');
 
 function authenticate(req, res, done) {
     if (!req.body.email || !req.body.password) {
