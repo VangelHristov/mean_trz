@@ -1,12 +1,18 @@
 'use strict';
 
-import {HttpClient, json} from 'aurelia-fetch-client';
+import {HttpClient, json as stringify} from 'aurelia-fetch-client';
 import {inject, NewInstance} from 'aurelia-framework';
+import {json as parse} from 'aurelia-router';
 
 @inject(NewInstance.of(HttpClient))
 export class DataUsers {
     constructor(xhr) {
-        this.xhr = xhr.configure(config => config.withBaseUrl('api/'));
+        this.xhr = xhr
+          .configure(config => {
+              config
+                .useStandardConfiguration()
+                .withBaseUrl('api/');
+          });
     }
 
     create(email, password) {
@@ -14,9 +20,9 @@ export class DataUsers {
             this.xhr
                 .fetch('users', {
                     method: 'POST',
-                    body  : json({email, password})
+                    body  : stringify({email, password})
                 })
-                .then(result => resolve(result))
+                .then(result => resolve(parse(result)))
                 .catch(err => reject(err));
         });
     }

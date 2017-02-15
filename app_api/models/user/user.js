@@ -12,7 +12,9 @@ const
       hash     : String,
       salt     : String,
       email    : {type: String, required: true, match: patterns.email},
-      companies: [{type: objectId, ref: 'Company'}]
+      companies: [{type: objectId, ref: 'Company'}],
+      firstName: String,
+      lastName : String
   });
 
 userSchema.methods.setPassword = function (password) {
@@ -34,4 +36,4 @@ userSchema.methods.generateJwt = function () {
         exp: parseInt(expiry.getTime() / 1000)
     }, process.env.JWT_SECRET);
 };
-module.exports = userSchema;
+module.exports                 = userSchema;

@@ -183,7 +183,7 @@ define('authentication/login',['exports', 'aurelia-framework'], function (export
 define('authentication/logout',[], function () {
   "use strict";
 });
-define('authentication/register',['exports', 'aurelia-framework', '../resources/services/data-users', 'aurelia-materialize-bridge', 'aurelia-router', '../resources/services/user'], function (exports, _aureliaFramework, _dataUsers, _aureliaMaterializeBridge, _aureliaRouter, _user) {
+define('authentication/register',['exports', 'aurelia-framework', '../resources/services/data-users', 'aurelia-materialize-bridge', '../resources/services/user'], function (exports, _aureliaFramework, _dataUsers, _aureliaMaterializeBridge, _user) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -578,7 +578,7 @@ define('resources/services/authorize-step',['exports', './user', 'aurelia-framew
         return AuthorizeStep;
     }()) || _class);
 });
-define('resources/services/data-users',['exports', 'aurelia-fetch-client', 'aurelia-framework'], function (exports, _aureliaFetchClient, _aureliaFramework) {
+define('resources/services/data-users',['exports', 'aurelia-fetch-client', 'aurelia-framework', 'aurelia-router'], function (exports, _aureliaFetchClient, _aureliaFramework, _aureliaRouter) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -599,7 +599,7 @@ define('resources/services/data-users',['exports', 'aurelia-fetch-client', 'aure
             _classCallCheck(this, DataUsers);
 
             this.xhr = xhr.configure(function (config) {
-                return config.withBaseUrl('api/');
+                config.useStandardConfiguration().withBaseUrl('api/');
             });
         }
 
@@ -611,7 +611,7 @@ define('resources/services/data-users',['exports', 'aurelia-fetch-client', 'aure
                     method: 'POST',
                     body: (0, _aureliaFetchClient.json)({ email: email, password: password })
                 }).then(function (result) {
-                    return resolve(result);
+                    return resolve((0, _aureliaRouter.json)(result));
                 }).catch(function (err) {
                     return reject(err);
                 });

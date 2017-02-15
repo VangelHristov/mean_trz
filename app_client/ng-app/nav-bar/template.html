@@ -1,0 +1,18 @@
+<row>
+    <nav id="custom-inverse" role="navigation" class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" data-toggle="collapse" data-target=".navbar-ex1-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav js-nav-add-active-class">
+                <li><a href="companies" class="custom-inverse">ТРЗ</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-show="user.isLoggedIn" href="{{profileHref}}" class="custom-inverse">Профил</a></li>
+                <li><a ng-hide="user.isLoggedIn" data-toggle="modal" data-target="{{registerModalId}}" class="custom-inverse">Регистрация</a></li>
+                <li><a ng-hide="user.isLoggedIn" data-toggle="modal" data-target="{{loginModalId}}" class="custom-inverse">Вход</a></li>
+                <li><a ng-show="user.isLoggedIn" ng-click="user.logOut()" class="custom-inverse"> Изход</a></li>
+            </ul>
+        </div>
+    </nav>
+</row>

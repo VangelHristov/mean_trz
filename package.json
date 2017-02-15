@@ -11,6 +11,7 @@
     "production": "forever ./bin/www"
   },
   "dependencies": {
+    "angular-resource": "^1.6.2",
     "body-parser": "~1.15.2",
     "compression": "^1.6.2",
     "cookie-parser": "~1.4.3",
@@ -28,7 +29,8 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pug": "~2.0.0-beta6",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

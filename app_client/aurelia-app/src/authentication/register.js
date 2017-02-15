@@ -3,7 +3,6 @@
 import {inject} from 'aurelia-framework';
 import {DataUsers} from '../resources/services/data-users';
 import {MdToastService} from 'aurelia-materialize-bridge';
-import {json} from 'aurelia-router';
 import {User} from '../resources/services/user';
 
 @inject(DataUsers, User, MdToastService)

@@ -32,12 +32,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(express.static(path.join(__dirname, 'app_client/aurelia-app')));
+app.use(express.static(path.join(__dirname, 'app_client/ng-app')));
 app.use(compression());
 app.use(passport.initialize());
 
 // routes
-app.get('/', (req, res) => res.sendFile('./app_client/aurelia-app/index.html'));
+app.get('/', (req, res) => res.sendFile('./app_client/ng-app/index.html'));
 app.use('/api', apiRoutes);
 
 app.use((err, req, res, next) => {

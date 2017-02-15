@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-trz</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/toastr/toastr.min.css">
+    <link rel="stylesheet" href="css/layout.css">
+</head>
+<body >
+
+<trz-nav-bar nav-bar profile-href="/profile" login-modal-id="#login-modal" register-modal-id="#register-modal"></trz-nav-bar>
+<trz-login-modal register-modal-id="#register-modal" forgotten-password-modal-id="#forgotten-password-modal"></trz-login-modal>
+<trz-register-modal login-modal-id="#login-modal" forgotten-password-modal-id="#forgotten-password-modal"></trz-register-modal>
+<trz-forgotten-password-modal login-modal-id="#login-modal" register-modal-id="#register-modal"></trz-forgotten-password-modal>
+
+</body>
+<!--libs-->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/toastr/toastr.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+
+<!--my scripts-->
+<script src="app.js"></script>
+<script src="modals/login/directive.js"></script>
+<script src="modals/login/controller.js"></script>
+<script src="modals/register/directive.js"></script>
+<script src="modals/register/controller.js"></script>
+<script src="modals/forgotten_password/directive.js"></script>
+<script src="modals/forgotten_password/controller.js"></script>
+<script src="about/directive.js"></script>
+<script src="services/storage.js"></script>
+<script src="services/user-data-context.js"></script>
+<script src="services/notification.js"></script>
+<script src="nav-bar/directive.js"></script>
+<script src="nav-bar/controller.js"></script>
+<script src="footer/directive.js"></script>
+<script src="profile/directive.js"></script>
+<script src="profile/controller.js"></script>
+</html>

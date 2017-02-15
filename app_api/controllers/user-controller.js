@@ -18,6 +18,18 @@ const
             .catch(err => controller.sendJson(res, 400, err));
       },
 
+      auth: (req, res) => {
+        User.findOne({email:req.body.email}, (err, user) => {
+            if(err){
+                controller.sendJson(res, 400, err.message);
+            }else if(!user){
+                controller.sendJson(res, 404, {message:'Invalid email'});
+            }else{
+                controller.sendJson(res, 200, user);
+            }
+        });
+      },
+
       getById: (req, res) => {
           controller
             .find(User, req.params.id, config.populate, config.select)

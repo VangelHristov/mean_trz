@@ -1,0 +1,17 @@
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="loginmodal-container">
+            <h1>Вход</h1><br>
+            <form ng-submit="user.logIn()">
+                <input type="email" name="email" ng-model="user.email" placeholder="Имейл">
+                <input type="password" name="password" ng-model="user.password" placeholder="Парола">
+                <input type="submit" name="login" class="login loginmodal-submit" value="Вход">
+            </form>
+
+            <div class="login-help">
+                <a data-toggle="modal"  data-dismiss="modal" data-target="{{registerModalId}}">Регистрация</a> -
+                <a data-dismiss="modal" data-toggle="modal" data-target="{{forgottenPasswordModalId}}">Забравена парола</a>
+            </div>
+        </div>
+    </div>
+</div>
