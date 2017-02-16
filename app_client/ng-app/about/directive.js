@@ -6,7 +6,7 @@
       .directive('trzAbout', function () {
           return {
               restrict:'E',
-              templateUrl:'about/template'
+              templateUrl:'about/template.html'
           };
       });
 }());

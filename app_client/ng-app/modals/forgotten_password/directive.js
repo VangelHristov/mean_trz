@@ -3,7 +3,7 @@
 
     angular
       .module('app')
-      .directive('trzForgottenPassword', function () {
+      .directive('trzForgottenPasswordModal', function () {
           return {
               restrict    : 'E',
               templateUrl : 'modals/forgotten_password/template.html',

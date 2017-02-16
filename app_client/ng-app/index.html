@@ -15,7 +15,8 @@
 <trz-login-modal register-modal-id="#register-modal" forgotten-password-modal-id="#forgotten-password-modal"></trz-login-modal>
 <trz-register-modal login-modal-id="#login-modal" forgotten-password-modal-id="#forgotten-password-modal"></trz-register-modal>
 <trz-forgotten-password-modal login-modal-id="#login-modal" register-modal-id="#register-modal"></trz-forgotten-password-modal>
-
+<section ng-view></section>
+<trz-footer></trz-footer>
 </body>
 <!--libs-->
 <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -27,6 +28,7 @@
 
 <!--my scripts-->
 <script src="app.js"></script>
+<script src="app.config.js"></script>
 <script src="modals/login/directive.js"></script>
 <script src="modals/login/controller.js"></script>
 <script src="modals/register/directive.js"></script>
