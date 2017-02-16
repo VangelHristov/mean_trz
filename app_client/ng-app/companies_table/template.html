@@ -1,0 +1,16 @@
+<table class="table table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <th >Име</th>
+            <th>Булстат</th>
+            <th>Управител</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="company in user.companies">
+            <td>{{company.name}}</td>
+            <td>{{company.bulstat}}</td>
+            <td>{{company.director}}</td>
+        </tr>
+    </tbody>
+</table>
