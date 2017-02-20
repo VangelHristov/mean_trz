@@ -6,7 +6,7 @@
       .directive('trzNavBar', function () {
             return {
                 restrict    : 'E',
-                templateUrl : 'nav-bar/template.html',
+                templateUrl : 'directives/nav_bar/template.html',
                 scope       : {
                     profileHref    : '@',
                     loginModalId   : '@',

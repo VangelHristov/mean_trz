@@ -34,8 +34,10 @@
           return {
               getToken     : () => getData('token'),
               setToken     : (token) => setData('token', token),
-              getId        : () => getData('id'),
-              setId        : (id) => setData('id', id),
+              geUsertId    : () => getData('userId'),
+              setUserId    : (id) => setData('userId', id),
+              getCompanyId : () => getData('companyId'),
+              setCompanyId : (id) => setData('companyId', id),
               removeAllData: () => $window.localStorage.removeItem(dataItemName)
           };
       }]);

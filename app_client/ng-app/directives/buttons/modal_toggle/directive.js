@@ -6,7 +6,7 @@
       .directive('trzModalToggleButton', function () {
           return {
               restrict   : 'E',
-              templateUrl: 'modal_toggle_button/template.html',
+              templateUrl: 'directives/buttons/modal_toggle/template.html',
               scope      : {
                   label : '@',
                   icon  : '@',

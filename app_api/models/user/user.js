@@ -1,23 +1,32 @@
 'use strict';
 
 const
-  mongoose   = require('mongoose'),
-  Schema     = mongoose.Schema,
-  objectId   = mongoose.Schema.Types.ObjectId,
-  patterns   = require('./../validations/patterns'),
-  crypto     = require('crypto'),
-  jwt        = require('jsonwebtoken'),
+  mongoose       = require('mongoose'),
+  Schema         = mongoose.Schema,
+  objectId       = mongoose.Schema.Types.ObjectId,
+  patterns       = require('./../validations/patterns'),
+  crypto         = require('crypto'),
+  jwt            = require('jsonwebtoken'),
+  beautifyUnique = require('mongoose-beautiful-unique-validation'),
 
-  userSchema = new Schema({
+  userSchema     = new Schema({
       hash     : String,
       salt     : String,
-      email    : {type: String, required: true, match: patterns.email},
+      email    : {
+          type    : String,
+          required: [true, 'No email'],
+          match   : [patterns.email, 'Invalid email'],
+          unique  : 'Email not unique'
+      },
       companies: [{type: objectId, ref: 'Company'}],
       firstName: String,
       lastName : String
   });
 
+userSchema.plugin(beautifyUnique);
+
 userSchema.methods.setPassword = function (password) {
+    password  = password.toString();
     this.salt = crypto.randomBytes(16).toString('hex');
     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 };
@@ -36,4 +45,5 @@ userSchema.methods.generateJwt = function () {
         exp: parseInt(expiry.getTime() / 1000)
     }, process.env.JWT_SECRET);
 };
-module.exports                 = userSchema;
+
+module.exports = userSchema;

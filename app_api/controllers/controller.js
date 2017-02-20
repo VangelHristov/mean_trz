@@ -1,8 +1,8 @@
 'use strict';
 
 const
-  lodash     = require('lodash'),
-  ObjectId   = require('mongoose').Types.ObjectId,
+  lodash = require('lodash'),
+  ObjectId = require('mongoose').Types.ObjectId,
 
   validateId = (id) => {
       try {
@@ -13,11 +13,41 @@ const
       }
   },
 
-  hasIn      = (obj, props) => {
+  hasIn = (obj, props) => {
       return lodash.hasIn(obj, props);
   },
 
-  find       = (model, id, populate, select) => {
+  getErrorMessage = (err, required) => {
+      let message = '';
+
+      required.forEach(field => {
+          if (err.errors[field]) {
+              message = err.errors[field].message;
+          }
+      });
+
+      return message;
+  },
+
+  errors = {
+      notFound    : 'The document you are looking for does not exist.',
+      badId       : 'Invalid id.',
+      missingField: 'Missing required field/s.',
+      immutable   : 'Attempted change of immutable property.'
+  },
+
+  sendJson = (res, status, content) => {
+      res.status(status);
+      res.json(content);
+  },
+
+  sendSuccess = (res, data) => sendJson(res, 200, data),
+
+  sendCreated = (res) => sendJson(res, 201, {message: 'Successfully created.'}),
+
+  sendError = (res, err) => sendJson(res,  444, err.message || 'Bad request.'),
+
+  find = (model, id, populate, select) => {
 
       let query = model.findById(id);
 
@@ -28,45 +58,46 @@ const
       if (select) {
           query.select(select);
       }
-      return new Promise((resolve, reject) => {
-          query.exec((err, doc) => {
-              if (err) {
-                  return reject(err.message);
-              } else if (!doc) {
-                  return reject({message: 'Not found!'});
-              }
 
-              return resolve(doc);
-          });
+      return new Promise((resolve, reject) => {
+          if (!validateId(id)) {
+              return reject({status: 400, message: errors.badId});
+          }
+
+          query.exec()
+               .then(doc => {
+                   if (!doc) {
+                       return reject({status: 404, message: errors.notFound});
+                   }
+
+                   resolve(doc);
+               })
+               .catch(err => reject({status: 400, message: err.message || err}));
       });
   },
 
-  sendJson   = (res, status, content) => {
-      res.status(status);
-      res.json(content);
-  },
-
-  save       = (document) => {
+  save = (document, required) => {
       return new Promise((resolve, reject) => {
           document.save((err) => {
               if (err) {
-                  return reject(err.message);
+                  return reject({status: 400, message: getErrorMessage(err, required)});
               }
 
-              return resolve({message: 'ok'});
+              return resolve('ok');
           });
       });
   },
 
-  create     = (model, data, required, res) => {
-      if (!hasIn(data, required)) {
-          return sendJson(res, 401, {message: 'Missing required field!'});
-      }
-
+  create = (model, data, required) => {
       return new Promise((resolve, reject) => {
+
+          if (!hasIn(data, required)) {
+              return reject({status: 400, message: errors.missingField});
+          }
+
           model.create(data, (err, doc) => {
               if (err) {
-                  return reject(err.message);
+                  return reject({status: 400, message: getErrorMessage(err, required)});
               }
 
               return resolve(doc);
@@ -74,26 +105,33 @@ const
       });
   },
 
-  update     = (model, data, id,immutable, res) => {
-      if (hasIn(data, immutable)) {
-          sendJson(res, 403, {message: 'Attempted change of immutable property!'});
-      } else if (!validateId(id)) {
-          sendJson(res, 400, {message: 'Invalid _id!'});
-      } else {
+  update = (model, data, id, required, immutable) => {
+      return new Promise((resolve, reject) => {
+
+          if (hasIn(data, immutable)) {
+              return reject({status: 400, message: errors.immutable});
+          }
+
+          if (!validateId(id)) {
+              return reject({status: 400, message: errors.badId});
+          }
+
           model.findById(id, (err, doc) => {
               if (err) {
-                  sendJson(res, 401, err.message);
-              } else if (!doc) {
-                  sendJson(res, 404, {message: 'Not found'});
-              } else {
-                  lodash.merge(doc, data);
-
-                  save(doc)
-                    .then(result => sendJson(res, 200, result))
-                    .catch(error => sendJson(res, 400, error));
+                  return reject({status: 400, message: getErrorMessage(err, required)});
               }
+
+              if (!doc) {
+                  return reject({status: 404, message: errors.notFound});
+              }
+
+              lodash.merge(doc, data);
+
+              save(doc, required)
+                .then(result => resolve(result))
+                .catch(error => reject({status: 400, message: error.message || error}));
           });
-      }
+      });
   };
 
 module.exports = {
@@ -103,5 +141,8 @@ module.exports = {
     find,
     validateId,
     hasIn,
-    sendJson
+    sendCreated,
+    sendError,
+    sendSuccess,
+    errors
 };

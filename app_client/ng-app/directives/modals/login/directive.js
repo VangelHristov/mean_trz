@@ -6,7 +6,7 @@
       .directive('trzLoginModal', function () {
           return {
               restrict    : 'E',
-              templateUrl : 'modals/login/template.html',
+              templateUrl : 'directives/modals/login/template.html',
               scope       : {
                   registerModalId : '@',
                   forgottenPasswordModalId:'@'

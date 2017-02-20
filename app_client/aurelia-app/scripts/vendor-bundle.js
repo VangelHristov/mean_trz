@@ -19788,26 +19788,26 @@ define('aurelia-templating',['exports', 'aurelia-logging', 'aurelia-metadata', '
       
 
       this.container = container;
-      this.viewFactory = viewFactory;
-      this.resources = viewFactory.resources;
-      this.fragment = fragment;
-      this.firstChild = fragment.firstChild;
-      this.lastChild = fragment.lastChild;
-      this.controllers = controllers;
-      this.bindings = bindings;
-      this.children = children;
-      this.slots = slots;
-      this.hasSlots = false;
-      this.fromCache = false;
-      this.isBound = false;
-      this.isAttached = false;
-      this.bindingContext = null;
-      this.overrideContext = null;
-      this.controller = null;
-      this.viewModelScope = null;
+      this.viewFactory       = viewFactory;
+      this.resources         = viewFactory.resources;
+      this.fragment          = fragment;
+      this.firstChild        = fragment.firstChild;
+      this.lastChild         = fragment.lastChild;
+      this.controllers       = controllers;
+      this.bindings          = bindings;
+      this.children          = children;
+      this.slots             = slots;
+      this.hasSlots          = false;
+      this.fromCache         = false;
+      this.isBound           = false;
+      this.isAttached        = false;
+      this.bindingContext    = null;
+      this.overrideContext   = null;
+      this.ctrl              = null;
+      this.viewModelScope    = null;
       this.animatableElement = undefined;
       this._isUserControlled = false;
-      this.contentView = null;
+      this.contentView       = null;
 
       for (var key in slots) {
         this.hasSlots = true;
@@ -19898,8 +19898,8 @@ define('aurelia-templating',['exports', 'aurelia-logging', 'aurelia-metadata', '
         this.isBound = false;
         this.resources._invokeHook('beforeUnbind', this);
 
-        if (this.controller !== null) {
-          this.controller.unbind();
+        if (this.ctrl !== null) {
+          this.ctrl.unbind();
         }
 
         bindings = this.bindings;
@@ -19960,8 +19960,8 @@ define('aurelia-templating',['exports', 'aurelia-logging', 'aurelia-metadata', '
 
       this.isAttached = true;
 
-      if (this.controller !== null) {
-        this.controller.attached();
+      if (this.ctrl !== null) {
+        this.ctrl.attached();
       }
 
       controllers = this.controllers;
@@ -19984,8 +19984,8 @@ define('aurelia-templating',['exports', 'aurelia-logging', 'aurelia-metadata', '
       if (this.isAttached) {
         this.isAttached = false;
 
-        if (this.controller !== null) {
-          this.controller.detached();
+        if (this.ctrl !== null) {
+          this.ctrl.detached();
         }
 
         controllers = this.controllers;

@@ -32,7 +32,7 @@
                   toastr.info(msg);
               },
               warning: function (msg) {
-                  toastr.warn(msg);
+                  toastr.warning(msg);
               },
               error  : function (msg) {
                   toastr.error(msg);
