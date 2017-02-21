@@ -2,16 +2,16 @@
     <div class="modal-dialog">
         <div class="trz-form-container">
             <h1>Регистрация</h1><br>
-            <form ng-submit="user.register()">
-                <input type="email" name="email" ng-model="user.email" placeholder="Имейл">
-                <input type="password" name="paswword" ng-model="user.password" placeholder="Парола">
+            <form ng-submit="submitForm()">
+                <input type="email" name="email" ng-model="data.email" placeholder="Имейл">
+                <input type="password" name="password" ng-model="data.password" placeholder="Парола">
                 <input type="submit" name="register" class="trz-form-submit" value="Регистрация">
             </form>
 
             <div class="modal-dismiss hidden" data-dismiss="modal"></div>
             <div class="trz-form-help">
-                <a data-toggle="modal" data-dismiss="modal" data-target="{{loginModalId}}">Вход</a> -
-                <a data-toggle="modal" data-dismiss="modal" data-target="{{forgottenPasswordModalId}}">Забравена парола</a>
+                <a data-toggle="modal" data-dismiss="modal" data-target="#login-modal">Вход</a> -
+                <a data-toggle="modal" data-dismiss="modal" data-target="#forgotten-password-modal">Забравена парола</a>
             </div>
         </div>
     </div>

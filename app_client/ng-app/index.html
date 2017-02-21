@@ -9,20 +9,18 @@
     <link rel="stylesheet" href="bower_components/toastr/toastr.min.css">
     <link rel="stylesheet" href="css/layout.css">
 </head>
-<body ng-cloack>
+<body ng-cloak ng-controller="UserController as user">
 
-<trz-nav-bar nav-bar profile-href="/profile" login-modal-id="#login-modal"
-             register-modal-id="#register-modal"></trz-nav-bar>
-<trz-login-modal register-modal-id="#register-modal"
-                 forgotten-password-modal-id="#forgotten-password-modal"></trz-login-modal>
-<trz-register-modal login-modal-id="#login-modal"
-                    forgotten-password-modal-id="#forgotten-password-modal"></trz-register-modal>
+<trz-nav-bar loggedIn="user.isLoggedIn()" logOut="user.logOut()"></trz-nav-bar>
 
-<trz-forgotten-password-modal></trz-forgotten-password-modal>
+<trz-login-modal submit="user.logIn(data)"></trz-login-modal>
+<trz-register-modal submit="user.register(data)"></trz-register-modal>
+<trz-forgotten-password-modal submit="user.resetPassword(email)"></trz-forgotten-password-modal>
 
+<main ng-view></main>
 
-<section ng-view></section>
 <trz-footer text="© Вангел Христов 2017"></trz-footer>
+
 </body>
 <!--libs-->
 <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -35,7 +33,9 @@
 <!--my scripts-->
 <script src="app.js"></script>
 <script src="app.config.js"></script>
-<script src="user.controller.js"></script>
+
+
+<script src="controllers/user.js"></script>
 
 
 <script src="directives/modals/login/directive.js"></script>
@@ -48,9 +48,6 @@
 <script src="directives/buttons/modal_toggle/directive.js"></script>
 
 
-
-<script src="profile/directive.js"></script>
-<script src="profile/controller.js"></script>
 <script src="about/directive.js"></script>
 
 
@@ -58,6 +55,9 @@
 <script src="services/data-context.js"></script>
 <script src="services/notification.js"></script>
 <script src="services/modal-dismiss.js"></script>
+
+<script src="services/core.js"></script>
+<script src="services/common.js"></script>
 
 <script src="constants/messages.js"></script>
 

@@ -3,8 +3,8 @@
 
     angular
       .module('app')
-      .controller('CompanyController', ['dataContext', 'notification', 'storage', function (dataContext, notification, storege) {
-          let ctrl  = this;
+      .controller('CompanyController', ['common', function (common) {
+          let ctrl = this;
           ctrl.data = {
               name                : '',
               bulstat             : '',
@@ -17,15 +17,15 @@
               },
               pkpv                : '',
               mainEconomicActivity: '',
-              user                : storege.getUserId()
+              user                : common.storege.getUserId()
           };
           ctrl.save = function () {
-              dataContext
-                .companies
-                .save(ctrl.data)
-                .$promise
-                .then(result => notification.success(result))
-                .catch(error => notification.warning(error));
+              common.dataContext
+                    .companies
+                    .save(ctrl.data)
+                    .$promise
+                    .then(result => common.notification.success(result))
+                    .catch(error => common.notification.warning(error));
           };
       }]);
 }());

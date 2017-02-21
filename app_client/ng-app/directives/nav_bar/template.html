@@ -5,13 +5,12 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav js-nav-add-active-class">
-                <li><a href="companies" class="custom-inverse">ТРЗ</a></li>
+                <li><a href="#!/companies" class="custom-inverse">ТРЗ</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a ng-show="user.isLoggedIn()" href="{{profileHref}}" class="custom-inverse">Профил</a></li>
-                <li><a ng-hide="user.isLoggedIn()" data-toggle="modal" data-target="{{registerModalId}}" class="custom-inverse">Регистрация</a></li>
-                <li><a ng-hide="user.isLoggedIn()" data-toggle="modal" data-target="{{loginModalId}}" class="custom-inverse">Вход</a></li>
-                <li><a ng-show="user.isLoggedIn()" ng-click="user.logOut()" class="custom-inverse"> Изход</a></li>
+                <li><a ng-hide="user.loggedIn" data-toggle="modal" data-target="#register-modal" class="custom-inverse">Регистрация</a></li>
+                <li><a ng-hide="user.loggedIn" data-toggle="modal" data-target="#login-modal" class="custom-inverse">Вход</a></li>
+                <li><a ng-show="user.loggedIn" ng-click="user.exit()" class="custom-inverse"> Изход</a></li>
             </ul>
         </div>
     </nav>
