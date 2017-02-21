@@ -1,16 +1,19 @@
 (function () {
     'use strict';
+
     angular
       .module('app')
-      .controller("UserController", ['storage', 'notification', function (storage, notification) {
-          let ctrl        = this;
+      .controller("UserController", ['storage', 'notification', '$location', function (storage, notification, $location) {
+          let ctrl = this;
 
-          ctrl.isLoggedIn = !!storage.getToken();
+          ctrl.isLoggedIn = function () {
+              return !!storage.getToken();
+          };
 
-          ctrl.logOut     = function () {
+          ctrl.logOut = function () {
               storage.removeAllData();
-              ctrl.isLoggedIn = false;
               notification.success('Good bye!');
+              $location.path('/about');
               // redirect to about
           };
       }]);

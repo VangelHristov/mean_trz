@@ -30,7 +30,7 @@ const
                   return ctrl.sendError(res, {message: 'Invalid username or password'});
               }
 
-              ctrl.sendSuccess(res, user.generateJwt());
+              ctrl.sendSuccess(res, {data: user.generateJwt()});
           });
       },
 
