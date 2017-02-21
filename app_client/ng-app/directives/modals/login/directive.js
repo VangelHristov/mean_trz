@@ -11,7 +11,7 @@
                   registerModalId : '@',
                   forgottenPasswordModalId:'@'
               },
-              controller  : 'LoginController',
+              controller  : 'UserController',
               controllerAs: 'user'
           };
       });

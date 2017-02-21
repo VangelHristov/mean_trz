@@ -2,11 +2,11 @@
     <div class="modal-dialog">
         <div class="trz-form-container">
             <h1>Забравена парола</h1><br>
-            <form ng-submit="user.data.submit()">
+            <form ng-submit="user.resetPassword()">
                 <input type="email" placeholder="Имейл" name="email" ng-model="user.data.email">
                 <input type="submit" name="resetpassword" class="trz-form-submit" value="Прати нова парола">
             </form>
-
+            <div class="modal-dismiss hidden" data-dismiss="modal"></div>
             <div class="trz-form-help">
                 <a data-toggle="modal" data-dismiss="modal" data-target="#register-modal">Регистрация</a> -
                 <a data-toggle="modal" data-dismiss="modal" data-target="#login-modal">Вход</a>
