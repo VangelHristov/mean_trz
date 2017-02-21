@@ -6,7 +6,7 @@
       .directive('trzCompaniesTable', function () {
           return {
               restrict    : 'E',
-              templateUrl : 'table/companies/template.html',
+              templateUrl : 'directives/tables/companies/template.html',
               controller  : 'CompaniesController',
               controllerAs: 'user'
           };

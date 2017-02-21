@@ -45,7 +45,7 @@ const
 
   sendCreated = (res) => sendJson(res, 201, {message: 'Successfully created.'}),
 
-  sendError = (res, err) => sendJson(res,  444, err.message || 'Bad request.'),
+  sendError = (res, err) => sendJson(res,  err.status || 400, err.message || 'Bad request.'),
 
   find = (model, id, populate, select) => {
 

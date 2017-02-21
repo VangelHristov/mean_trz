@@ -19803,7 +19803,7 @@ define('aurelia-templating',['exports', 'aurelia-logging', 'aurelia-metadata', '
       this.isAttached        = false;
       this.bindingContext    = null;
       this.overrideContext   = null;
-      this.ctrl              = null;
+      this.util              = null;
       this.viewModelScope    = null;
       this.animatableElement = undefined;
       this._isUserControlled = false;
@@ -19898,8 +19898,8 @@ define('aurelia-templating',['exports', 'aurelia-logging', 'aurelia-metadata', '
         this.isBound = false;
         this.resources._invokeHook('beforeUnbind', this);
 
-        if (this.ctrl !== null) {
-          this.ctrl.unbind();
+        if (this.util !== null) {
+          this.util.unbind();
         }
 
         bindings = this.bindings;
@@ -19960,8 +19960,8 @@ define('aurelia-templating',['exports', 'aurelia-logging', 'aurelia-metadata', '
 
       this.isAttached = true;
 
-      if (this.ctrl !== null) {
-        this.ctrl.attached();
+      if (this.util !== null) {
+        this.util.attached();
       }
 
       controllers = this.controllers;
@@ -19984,8 +19984,8 @@ define('aurelia-templating',['exports', 'aurelia-logging', 'aurelia-metadata', '
       if (this.isAttached) {
         this.isAttached = false;
 
-        if (this.ctrl !== null) {
-          this.ctrl.detached();
+        if (this.util !== null) {
+          this.util.detached();
         }
 
         controllers = this.controllers;

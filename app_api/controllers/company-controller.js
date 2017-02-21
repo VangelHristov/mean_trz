@@ -1,7 +1,7 @@
 'use strict';
 
 const
-  ctrl = require('./controller'),
+  util = require('./util'),
   db = require('../models/db'),
   Company = db.model('Company'),
   User = db.model('User'),
@@ -9,33 +9,33 @@ const
 
 module.exports = {
     getById   : (req, res) => {
-        ctrl
+        util
           .find(Company, req.body.id, config.populate)
-          .then(company => ctrl.sendSuccess(res, company))
-          .catch(error => ctrl.sendError(res, error));
+          .then(company => util.sendSuccess(res, company))
+          .catch(error => util.sendError(res, error));
     },
     updateById: (req, res) => {
-        ctrl
+        util
           .update(Company, req.body.data, req.body.id, config.required, config.immutable)
-          .then(company => ctrl.save(company))
-          .then(result => ctrl.sendSuccess(res, result))
-          .catch(error => ctrl.sendErroe(res, error));
+          .then(company => util.save(company, config.required))
+          .then(result => util.sendSuccess(res, result))
+          .catch(error => util.sendErroe(res, error));
     },
     createNew : (req, res) => {
         let companyId = '';
 
-        ctrl
+        util
           .create(Company, req.body.data, config.required)
           .then(company => {
               companyId = company._id;
-              ctrl.find(User, companyId);
+              util.find(User, companyId);
           })
           .then(user => {
               user.companies.unshift(companyId);
               return Promise.resolve(user);
           })
-          .then(user => ctrl.save(user))
-          .then(() => ctrl.sendCreated(res))
-          .catch(error => ctrl.sendError(res, error));
+          .then(user => util.save(user))
+          .then(() => util.sendCreated(res))
+          .catch(error => util.sendError(res, error));
     }
 };
