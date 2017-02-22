@@ -8,9 +8,9 @@
                 <li><a href="#!/companies" class="custom-inverse">ТРЗ</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a ng-hide="user.loggedIn" data-toggle="modal" data-target="#register-modal" class="custom-inverse">Регистрация</a></li>
-                <li><a ng-hide="user.loggedIn" data-toggle="modal" data-target="#login-modal" class="custom-inverse">Вход</a></li>
-                <li><a ng-show="user.loggedIn" ng-click="user.exit()" class="custom-inverse"> Изход</a></li>
+                <li><a ng-hide="user.isLoggedIn()" data-toggle="modal" data-target="#register-modal" class="custom-inverse">Регистрация</a></li>
+                <li><a ng-hide="user.isLoggedIn()" data-toggle="modal" data-target="#login-modal" class="custom-inverse">Вход</a></li>
+                <li><a ng-show="user.isLoggedIn()" ng-click="user.logOut()" class="custom-inverse"> Изход</a></li>
             </ul>
         </div>
     </nav>
