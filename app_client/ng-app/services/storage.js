@@ -9,7 +9,7 @@
                 '<': '&lt;',
                 '>': '&gt;'
             },
-            dataItemName  = 'TRZ_USER_DATA';
+            dataItemName = 'TRZ_TOKEN';
 
           function replaceTag(tag) {
               return tagsToReplace[tag] || tag;
@@ -19,25 +19,33 @@
               return str.replace(/[<>]/g, replaceTag);
           }
 
-          function getData(prop) {
-              let storageData = $window.localStorage.getItem(dataItemName) || '{}';
-              storageData     = escapeHtml(storageData);
-              return prop ? JSON.parse(storageData)[prop] : JSON.parse(storageData);
+          function getToken() {
+              let token = $window.localStorage.getItem(dataItemName);
+              return token ? escapeHtml(token) : false;
           }
 
-          function setData(prop, val) {
-              let data   = getData() || {};
-              data[prop] = val;
-              $window.localStorage.setItem(dataItemName, JSON.stringify(data));
+          function setToken(token) {
+              $window.localStorage.setItem(dataItemName, token);
+          }
+
+          function getPayload() {
+              let token = getToken();
+              return token ? JSON.parse($window.atob(token.split('.')[1])) : false;
           }
 
           return {
-              getToken     : () => getData('token'),
-              setToken     : (token) => setData('token', token),
-              geUsertId    : () => getData('userId'),
-              setUserId    : (id) => setData('userId', id),
-              getCompanyId : () => getData('companyId'),
-              setCompanyId : (id) => setData('companyId', id),
+              getToken,
+              setToken,
+              isLoggedIn   : () => {
+                  let payload = getPayload();
+
+                  if (payload) {
+                      return payload.exp > Date.now() / 1000;
+                  }
+
+                  return false;
+              },
+              getUserId    : () => getPayload()._id,
               removeAllData: () => $window.localStorage.removeItem(dataItemName)
           };
       }]);
