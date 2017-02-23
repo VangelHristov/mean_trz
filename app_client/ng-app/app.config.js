@@ -31,12 +31,13 @@
 
           $httpProvider.interceptors.push('authenticationInterceptor');
       }])
-      .run(['$rootScope', '$location', 'storage', function ($rootScope, $location, storage) {
+      .run(['$rootScope', '$location', 'storage', 'notification', 'messages', function ($rootScope, $location, storage, notification, messages) {
           $rootScope.$on('$routeChangeStart', function (event, requestedRoute) {
 
               if (requestedRoute.authorization && !storage.getToken()) {
                   event.preventDefault();
                   $location.path('/about');
+                  notification.warning(messages.propmtToLogIn);
               }
           });
       }]);
