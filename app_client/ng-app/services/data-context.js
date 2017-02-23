@@ -3,13 +3,13 @@
 
     angular
       .module('app')
-      .factory('dataContext', ['core', function (core) {
+      .factory('dataContext', ['$resource', function ($resource) {
           return {
-              register: core.$resource('api/register'),
-              auth    : core.$resource('api/auth', null, {authenticate: {method: 'PUT'}}),
-              user    : core.$resource('api/users/:id', {id: '@_id'}, {auth: {method: 'PUT'}}),
-              company : core.$resource('api/companies/:id', {id: '@_id'}, {edit: {method: 'PUT'}}),
-              dossier : core.$resource('api/dossiers/:id', {id: '@_id'}, {edit: {method: 'PUT'}})
+              register: $resource('api/register'),
+              auth    : $resource('api/auth', null, {authenticate: {method: 'PUT'}}),
+              user    : $resource('api/users/:id', {id: '@_id'}),
+              company : $resource('api/companies/:id', {id: '@_id'}, {edit: {method: 'PUT'}}),
+              dossier : $resource('api/dossiers/:id', {id: '@_id'}, {edit: {method: 'PUT'}})
           };
       }]);
 }());

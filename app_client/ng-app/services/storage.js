@@ -3,7 +3,7 @@
 
     angular
       .module('app')
-      .factory('storage', ['core', function (core) {
+      .factory('storage', ['$window', function ($window) {
           let
             tagsToReplace = {
                 '<': '&lt;',
@@ -20,7 +20,7 @@
           }
 
           function getData(prop) {
-              let storageData = core.$window.localStorage.getItem(dataItemName) || '{}';
+              let storageData = $window.localStorage.getItem(dataItemName) || '{}';
               storageData     = escapeHtml(storageData);
               return prop ? JSON.parse(storageData)[prop] : JSON.parse(storageData);
           }
@@ -28,7 +28,7 @@
           function setData(prop, val) {
               let data   = getData() || {};
               data[prop] = val;
-              core.$window.localStorage.setItem(dataItemName, JSON.stringify(data));
+              $window.localStorage.setItem(dataItemName, JSON.stringify(data));
           }
 
           return {
@@ -38,7 +38,7 @@
               setUserId    : (id) => setData('userId', id),
               getCompanyId : () => getData('companyId'),
               setCompanyId : (id) => setData('companyId', id),
-              removeAllData: () => core.$window.localStorage.removeItem(dataItemName)
+              removeAllData: () => $window.localStorage.removeItem(dataItemName)
           };
       }]);
 }());

@@ -3,8 +3,8 @@
 
     angular
       .module('app')
-      .factory('notification', ['core', function (core) {
-          let toastr = core.$window.toastr;
+      .factory('notification', ['$window', function ($window) {
+          let toastr = $window.toastr;
 
           toastr.options = {
               "closeButton"      : false,

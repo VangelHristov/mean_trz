@@ -3,7 +3,7 @@
 
     angular
       .module('app')
-      .config(['$routeProvider', function ($routeProvider) {
+      .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
           $routeProvider
             .when('/about', {template: '<trz-about></trz-about>'})
             .when('/companies', {template: '<trz-modal-toggle-button label="Добави нова" icon="fa fa-plus" target="#"></trz-modal-toggle-button><trz-companies-table></trz-companies-table>'})
@@ -13,5 +13,7 @@
             .when('/companies/:companyId/dossiers/add-new', {template: '<h1>New dossier form </h1>'})
             .when('/companies/:companyId/dossiers/:dossierId', {template: '<h1>Dossier details</h1>'})
             .otherwise('/about');
+
+          $httpProvider.interceptors.push('authenticationInterceptor');
       }]);
 }());
