@@ -37,7 +37,7 @@
               if (requestedRoute.authorization && !storage.getToken()) {
                   event.preventDefault();
                   $location.path('/about');
-                  notification.warning(messages.propmtToLogIn);
+                  notification.warning(messages.promptToLogIn);
               }
           });
       }]);
