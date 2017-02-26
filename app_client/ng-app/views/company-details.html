@@ -1,3 +1,38 @@
 <div ng-controller="CompanyDetailsController as company">
-    <company-details company="company"></company-details>
+    <ul class="nav nav-tabs" role="tablist">
+        <li ng-repeat="tab in company.tabs" class="{{tab.active ? 'active': ''}}" role="presentation">
+            <a ng-click="company.selected = tab.target" data-toggle="tab">
+                <i class="fa {{tab.icon}}"></i>
+                <span>{{tab.label}}</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane" ng-show="company.selected === 'company-info'">
+            <div class="panel-body">
+                <company-details company="company"></company-details>
+            </div>
+        </div>
+        <div ng-show="company.selected === 'dossiers'" class="tab-pane">
+            <div class="panel-body">
+                <table class="table table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <td>Име</td>
+                            <td>ЕГН</td>
+                            <td>Длъжност</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="dossier in company.dossiers">
+                            <td>{{dossier.name}}</td>
+                            <td>{{dossier.egn}}</td>
+                            <td>{{dossier.position}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

@@ -3,7 +3,8 @@
 
     angular
       .module('app')
-      .controller('AddCompanyController', ['storage', 'dataContext', 'notification', function (storage, dataContext, notification) {
+      .controller('AddCompanyController', ['storage', 'dataContext', 'notification', '$location',
+          function (storage, dataContext, notification, $location) {
           let ctrl = this;
           ctrl.data = {
               name                : 'Първа фирма',
@@ -23,7 +24,10 @@
               dataContext.company
                          .save(ctrl.data)
                          .$promise
-                         .then(result => notification.success(result.message))
+                         .then(result => {
+                             notification.success(result.message);
+                             $location.path('/companies');
+                         })
                          .catch(error => notification.warning(error.data));
           };
       }]);

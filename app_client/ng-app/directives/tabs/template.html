@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs" role="tablist">
+    <li ng-repeat="tab in tabs" class="{{tab.active || ''}}" role="presentation">
+            <a ng-click="$parent.selected = tab.target" data-toggle="tab">
+                <i class="fa {{tab.icon}}"></i>
+                <span>{{tab.label}}</span>
+            </a>
+    </li>
+</ul>

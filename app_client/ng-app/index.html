@@ -17,7 +17,9 @@
 <trz-register-modal submit="user.register(data)"></trz-register-modal>
 <trz-forgotten-password-modal submit="user.resetPassword(email)"></trz-forgotten-password-modal>
 
-<main ng-view></main>
+<div class="container-fluid special">
+    <main class="jumbotron" ng-view></main>
+</div>
 
 <trz-footer text="© Вангел Христов 2017"></trz-footer>
 
@@ -50,6 +52,7 @@
 <script src="directives/buttons/modal_toggle/directive.js"></script>
 <script src="directives/company_details/directive.js"></script>
 <script src="directives/buttons/button_group/directive.js"></script>
+<script src="directives/tabs/directive.js"></script>
 
 
 <script src="about/directive.js"></script>
