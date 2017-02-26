@@ -43,7 +43,7 @@ const
 
       updateById: (req, res) => {
           util
-            .update(User, req.body, req.params.id, config.required, config.immutable)
+            .update(User, req.body, req.params.id, config.required)
             .then(() => util.sendSuccess(res))
             .catch(error => util.sendError(res, error));
       }

@@ -4,17 +4,20 @@ const
   lodash = require('lodash'),
   ObjectId = require('mongoose').Types.ObjectId,
 
-  validateId = (id) => {
-      try {
-          let objId = new ObjectId(id);
-          return (objId.toString() === id && ObjectId.isValid(id));
-      } catch (e) {
-          return false;
-      }
-  },
+  validateId = (id) => (/^[a-fA-F0-9]{24}$/.test(id.toString()) && ObjectId.isValid(id)),
 
-  hasIn = (obj, props) => {
-      return lodash.hasIn(obj, props);
+  hasAll = (obj, props) => {
+      return props.every(prop => {
+          if (prop.indexOf('.') > -1) {
+              let lastDot = prop.lastIndexOf('.'),
+                p = prop.substring(lastDot + 1),
+                o = prop.substring(0, lastDot);
+
+              return obj[o].hasOwnProperty(p);
+          }
+
+          return obj.hasOwnProperty(prop);
+      });
   },
 
   getErrorMessage = (err, required) => {
@@ -45,23 +48,24 @@ const
 
   sendCreated = (res) => sendJson(res, 201, {message: 'Successfully created.'}),
 
-  sendError = (res, err) => sendJson(res,  err.status || 400, err.message || 'Bad request.'),
+  sendError = (res, err) => sendJson(res, err.status || 400, err.message || 'Bad request.'),
 
   find = (model, id, populate, select) => {
 
-      let query = model.findById(id);
-
-      if (populate) {
-          query.populate(populate);
-      }
-
-      if (select) {
-          query.select(select);
-      }
-
       return new Promise((resolve, reject) => {
+
           if (!validateId(id)) {
               return reject({status: 400, message: errors.badId});
+          }
+
+          let query = model.findById(id);
+
+          if (populate) {
+              query.populate(populate);
+          }
+
+          if (select) {
+              query.select(select);
           }
 
           query.exec()
@@ -83,7 +87,7 @@ const
                   return reject({status: 400, message: getErrorMessage(err, required)});
               }
 
-              return resolve('ok');
+              return resolve({message:'ok'});
           });
       });
   },
@@ -91,7 +95,7 @@ const
   create = (model, data, required) => {
       return new Promise((resolve, reject) => {
 
-          if (!hasIn(data, required)) {
+          if (!hasAll(data, required)) {
               return reject({status: 400, message: errors.missingField});
           }
 
@@ -105,12 +109,8 @@ const
       });
   },
 
-  update = (model, data, id, required, immutable) => {
+  update = (model, data, id, required) => {
       return new Promise((resolve, reject) => {
-
-          if (hasIn(data, immutable)) {
-              return reject({status: 400, message: errors.immutable});
-          }
 
           if (!validateId(id)) {
               return reject({status: 400, message: errors.badId});
@@ -126,10 +126,7 @@ const
               }
 
               lodash.merge(doc, data);
-
-              save(doc, required)
-                .then(result => resolve(result))
-                .catch(error => reject({status: 400, message: error.message || error}));
+              resolve(doc);
           });
       });
   };
@@ -140,7 +137,7 @@ module.exports = {
     save,
     find,
     validateId,
-    hasIn,
+    hasAll,
     sendCreated,
     sendError,
     sendSuccess,

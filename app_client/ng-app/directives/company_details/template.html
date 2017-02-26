@@ -1,4 +1,4 @@
-<div id="company-info" role="tabpanel" class="tab-pane" ng-controller="CompanyController as company">
+<div role="tabpanel" class="tab-pane">
     <div class="panel-body">
         <form class="form form-horizontal" ng-submit="company.save()" novalidate>
             <fieldset>
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label for="address" class="control-label col-md-4">Адрес<span class="required">*</span></label>
                     <div class="col-md-4">
-                        <input ng-model="company.address.street" id="address" name="address" required="required" type="text" class="form-control"/>
+                        <input ng-model="company.data.address.street" id="address" name="address" required="required" type="text" class="form-control"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -50,13 +50,13 @@
                 <div class="form-group">
                     <label for="postal-code" class="control-label col-md-4">Пощенски код<span class="required">*</span></label>
                     <div class="col-md-4">
-                        <input ng-model="company.address.postalCode" id="postal-code" name="postal-code" required="required" type="text" class="form-control"/>
+                        <input ng-model="company.data.address.postalCode" id="postal-code" name="postal-code" required="required" type="text" class="form-control"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="country" class="control-label col-md-4">Държава<span class="required">*</span></label>
                     <div class="col-md-4">
-                        <input ng-model="company.address.country" id="country" name="country" required="required" type="text" class="form-control"/>
+                        <input ng-model="company.data.address.country" id="country" name="country" required="required" type="text" class="form-control"/>
                     </div>
                 </div>
                 <div class="form-group">

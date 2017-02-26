@@ -8,13 +8,16 @@
             .when('/about', {template: '<trz-about></trz-about>'})
             .when('/companies', {
                 authorization: true,
-                template: '<trz-modal-toggle-button label="Добави нова" icon="fa fa-plus" target="#"></trz-modal-toggle-button><trz-companies-table></trz-companies-table>'
+                templateUrl: 'views/companies.html'
             })
             .when('/companies/add-new', {
                 authorization: true,
-                template: '<h1>New company form(Reuse the company form with different controller)</h1>'
+                templateUrl: 'views/add-new-company.html'
             })
-            .when('/companies/:companyId', {authorization: true, template: '<h1>Company details here</h1>'})
+            .when('/companies/:companyId', {
+                authorization: true,
+                templateUrl: 'views/company-details.html'
+            })
             .when('/companies/:companyId/dossiers', {
                 authorization: true,
                 template: '<h1>Display a table containing all the dossiers names and egn'

@@ -10,25 +10,29 @@ const
 module.exports = {
     getById   : (req, res) => {
         util
-          .find(Company, req.body.id, config.populate)
+          .find(Company, req.params.id, config.populate)
           .then(company => util.sendSuccess(res, company))
           .catch(error => util.sendError(res, error));
     },
     updateById: (req, res) => {
         util
-          .update(Company, req.body.data, req.body.id, config.required, config.immutable)
+          .update(Company, req.body, req.params.id, config.required)
           .then(company => util.save(company, config.required))
           .then(result => util.sendSuccess(res, result))
-          .catch(error => util.sendErroe(res, error));
+          .catch(error => util.sendError(res, error));
     },
     createNew : (req, res) => {
         let companyId = '';
 
         util
-          .create(Company, req.body.data, config.required)
+          .create(Company, req.body, config.required)
           .then(company => {
               companyId = company._id;
-              util.find(User, companyId);
+
+              return new Promise((resolve, reject)=>{
+                  util.find(User, company.user)
+                    .then(resolve, reject);
+              });
           })
           .then(user => {
               user.companies.unshift(companyId);

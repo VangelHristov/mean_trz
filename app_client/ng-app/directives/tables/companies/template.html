@@ -7,9 +7,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="company in user.companies">
-            <td>{{company.name}}</td>
-            <td>{{company.bulstat}}</td>
+        <tr ng-repeat="company in companies">
+            <td><a ng-href="#!/companies/{{company._id}}">{{company.name}}</a></td>
+            <td><a ng-href="#!/companies/{{company._id}}">{{company.bulstat}}</a></td>
             <td>{{company.director}}</td>
         </tr>
     </tbody>
