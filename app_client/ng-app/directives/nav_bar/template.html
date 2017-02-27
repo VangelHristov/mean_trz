@@ -1,18 +1,18 @@
-<row>
-    <nav id="custom-inverse" role="navigation" class="navbar navbar-inverse">
+<div class="row">
+    <nav id="navigation" role="navigation" class="navbar">
         <div class="navbar-header">
             <button type="button" data-toggle="collapse" data-target=".navbar-ex1-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav js-nav-add-active-class">
-                <li><a href="#!/about" class="custom-inverse">ТРЗ</a></li>
+            <ul class="nav navbar-nav">
+                <li><a href="#!/about">ТРЗ</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a ng-hide="user.isLoggedIn()" data-toggle="modal" data-target="#register-modal" class="custom-inverse">Регистрация</a></li>
-                <li><a ng-hide="user.isLoggedIn()" data-toggle="modal" data-target="#login-modal" class="custom-inverse">Вход</a></li>
-                <li><a ng-show="user.isLoggedIn()" href="#!/companies" class="custom-inverse"> Фирми</a></li>
-                <li><a ng-show="user.isLoggedIn()" ng-click="user.logOut()" class="custom-inverse"> Изход</a></li>
+                <li><a ng-hide="user.isLoggedIn()" data-toggle="modal" data-target="#register-modal">Регистрация</a></li>
+                <li><a ng-hide="user.isLoggedIn()" data-toggle="modal" data-target="#login-modal">Вход</a></li>
+                <li><a ng-show="user.isLoggedIn()" href="#!/companies"> Фирми</a></li>
+                <li><a ng-show="user.isLoggedIn()" ng-click="user.logOut()" > Изход</a></li>
             </ul>
         </div>
     </nav>
-</row>
+</div>

@@ -4,13 +4,6 @@
     margin-right: 10px;
 }
 
-.custom_nav .navbar .nav > .active a,
-.navbar .nav > .active a:hover,
-.custom_nav .navbar .nav > li a:hover {
-    background: rgba(210, 105, 30, 0);
-    text-shadow: none;
-}
-
 .dropdown-submenu {
     position: relative;
 }
@@ -58,25 +51,24 @@
     border-radius: 6px 0 6px 6px;
 }
 
-.custom-inverse {
+#navigation {
+    color: #fff;
+    background-color: rgba(17, 51, 85, 0.85);
+    font-size: 1.2em;
+    border-bottom: 2px solid rgb(17, 51, 85);
+}
+
+#navigation li a {
     color: #fff !important;
     width: 150px !important;
     text-align: center !important;
     text-shadow: none !important;
-    border-bottom: 2px solid #222 !important;
 }
 
-.custom-inverse:hover {
-    color: #222 !important;
-    background: #fff !important;
-}
-
-#custom-inverse a:hover {
-    cursor: pointer;
-}
-
-fieldset.margin-top {
-    margin-top: 50px;
+#navigation li :hover,
+#navigation li a:hover {
+    background-color: #fff !important;
+    color: rgb(17, 51, 85) !important;
 }
 
 .special,
@@ -86,6 +78,17 @@ fieldset.margin-top {
 
 html, body {
     height: 100%;
+    color: #226;
+}
+
+body a {
+    color: #226;
+    text-shadow: none !important;
+}
+
+body a:hover {
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 .margin-bottom .form-group div > input,
@@ -99,28 +102,32 @@ html, body {
 }
 
 .nav-tabs {
+    border-radius: 0;
     border-bottom: 2px solid #DDD;
 }
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
     border-width: 0;
 }
 
 .nav-tabs > li > a {
+    border-radius: 0;
     border: none;
     color: #ffffff;
-    background: #222;
+    background: rgba(17, 51, 85, 0.85);
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li > a:hover {
     border: none;
-    color: #222 !important;
+    color: rgba(17, 51, 85, 0.85) !important;
     background: #fff;
 }
 
 .nav-tabs > li > a::after {
     content: "";
-    background: #222;
+    background: rgba(17, 51, 85, 0.85);
     height: 2px;
     position: absolute;
     width: 100%;
@@ -135,7 +142,7 @@ html, body {
 }
 
 .tab-nav > li > a::after {
-    background: #222 none repeat scroll 0 0;
+    background: rgba(17, 51, 85, 0.85) none repeat scroll 0 0;
     color: #fff;
 }
 
@@ -170,7 +177,13 @@ html, body {
     margin-bottom: 30px;
 }
 
-@media all and (max-width: 1370px) {
+@media all and (min-width: 1281px) {
+    .nav-tabs > li > a > i {
+        display: none;
+    }
+}
+
+@media all and (max-width: 1280px) {
     .nav-tabs > li > a > span {
         display: none;
     }
@@ -190,15 +203,15 @@ html, body {
     background-color: #F7F7F7;
     margin: 0 auto;
     border-radius: 2px;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-    font-family: roboto;
+    font-family: roboto, sans-serif;
 }
 
 .trz-form-container h1 {
     text-align: center;
     font-size: 1.8em;
-    font-family: roboto;
+    font-family: roboto, sans-serif;
 }
 
 .trz-form-container input[type=submit] {
@@ -245,19 +258,19 @@ html, body {
 
 .trz-form-submit {
     /* border: 1px solid #3079ed; */
-    border: 0px;
+    border: 0;
     color: #fff;
     text-shadow: 0 1px rgba(0, 0, 0, 0.1);
     background-color: darkslategray;
-    padding: 17px 0px;
-    font-family: roboto;
+    padding: 17px 0;
+    font-family: roboto, sans-serif;
     font-size: 14px;
     /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
 }
 
 .trz-form-submit:hover {
     /* border: 1px solid #2f5bb7; */
-    border: 0px;
+    border: 0;
     text-shadow: 0 1px rgba(0, 0, 0, 0.3);
     background-color: darkslategray;
     /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
@@ -280,3 +293,97 @@ html, body {
 .trz-form-help a:hover {
     cursor: pointer;
 }
+
+trz-button-group a:first-child {
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+trz-button-group .btn {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.light {
+    background-color: #0d3349;
+    color: #fff;
+}
+
+.btn.light {
+    box-shadow: 0 4px 11px 0 #555;
+}
+
+.btn.light:hover {
+    color: #fff;
+    font-weight: 500;
+    background-color: rgb(103, 131, 156);
+}
+
+.divider {
+    height: 2px;
+    width: 95%;
+    display: block;
+    margin-top: 20px;
+    margin-left: 25px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+input.form-control {
+    border-radius: 0;
+    border: 1px solid black;
+    color: #137;
+}
+
+.btn-default {
+    border: 1px solid black;
+    background-color: #0d3349;
+}
+
+.special .card {
+    box-shadow: 0 12px 40px 5px #555;
+}
+
+.jumbotron {
+    /*background-color: #699BA5;*/
+    background: url(../images/white-train-station.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.table-bordered > tbody > tr > th,
+.table-bordered > thead > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+    border: 1px solid #2f4f4f;
+    border-right-width: 0;
+    border-left-width: 0;
+}
+
+.table {
+    border: 1px solid #101010;
+    box-shadow: 0 3px 12px 0 #555;
+}
+
+.table-bordered > tbody > tr:nth-child(2n) {
+    background-color: rgba(187, 186, 202, 0.35);
+}
+
+.table-bordered > thead > tr > th {
+    background-color: rgba(82, 107, 112, 0.88);
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+/*table.table-bordered thead th{*/
+/*border-bottom:2px solid #000;*/
+/*}*/

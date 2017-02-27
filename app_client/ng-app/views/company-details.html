@@ -1,6 +1,5 @@
 <div ng-controller="CompanyDetailsController as company">
 
-    <input type="text" ng-model="company.active" class="input-lg">
     <trz-tabs set="company.setActive(id)" tabs="company.tabs"></trz-tabs>
     <div class="tab-content">
         <div class="tab-pane active" ng-show="company.getActive() === 'company-info'">
