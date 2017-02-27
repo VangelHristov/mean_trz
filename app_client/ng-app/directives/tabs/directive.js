@@ -8,7 +8,8 @@
               restrict   : 'AE',
               templateUrl: 'directives/tabs/template.html',
               scope      : {
-                  tabs: '='
+                  tabs: '=',
+                  set : '&'
               }
           };
       });

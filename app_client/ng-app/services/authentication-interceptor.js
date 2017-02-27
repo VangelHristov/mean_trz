@@ -9,15 +9,16 @@
                   request     : function (config) {
 
                       if (secureRoutes.some((route) => route.test(config.url))) {
-                          let token = storage.getToken();
 
-                          if (token) {
-                              config.headers.Authorization = `Bearer ${token}`;
+                          if (storage.isLoggedIn()) {
+
+                              config.headers.Authorization = `Bearer ${storage.getToken()}`;
                               return config;
                           }
 
+                          storage.removeAllData();
+                          notification.warning('Please login');
                           $location.path('/about');
-                          notification.warning('Please login.');
                           return;
                       }
 

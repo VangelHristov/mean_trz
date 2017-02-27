@@ -3,10 +3,10 @@
 
     angular
       .module('app')
-      .controller('CompanyDetailsController', ['$routeParams', 'dataContext',
-          function ($routeParams, dataContext) {
+      .controller('CompanyDetailsController', ['$routeParams', 'dataContext','notification',
+          function ($routeParams, dataContext, notification) {
               let ctrl = this;
-              ctrl.selected = 'dossiers';
+              ctrl.active = 'dossiers';
               ctrl.tabs = [
                   {
                       target: 'dossiers',
@@ -20,12 +20,17 @@
                       label : 'За фирмата'
                   }
               ];
+
+              ctrl.setActive = (id) => ctrl.active = id;
+
+              ctrl.getActive = () => ctrl.active;
+
               ctrl.save = () => {
                   dataContext.company
                              .edit({id: ctrl.data._id}, ctrl.data)
                              .$promise
-                             .then(result => console.log(result))
-                             .catch(err => console.log(err));
+                             .then(result => notification.success(result.message))
+                             .catch(err => notification.error(err));
               };
 
               dataContext.company
@@ -39,12 +44,14 @@
                   {
                       name    : 'Ivan Ivanov',
                       egn     : 8601110082,
-                      position: 'director'
+                      position: 'director',
+                      _id     : 1
                   },
                   {
                       name    : 'Asen Petrov',
                       egn     : 8765334223,
-                      position: 'vice president'
+                      position: 'vice president',
+                      _id     : 2
                   }
               ];
           }]);

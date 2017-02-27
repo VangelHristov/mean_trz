@@ -11,17 +11,24 @@
 </head>
 <body ng-cloak ng-controller="UserController as user">
 
-<trz-nav-bar></trz-nav-bar>
+    <trz-nav-bar></trz-nav-bar>
 
-<trz-login-modal submit="user.logIn(data)"></trz-login-modal>
-<trz-register-modal submit="user.register(data)"></trz-register-modal>
-<trz-forgotten-password-modal submit="user.resetPassword(email)"></trz-forgotten-password-modal>
+    <trz-login-modal submit="user.logIn(data)"></trz-login-modal>
+    <trz-register-modal submit="user.register(data)"></trz-register-modal>
+    <trz-forgotten-password-modal submit="user.resetPassword(email)"></trz-forgotten-password-modal>
 
-<div class="container-fluid special">
-    <main class="jumbotron" ng-view></main>
-</div>
+    <div class="container-fluid special">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="md-12">
+                    <main class="card" ng-view>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<trz-footer text="© Вангел Христов 2017"></trz-footer>
+    <trz-footer text="© Вангел Христов 2017"></trz-footer>
 
 </body>
 <!--libs-->

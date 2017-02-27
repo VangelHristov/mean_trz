@@ -1,33 +1,27 @@
 <div ng-controller="CompanyDetailsController as company">
-    <ul class="nav nav-tabs" role="tablist">
-        <li ng-repeat="tab in company.tabs" class="{{tab.active ? 'active': ''}}" role="presentation">
-            <a ng-click="company.selected = tab.target" data-toggle="tab">
-                <i class="fa {{tab.icon}}"></i>
-                <span>{{tab.label}}</span>
-            </a>
-        </li>
-    </ul>
 
+    <input type="text" ng-model="company.active" class="input-lg">
+    <trz-tabs set="company.setActive(id)" tabs="company.tabs"></trz-tabs>
     <div class="tab-content">
-        <div class="tab-pane" ng-show="company.selected === 'company-info'">
+        <div class="tab-pane active" ng-show="company.getActive() === 'company-info'">
             <div class="panel-body">
                 <company-details company="company"></company-details>
             </div>
         </div>
-        <div ng-show="company.selected === 'dossiers'" class="tab-pane">
+        <div ng-show="company.getActive() === 'dossiers'" class="tab-pane active">
             <div class="panel-body">
                 <table class="table table-bordered table-hover table-responsive">
                     <thead>
                         <tr>
-                            <td>Име</td>
-                            <td>ЕГН</td>
-                            <td>Длъжност</td>
+                            <th>Име</th>
+                            <th>ЕГН</th>
+                            <th>Длъжност</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="dossier in company.dossiers">
-                            <td>{{dossier.name}}</td>
-                            <td>{{dossier.egn}}</td>
+                            <td><a ng-href="#!/companies/{{company.data._id}}/dossiers/{{dossier._id}}">{{dossier.name}}</a></td>
+                            <td><a ng-href="#!/companies/{{company.data._id}}/dossiers/{{dossier._id}}">{{dossier.egn}}</a></td>
                             <td>{{dossier.position}}</td>
                         </tr>
                     </tbody>
