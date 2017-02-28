@@ -1,7 +1,16 @@
 'use strict';
 
+const
+  dbConnection = require('../models/db'),
+  User = dbConnection.model('User'),
+  Company = dbConnection.model('Company');
+
 module.exports = {
-    required : [
+    Model                  : Company,
+    ParentModel            : User,
+    parentRefCollectionName: 'companies',
+    parentModelName        : 'user',
+    required               : [
         'user',
         'bulstat',
         'director',
@@ -13,7 +22,7 @@ module.exports = {
         'pkpv',
         'mainEconomicActivity'
     ],
-    populate : {
+    populate               : {
         path  : 'dossiers',
         select: '_id personalInfo.names personalInfo.id'
     }
