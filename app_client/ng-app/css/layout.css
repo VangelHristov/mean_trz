@@ -1,56 +1,4 @@
-.fa,
-.modal-body label,
-.modal-body input {
-    margin-right: 10px;
-}
-
-.dropdown-submenu {
-    position: relative;
-}
-
-.dropdown-submenu > .dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -6px;
-    margin-left: -1px;
-    -webkit-border-radius: 0 6px 6px 6px;
-    -moz-border-radius: 0 6px 6px;
-    border-radius: 0 6px 6px 6px;
-}
-
-.dropdown-submenu:hover > .dropdown-menu {
-    display: block;
-}
-
-.dropdown-submenu > a:after {
-    display: block;
-    content: " ";
-    float: right;
-    width: 0;
-    height: 0;
-    border: 5px solid transparent;
-    border-right-width: 0;
-    border-left-color: #ccc;
-    margin-top: 5px;
-    margin-right: -10px;
-}
-
-.dropdown-submenu:hover > a:after {
-    border-left-color: #fff;
-}
-
-.dropdown-submenu.pull-left {
-    float: none;
-}
-
-.dropdown-submenu.pull-left > .dropdown-menu {
-    left: -100%;
-    margin-left: 10px;
-    -webkit-border-radius: 6px 0 6px 6px;
-    -moz-border-radius: 6px 0 6px 6px;
-    border-radius: 6px 0 6px 6px;
-}
-
+/*navigation*/
 #navigation {
     color: #fff;
     background-color: rgba(17, 51, 85, 0.85);
@@ -71,6 +19,7 @@
     color: rgb(17, 51, 85) !important;
 }
 
+/*wrappers*/
 .special,
 .special .jumbotron {
     height: 100%;
@@ -91,19 +40,11 @@ body a:hover {
     cursor: pointer;
 }
 
-.margin-bottom .form-group div > input,
-.margin-bottom .form-group div > select,
-.margin-bottom .form-group div > label {
-    margin-bottom: 10px;
-}
 
-.margin-top {
-    margin-top: 10px;
-}
-
+/*tabs*/
 .nav-tabs {
     border-radius: 0;
-    border-bottom: 2px solid #DDD;
+    /*border-bottom: 2px solid #DDD;*/
 }
 
 .nav-tabs > li.active > a,
@@ -155,20 +96,8 @@ body a:hover {
 }
 
 .nav-tabs > li {
-    width: 13%;
+    width: 15%;
     text-align: center;
-}
-
-.nav-tabs > li#tab-22-percent {
-    width: 22%;
-}
-
-.nav-tabs > li.tab-18-percent {
-    width: 18.5%;
-}
-
-.nav-tabs > li.tab-16-percent {
-    width: 16.5%;
 }
 
 .card {
@@ -194,8 +123,12 @@ body a:hover {
 }
 
 /* modals*/
+.fa,
+.modal-body label,
+.modal-body input {
+    margin-right: 10px;
+}
 
-/****** LOGIN MODAL ******/
 .trz-form-container {
     padding: 30px;
     max-width: 350px;
@@ -304,9 +237,6 @@ trz-button-group .btn {
     padding-bottom: 10px;
 }
 
-.btn {
-    border-radius: 0;
-}
 
 .light {
     background-color: #0d3349;
@@ -331,6 +261,11 @@ trz-button-group .btn {
     margin-left: 25px;
     overflow: hidden;
     background-color: #e5e5e5;
+}
+
+/*bootstrap*/
+.btn {
+    border-radius: 0;
 }
 
 input.form-control {
@@ -370,7 +305,7 @@ input.form-control {
 
 .table {
     border: 1px solid #101010;
-    box-shadow: 0 3px 12px 0 #555;
+    box-shadow: 0 6px 20px 2px #555;
 }
 
 .table-bordered > tbody > tr:nth-child(2n) {
@@ -383,7 +318,3 @@ input.form-control {
     font-size: 1.2em;
     font-weight: 500;
 }
-
-/*table.table-bordered thead th{*/
-/*border-bottom:2px solid #000;*/
-/*}*/
