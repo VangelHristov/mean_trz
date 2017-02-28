@@ -7,24 +7,7 @@
           function (dataContext, notification, $routeParams, $location) {
               let ctrl = this;
               ctrl.idType = 'bulgarian';
-              ctrl.data = {
-                  names  : {
-                      first: 'Вангел',
-                      last : 'Христов'
-                  },
-                  address: {
-                      street    : 'Свобода 4',
-                      city      : 'Благоевград',
-                      postalCode: '2700',
-                      country   : 'Булгария'
-                  },
-                  id     : {
-                      bulgarian:{
-                          egn:'8601110082',
-                          idCardNumber:'646039845'
-                      }
-                  }
-              };
+              ctrl.data = {};
               ctrl.data.company = $routeParams.companyId;
               ctrl.save = function () {
 
