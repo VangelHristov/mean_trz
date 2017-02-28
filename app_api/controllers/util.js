@@ -46,7 +46,10 @@ const
 
   sendSuccess = (res, data) => sendJson(res, 200, data),
 
-  sendCreated = (res) => sendJson(res, 201, {message: 'Successfully created.'}),
+  sendCreated = (res, data) => {
+      data.message = 'Successfully created.';
+      sendJson(res, 201, data);
+  },
 
   sendError = (res, err) => sendJson(res, err.status || 400, err.message || 'Bad request.'),
 
@@ -87,7 +90,7 @@ const
                   return reject({status: 400, message: getErrorMessage(err, required)});
               }
 
-              return resolve({message:'ok'});
+              return resolve({message: 'ok'});
           });
       });
   },

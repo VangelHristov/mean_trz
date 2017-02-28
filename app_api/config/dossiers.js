@@ -1,10 +1,23 @@
 'use strict';
 
+const
+  dbConnection = require('../models/db'),
+  Dossier = dbConnection.model('Dossier'),
+  Company = dbConnection.model('Company');
+
 module.exports = {
-    model   : 'Dossier',
-    required: ['owner', 'personalInfo'],
-    owner   : {
-        name      : 'Company',
-        collection: 'dossiers'
-    }
+    Model                  : Dossier,
+    required               : [
+        'company',
+        'names.first',
+        'names.last',
+        'address.street',
+        'address.city',
+        'address.postalCode',
+        'address.country',
+        'id'
+    ],
+    ParentModel            : Company,
+    parentModelName        : 'company',
+    parentRefCollectionName: 'dossiers'
 };
