@@ -19,12 +19,6 @@
     color: rgb(17, 51, 85) !important;
 }
 
-/*wrappers*/
-.special,
-.special .jumbotron {
-    height: 100%;
-}
-
 html, body {
     height: 100%;
     color: #226;
@@ -39,7 +33,6 @@ body a:hover {
     text-transform: uppercase;
     cursor: pointer;
 }
-
 
 /*tabs*/
 .nav-tabs {
@@ -237,7 +230,6 @@ trz-button-group .btn {
     padding-bottom: 10px;
 }
 
-
 .light {
     background-color: #0d3349;
     color: #fff;
@@ -268,7 +260,8 @@ trz-button-group .btn {
     border-radius: 0;
 }
 
-input.form-control {
+input.form-control,
+select.form-control {
     border-radius: 0;
     border: 1px solid black;
     color: #137;
@@ -290,6 +283,7 @@ input.form-control {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    min-height: 800px;
 }
 
 .table-bordered > tbody > tr > th,

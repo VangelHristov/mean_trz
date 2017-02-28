@@ -24,11 +24,15 @@
             })
             .when('/companies/:companyId/dossiers/add-new', {
                 authorization: true,
-                template: '<h1>New dossier form </h1>'
+                template: '<div ng-controller="AddDossierController as dossier"><trz-dossier-details model="dossier" submit="dossier.save()"> </trz-dossier-details></div>'
             })
             .when('/companies/:companyId/dossiers/:dossierId', {
                 authorization: true,
                 template: '<h1>Dossier details</h1>'
+            })
+            .when('/companies/:companyId/dossiers/:dossierId/add-work-contract', {
+                authorization: true,
+                template: '<h1>Come on add the work contract</h1>'
             })
             .otherwise('/about');
 
