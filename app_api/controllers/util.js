@@ -97,7 +97,6 @@ const
 
   create = (model, data, required) => {
 
-      console.log(data);
       return new Promise((resolve, reject) => {
 
           if (!hasAll(data, required)) {
