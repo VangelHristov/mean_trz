@@ -28,7 +28,7 @@
             })
             .when('/companies/:companyId/dossiers/:dossierId', {
                 authorization: true,
-                template: '<h1>Dossier details</h1>'
+                templateUrl: 'views/dossier-details.html'
             })
             .when('/companies/:companyId/dossiers/:dossierId/add-work-contract', {
                 authorization: true,

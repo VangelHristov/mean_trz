@@ -1,3 +1,12 @@
-<div>
-    <trz-tabs></trz-tabs>
+<div ng-controller="DossierDetailsController as dossier">
+    <trz-tabs tabs="dossier.tabs" set="dossier.setActive(id)"></trz-tabs>
+    <div class="tab-content">
+        <div class="tab-pane active" ng-show="dossier.selected === 'dossier-details'">
+            <trz-dossier-details model="dossier" submit="dossier.save()"></trz-dossier-details>
+        </div>
+        <div class="tab-pane active" ng-show="dossier.selected=== 'work-contract'">
+            <span>It works</span>
+        </div>
+    </div>
+
 </div>

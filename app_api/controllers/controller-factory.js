@@ -12,7 +12,7 @@ module.exports = (config) => {
 
     function updateById(req, res) {
         util
-          .update(config.ParentModel, req.body, req.params.id, config.required)
+          .update(config.Model, req.body, req.params.id, config.required)
           .then(doc => util.save(doc, config.required))
           .then(result => util.sendSuccess(res, result))
           .catch(error => util.sendError(res, error));
