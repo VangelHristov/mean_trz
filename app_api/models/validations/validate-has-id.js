@@ -3,7 +3,10 @@
 module.exports = function (next) {
     let id = this.id;
 
-    if (!id.bulgarian && !id.foreign) {
+    if (!id) {
+        next(new Error('No id'));
+
+    } else if (!id.bulgarian && !id.foreign) {
 
         next(new Error('No id or lnch'));
     } else if (id.bulgarian && id.foreign) {

@@ -51,7 +51,7 @@ const
       sendJson(res, 201, data);
   },
 
-  sendError = (res, err) => sendJson(res, err.status || 400, err.message || 'Bad request.'),
+  sendError = (res, err) => sendJson(res, err.status || 400, {message:err.message || 'Bad request.'}),
 
   find = (model, id, populate, select) => {
 
@@ -96,6 +96,8 @@ const
   },
 
   create = (model, data, required) => {
+
+      console.log(data);
       return new Promise((resolve, reject) => {
 
           if (!hasAll(data, required)) {

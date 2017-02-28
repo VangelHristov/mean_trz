@@ -27,7 +27,7 @@ module.exports = (config) => {
               docId = doc._id;
 
               return new Promise((resolve, reject) => {
-                  util.find(config.ParentModel, doc[config.parentModelName])
+                  util.find(config.ParentModel, req.body[config.parentModelName])
                       .then(resolve, reject);
               });
           })

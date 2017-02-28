@@ -14,8 +14,7 @@ module.exports = {
         'address.street',
         'address.city',
         'address.postalCode',
-        'address.country',
-        'id'
+        'address.country'
     ],
     ParentModel            : Company,
     parentModelName        : 'company',
