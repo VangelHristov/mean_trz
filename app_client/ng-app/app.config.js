@@ -18,10 +18,6 @@
                 authorization: true,
                 templateUrl: 'views/company-details.html'
             })
-            .when('/companies/:companyId/dossiers', {
-                authorization: true,
-                template: '<h1>Display a table containing all the dossiers names and egn'
-            })
             .when('/companies/:companyId/dossiers/add-new', {
                 authorization: true,
                 template: '<div ng-controller="AddDossierController as dossier"><trz-dossier-details model="dossier" submit="dossier.save()"> </trz-dossier-details></div>'
