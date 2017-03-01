@@ -1,21 +1,25 @@
 'use strict';
 
+const
+  dbConnection = require('../models/db'),
+  Dossier = dbConnection.model('Dossier'),
+  WorkContract = dbConnection.model('WorkContract');
+
 module.exports = {
-    model   : 'WorkContract',
-    required: [
-        'owner',
+    model                  : WorkContract,
+    ParentModel            : Dossier,
+    parentModelName        : 'dossier',
+    parentRefCollectionName: 'workContracts',
+    required               : [
+        'dossier',
         'typeInsured',
         'contractNumber',
         'signingDate',
         'startingDate',
         'principalSalary',
-        'occupationNKPD',
-        'kid',
-        'payedVacationLength',
+        'occupationCode',
+        'codeEconomicActivity',
+        'payedVacationLengthInDays',
         'experience'
-    ],
-    owner   : {
-        name      : 'Dossier',
-        collection: 'workContracts'
-    }
+    ]
 };

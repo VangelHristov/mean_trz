@@ -40,5 +40,9 @@
                              .then(result => notification.success(result.message))
                              .catch(error => notification.error(error.data.message));
               };
+
+              ctrl.saveContract = () => {
+                  dataContext.wo
+              };
           }]);
 }());

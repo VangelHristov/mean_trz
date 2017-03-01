@@ -21,7 +21,7 @@ const
       education    : {type: String, enum: enums.education},
       email        : {type: String, match: patterns.email},
       bankAccount  : bankAccountSchema,
-      workContracts: [{type: objectId, ref: 'WorkContract', required: true}]
+      workContract: {type: objectId, ref: 'WorkContract'}
   });
 
 dossierSchema.pre('save', checkHasId);

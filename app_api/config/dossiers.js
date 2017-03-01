@@ -16,6 +16,9 @@ module.exports = {
         'address.postalCode',
         'address.country'
     ],
+    populate               : {
+        path: 'workContract'
+    },
     ParentModel            : Company,
     parentModelName        : 'company',
     parentRefCollectionName: 'dossiers'
