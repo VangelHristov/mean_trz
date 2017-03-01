@@ -7,7 +7,7 @@ module.exports = (config) => {
         util
           .find(config.Model, req.params.id, config.populate)
           .then(doc => util.sendSuccess(res, doc))
-          .catch(error => util.sendError(res, error));
+          .catch(error => util.sendError(res, {message: error.message}));
     }
 
     function updateById(req, res) {
@@ -15,7 +15,7 @@ module.exports = (config) => {
           .update(config.Model, req.body, req.params.id, config.required)
           .then(doc => util.save(doc, config.required))
           .then(result => util.sendSuccess(res, result))
-          .catch(error => util.sendError(res, error));
+          .catch(error => util.sendError(res, {message: util.getErrorMessage(error)}));
     }
 
     function createNew(req, res) {
@@ -28,7 +28,7 @@ module.exports = (config) => {
 
               return new Promise((resolve, reject) => {
                   util.find(config.ParentModel, req.body[config.parentModelName])
-                      .then(resolve, reject);
+                      .then(resolve, (err) => reject({message: util.getErrorMessage(err)}));
               });
           })
           .then(parentDoc => {
