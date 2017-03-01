@@ -299,7 +299,7 @@ select.form-control {
 
 .table {
     border: 1px solid #101010;
-    box-shadow: 0 6px 20px 2px #555;
+    box-shadow: 0 4px 11px 0px #555;
 }
 
 .table-bordered > tbody > tr:nth-child(2n) {

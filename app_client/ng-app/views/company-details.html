@@ -13,15 +13,21 @@
                     <thead>
                         <tr>
                             <th>Име</th>
-                            <th>ЕГН</th>
-                            <th>Длъжност</th>
+                            <th>ЕГН/ЛНЧ</th>
+                            <th>Статус</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="dossier in company.dossiers">
-                            <td><a ng-href="#!/companies/{{company.data._id}}/dossiers/{{dossier._id}}">{{dossier.name}}</a></td>
-                            <td><a ng-href="#!/companies/{{company.data._id}}/dossiers/{{dossier._id}}">{{dossier.egn}}</a></td>
-                            <td>{{dossier.position}}</td>
+                        <tr ng-repeat="dossier in company.data.dossiers">
+                            <td>
+                                <a ng-href="#!/companies/{{company.data._id}}/dossiers/{{dossier._id}}">
+                                    {{dossier.names.first}} {{dossier.names.last}}
+                                </a>
+                            </td>
+                            <td>
+                                    {{dossier.id.bulgarian?dossier.id.bulgarian.egn:dossier.foreign.lnch}}
+                            </td>
+                            <td>{{dossier.archive? 'Архив':'Активен'}}</td>
                         </tr>
                     </tbody>
                 </table>

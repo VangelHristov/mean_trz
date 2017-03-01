@@ -39,20 +39,5 @@
                          .then(company => {
                              ctrl.data = company;
                          });
-
-              ctrl.dossiers = [
-                  {
-                      name    : 'Ivan Ivanov',
-                      egn     : 8601110082,
-                      position: 'director',
-                      _id     : 1
-                  },
-                  {
-                      name    : 'Asen Petrov',
-                      egn     : 8765334223,
-                      position: 'vice president',
-                      _id     : 2
-                  }
-              ];
           }]);
 }());

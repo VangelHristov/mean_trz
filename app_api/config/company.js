@@ -24,6 +24,6 @@ module.exports = {
     ],
     populate               : {
         path  : 'dossiers',
-        select: '_id personalInfo.names personalInfo.id'
+        select: '_id names id'
     }
 };
