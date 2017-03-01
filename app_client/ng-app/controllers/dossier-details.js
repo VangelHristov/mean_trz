@@ -31,14 +31,14 @@
                              ctrl.idType = dossier.id.bulgarian ? 'bulgarian' : 'foreign';
                              ctrl.data = dossier;
                          })
-                         .catch(error => notification.error(error.message));
+                         .catch(error => notification.error(error.data.message));
 
               ctrl.save = () => {
                   dataContext.dossier
                              .edit(ctrl.data)
                              .$promise
                              .then(result => notification.success(result.message))
-                             .catch(error => notification.error(error.data));
+                             .catch(error => notification.error(error.data.message));
               };
           }]);
 }());

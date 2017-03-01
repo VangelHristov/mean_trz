@@ -25,7 +25,9 @@
                         notification.success(result.message);
                         $location.path(`/companies/${ctrl.data.company}/dossiers/${result._id}/add-work-contract`);
                     })
-                    .catch(error => notification.error(error.message));
+                    .catch(error => {
+                        notification.error(error.data.message);
+                    });
               };
           }]);
 }());
