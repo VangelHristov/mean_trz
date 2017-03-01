@@ -20,7 +20,7 @@
             })
             .when('/companies/:companyId/dossiers/add-new', {
                 authorization: true,
-                template: '<div ng-controller="AddDossierController as dossier"><trz-dossier-details model="dossier" submit="dossier.save()"> </trz-dossier-details></div>'
+                templateUrl: 'views/add-new-dossier.html'
             })
             .when('/companies/:companyId/dossiers/:dossierId', {
                 authorization: true,
