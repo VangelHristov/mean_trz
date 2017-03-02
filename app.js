@@ -11,7 +11,9 @@ const
   helmet       = require('helmet'),
   passport     = require('passport');
 
-// connect to users database
+
+
+// connect to database
 require('./app_api/models/db');
 
 // configure passport
@@ -21,23 +23,19 @@ const
   apiRoutes    = require('./app_api/routes/index'),
   app          = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'app_server/views'));
-app.set('view engine', 'pug');
-
-// middle wares
+// middlewares
 app.use(helmet());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(express.static(path.join(__dirname, 'app_client/ng-app')));
+app.use(favicon(path.join(__dirname, 'app_client/images', 'favicon.ico')));
+app.use(express.static(path.join(__dirname, 'app_client')));
 app.use(compression());
 app.use(passport.initialize());
 
 // routes
-app.get('/', (req, res) => res.sendFile('./app_client/ng-app/index.html'));
+app.get('/', (req, res) => res.sendFile('./app_client/index.html'));
 app.use('/api', apiRoutes);
 
 // catch 404 and forward to error handler
@@ -56,7 +54,7 @@ app.use(function(err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('static/error');
+    res.end('Unhandled error.');
 });
 
 module.exports = app;
