@@ -6,7 +6,8 @@
       .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
           $routeProvider
             .when('/about', {
-                templateUrl: 'views/about.html'
+                templateUrl: 'views/about.html',
+                title:'ТРЗ'
             })
             .when('/companies', {
                 authorization: true,
