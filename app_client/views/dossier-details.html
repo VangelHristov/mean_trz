@@ -1,4 +1,5 @@
 <div ng-controller="DossierDetailsController as dossier">
+    <trz-breadcrumb breadcrumbs="dossier.breadcrumbs"></trz-breadcrumb>
     <trz-tabs tabs="dossier.tabs" set="dossier.setActive(id)"></trz-tabs>
     <div class="tab-content">
         <div class="tab-pane active" ng-show="dossier.selected === 'dossier-details'">

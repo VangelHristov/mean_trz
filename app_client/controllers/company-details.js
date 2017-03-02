@@ -3,8 +3,8 @@
 
     angular
       .module('app')
-      .controller('CompanyDetailsController', ['$routeParams', 'dataContext', 'notification',
-          function ($routeParams, dataContext, notification) {
+      .controller('CompanyDetailsController', ['$routeParams', 'dataContext', 'notification', 'storage', 'breadcrumb',
+          function ($routeParams, dataContext, notification, storage, breadcrumb) {
               let ctrl = this;
               ctrl.active = 'dossiers';
               ctrl.tabs = [
@@ -44,6 +44,8 @@
                          .$promise
                          .then(company => {
                              ctrl.data = company;
+                             storage.setCompanyName(company.name);
+                             ctrl.breadcrumbs = breadcrumb.getAll();
                          });
           }]);
 }());

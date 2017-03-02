@@ -36,7 +36,7 @@
           return {
               getToken,
               setToken,
-              isLoggedIn   : () => {
+              isLoggedIn    : () => {
                   let payload = getPayload();
 
                   if (payload) {
@@ -45,8 +45,12 @@
 
                   return false;
               },
-              getUserId    : () => getPayload()._id,
-              removeAllData: () => $window.localStorage.removeItem(dataItemName)
+              getUserId     : () => getPayload()._id,
+              removeAllData : () => $window.localStorage.removeItem(dataItemName),
+              getCompanyName: () => $window.localStorage.getItem('company'),
+              setCompanyName: (name) => $window.localStorage.setItem('company', name),
+              getDossierName: () => $window.localStorage.getItem('dossier'),
+              setDossierName: (name) => $window.localStorage.setItem('dossier', name)
           };
       }]);
 }());

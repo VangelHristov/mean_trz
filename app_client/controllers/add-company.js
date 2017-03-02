@@ -3,9 +3,10 @@
 
     angular
       .module('app')
-      .controller('AddCompanyController', ['storage', 'dataContext', 'notification', '$location',
-          function (storage, dataContext, notification, $location) {
+      .controller('AddCompanyController', ['storage', 'dataContext', 'notification', '$location','breadcrumb',
+          function (storage, dataContext, notification, $location, breadcrumb) {
               let ctrl = this;
+              ctrl.breadcrumbs = breadcrumb.getAll();
               ctrl.data = {};
               ctrl.data.user = storage.getUserId();
               ctrl.save = function () {

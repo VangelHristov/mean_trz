@@ -3,25 +3,23 @@
 
     angular
       .module('app')
-      .factory('breadcrumbs', ['$location', 'storage', function ($location, storage) {
+      .factory('breadcrumb', ['$location', 'storage', function ($location, storage) {
           return {
               getAll: () => {
                   let url = $location.url(),
-                    companyName = storage.getCompanyName(),
-                    dossierName = storage.getDossierName(),
                     getCompanyData = () => {
                         let result = /companies\/[0-9abcdef]{24}/.exec(url);
 
                         return {
                             href : `#!/${result[0]}`,
-                            label: companyName
+                            label: storage.getCompanyName()
                         };
                     },
                     getDossierData = () => {
                         let result = /companies\/[0-9a-f]{24}\/dossiers\/[0-9a-f]{24}/.exec(url);
                         return {
                             href : `#!/${result[0]}`,
-                            label: dossierName
+                            label: storage.getDossierName()
                         };
                     },
                     trim = (str) => {
@@ -31,11 +29,11 @@
                           trimRight = str[strLen - 1] === '/';
 
                         if (trimLeft && trimRight) {
-                            return str.substring(1, strLen - 2);
-                        } else if (trimLeft) {
                             return str.substring(1, strLen - 1);
+                        } else if (trimLeft) {
+                            return str.substring(1, strLen);
                         } else if (trimRight) {
-                            return str.substring(0, strLen - 2);
+                            return str.substring(0, strLen - 1);
                         }
 
                         return str;
@@ -45,16 +43,16 @@
 
                   let breadcrumbs = {
                       companies      : {
-                          href : `#!/${url}`,
+                          href : `#!/companies`,
                           label: 'Начало'
                       },
                       newCompany     : {
                           href : `#!/${url}`,
-                          label: 'Добави фирма'
+                          label: 'Нова фирма'
                       },
                       newDossier     : {
                           href : `#!/${url}`,
-                          label: companyName
+                          label: 'Ново досие'
                       },
                       newWorkContract: {
                           href: `#!/${url}`,
@@ -66,11 +64,11 @@
                       case 1:
                           return [breadcrumbs.companies];
                       case 2:
-                          return url.test(/add-new/)
+                          return /add-new/.test(url)
                             ? [breadcrumbs.companies, breadcrumbs.newCompany]
                             : [breadcrumbs.companies, getCompanyData()];
                       case 4:
-                          return url.test(/add-new/)
+                          return /add-new/.test(url)
                             ? [breadcrumbs.companies, getCompanyData(), breadcrumbs.newDossier]
                             : [breadcrumbs.companies, getCompanyData(), getDossierData()];
                       case 6:

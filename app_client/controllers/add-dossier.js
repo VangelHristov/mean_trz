@@ -3,9 +3,10 @@
 
     angular
       .module('app')
-      .controller('AddDossierController', ['dataContext', 'notification', '$routeParams', '$location',
-          function (dataContext, notification, $routeParams, $location) {
+      .controller('AddDossierController', ['dataContext', 'notification', '$routeParams', '$location','breadcrumb',
+          function (dataContext, notification, $routeParams, $location,breadcrumb) {
               let ctrl = this;
+              ctrl.breadcrumbs = breadcrumb.getAll();
               ctrl.id = {
                   type: 'bulgarian'
               };
