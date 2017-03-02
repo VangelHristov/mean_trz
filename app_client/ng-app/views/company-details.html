@@ -1,5 +1,7 @@
 <div ng-controller="CompanyDetailsController as company">
 
+    <trz-button-group buttons="company.buttons"></trz-button-group>
+    <br><br>
     <trz-tabs set="company.setActive(id)" tabs="company.tabs"></trz-tabs>
     <div class="tab-content">
         <div class="tab-pane active" ng-show="company.getActive() === 'company-info'">

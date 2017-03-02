@@ -3,7 +3,7 @@
 
     angular
       .module('app')
-      .controller('CompanyDetailsController', ['$routeParams', 'dataContext','notification',
+      .controller('CompanyDetailsController', ['$routeParams', 'dataContext', 'notification',
           function ($routeParams, dataContext, notification) {
               let ctrl = this;
               ctrl.active = 'dossiers';
@@ -20,7 +20,13 @@
                       label : 'За фирмата'
                   }
               ];
-
+              ctrl.buttons = [
+                  {
+                      href : `#!/companies/${$routeParams.companyId}/dossiers/add-new`,
+                      icon : 'fa-plus',
+                      label: 'Добави досие'
+                  }
+              ];
               ctrl.setActive = (id) => ctrl.active = id;
 
               ctrl.getActive = () => ctrl.active;

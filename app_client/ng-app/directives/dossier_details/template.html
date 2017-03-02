@@ -1,7 +1,5 @@
 <div class="tab-pane">
     <div class="panel-body">
-        <fieldset>
-            <legend>Полетата маркирани със * са задължителни</legend>
             <form ng-submit="submit()" class="form form-horizontal">
 
                 <!-- 1.Име-->
@@ -33,22 +31,22 @@
                     <label for="type-of-id-number" class="col-lg-4 control-label">Изберете *</label>
                     <div id="type-of-id-number" class="col-lg-4">
                         <label for="bulgarian-id" class="radio-inline">
-                            <input id="bulgarian-id" name="id-type" ng-model="model.idType" value="bulgarian" checked="checked"
+                            <input id="bulgarian-id" name="id-type" ng-model="model.id.type" value="bulgarian" checked="checked"
                                    type="radio"/> егн
                         </label>
                         <label for="foreign-id" class="radio-inline">
-                            <input id="foreign-id" name="id-type" ng-model="model.idType" value="foreign" type="radio"/> лнч
+                            <input id="foreign-id" name="id-type" ng-model="model.id.type" value="foreign" type="radio"/> лнч
                         </label>
                     </div>
                 </div>
 
-                <div ng-show="model.idType === 'bulgarian'">
+                <div ng-show="model.id.type === 'bulgarian'">
                     <!--ЕГН-->
                     <div class="form-group">
                         <label for="egn" class="col-lg-4 control-label">ЕГН<span
                                 class="required"> *</span></label>
                         <div class="col-lg-4">
-                            <input ng-model="model.id.bulgarian.egn" id="egn" name="egn" required="" type="text"
+                            <input ng-model="model.data.id.bulgarian.egn" id="egn" name="egn" required="" type="text"
                                    class="form-control input-md"/>
                         </div>
                     </div>
@@ -57,20 +55,20 @@
                         <label for="bulgarian-id-card-number" class="col-lg-4 control-label">Лична карта номер<span
                                 class="required"> *</span></label>
                         <div class="col-lg-4">
-                            <input ng-model="model.id.bulgarian.idCardNumber" id="bulgarian-id-card-number"
+                            <input ng-model="model.data.id.bulgarian.idCardNumber" id="bulgarian-id-card-number"
                                    name="bulgarian-id-card-number" required="" type="text"
                                    class="form-control input-md"/>
                         </div>
                     </div>
                 </div>
 
-                <div  ng-show="model.idType === 'foreign'">
+                <div  ng-show="model.id.type === 'foreign'">
                     <!--ЛНЧ-->
                     <div class="form-group">
                         <label for="lnch" class="col-lg-4 control-label">ЛНЧ<span
                                 class="required"> *</span></label>
                         <div class="col-lg-4">
-                            <input ng-model="model.id.foreign.lnch" id="lnch" name="lnch" required="" type="text"
+                            <input ng-model="model.data.id.foreign.lnch" id="lnch" name="lnch" required="" type="text"
                                    class="form-control input-md"/>
                         </div>
                     </div>
@@ -79,7 +77,7 @@
                         <label for="foreign-id-card-number" class="col-lg-4 control-label">Лична карта номер<span
                                 class="required"> *</span></label>
                         <div class="col-lg-4">
-                            <input ng-model="model.id.foreign.idCardNumber" id="foreign-id-card-number"
+                            <input ng-model="model.data.id.foreign.idCardNumber" id="foreign-id-card-number"
                                    name="bulgarian-id-card-number" required="" type="text"
                                    class="form-control input-md"/>
                         </div>
@@ -89,7 +87,7 @@
                         <label for="sex" class="col-lg-4 control-label margin-top">Пол<span
                                 class="required"> *</span></label>
                         <div class="col-lg-4">
-                            <input ng-model="model.id.foreign.sex" id="sex" name="id" required="" type="text"
+                            <input ng-model="model.data.id.foreign.sex" id="sex" name="id" required="" type="text"
                                    class="form-control input-md margin-top"/>
                         </div>
                     </div>
@@ -98,7 +96,7 @@
                         <label for="id" class="col-lg-4 control-label margin-top">Дата на раждане<span
                                 class="required"> *</span></label>
                         <div class="col-lg-4">
-                            <input ng-model="model.id.foreign.dob" id="id" name="id" required="" type="text"
+                            <input ng-model="model.data.id.foreign.dob" id="id" name="id" required="" type="text"
                                    class="form-control input-md margin-top"/>
                         </div>
                     </div>
@@ -185,12 +183,13 @@
                         <input ng-model="model.data.bankAccount.bic" id="bic" name="bic" type="text" class="form-control input-md"/>
                     </div>
                 </div>
+
                 <!-- Запази-->
                 <div class="form-group">
                     <div class="col-lg-4 col-lg-offset-4">
                         <button ng-click="submit()" type="button" class="btn btn-default">Запази</button>
                     </div>
                 </div>
-            </form></fieldset>
+            </form>
     </div>
 </div>

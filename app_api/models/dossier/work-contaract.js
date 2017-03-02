@@ -11,7 +11,7 @@ const
   workContractSchema = new Schema({
       dossier                  : {type: objectId, ref: 'Dossier', required: true},
       typeInsured              : {type: String, required: true, match: patterns.typeInsured},
-      reasonForContract        : {type: String, required: true, match: patterns.reasonForContract},
+      reasonForContract        : {type: String, required: true/*, match: patterns.reasonForContract*/},
       contractNumber           : {type: String, required: true},
       signingDate              : {type: Date, required: true},
       startingDate             : {type: Date, required: true},

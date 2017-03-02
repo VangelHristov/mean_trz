@@ -2,10 +2,10 @@
     <trz-tabs tabs="dossier.tabs" set="dossier.setActive(id)"></trz-tabs>
     <div class="tab-content">
         <div class="tab-pane active" ng-show="dossier.selected === 'dossier-details'">
-            <trz-dossier-details model="dossier" submit="dossier.save()"></trz-dossier-details>
+            <trz-dossier-details model="dossier" submit="dossier.saveDossier()"></trz-dossier-details>
         </div>
         <div class="tab-pane active" ng-show="dossier.selected=== 'work-contract'">
-            <trz-work-contract model="dossier.data.workContract" submit="saveContract()"></trz-work-contract>
+            <trz-work-contract model="dossier.data.workContracts[0]" submit="dossier.saveContract()"></trz-work-contract>
         </div>
     </div>
 

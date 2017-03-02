@@ -6,18 +6,27 @@ const
 
   validateId = (id) => (/^[a-fA-F0-9]{24}$/.test(id.toString()) && ObjectId.isValid(id)),
 
-  hasAll = (obj, props) => {
-      return props.every(prop => {
-          if (prop.indexOf('.') > -1) {
-              let lastDot = prop.lastIndexOf('.'),
-                p = prop.substring(lastDot + 1),
-                o = prop.substring(0, lastDot);
+  getMissingProperties = (obj, props) => {
+      return props
+        .reduce((missing, prop) => {
 
-              return obj[o].hasOwnProperty(p);
-          }
+            if (prop.indexOf('.') > -1) {
+                let lastDot = prop.lastIndexOf('.'),
+                  p = prop.substring(lastDot + 1),
+                  o = prop.substring(0, lastDot);
 
-          return obj.hasOwnProperty(prop);
-      });
+                if (!obj[o].hasOwnProperty(p)) {
+                    missing.push(p);
+                }
+
+                return missing;
+            } else if (!obj.hasOwnProperty(prop)) {
+                missing.push(prop);
+            }
+
+            return missing;
+        }, [])
+        .join( '\n');
   },
 
   getErrorMessage = (err, required) => {
@@ -51,7 +60,7 @@ const
       sendJson(res, 201, data);
   },
 
-  sendError = (res, err) => sendJson(res, err.status || 400, {message:err.message || 'Bad request.'}),
+  sendError = (res, err) => sendJson(res, err.status || 400, {message: err.message || 'Bad request.'}),
 
   find = (model, id, populate, select) => {
 
@@ -98,13 +107,15 @@ const
   create = (model, data, required) => {
 
       return new Promise((resolve, reject) => {
+          let missing = getMissingProperties(data, required);
 
-          if (!hasAll(data, required)) {
-              return reject({status: 400, message: errors.missingField});
+          if (missing) {
+              return reject({status: 400, message:`Following props are required:\n ${missing}`});
           }
 
           model.create(data, (err, doc) => {
               if (err) {
+                  console.log(err);
                   return reject({status: 400, message: getErrorMessage(err, required)});
               }
 
@@ -141,9 +152,10 @@ module.exports = {
     save,
     find,
     validateId,
-    hasAll,
     sendCreated,
     sendError,
     sendSuccess,
-    errors
+    errors,
+    getErrorMessage,
+    getMissingProperties
 };

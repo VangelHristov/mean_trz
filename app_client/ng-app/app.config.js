@@ -28,7 +28,7 @@
             })
             .when('/companies/:companyId/dossiers/:dossierId/add-work-contract', {
                 authorization: true,
-                template: '<h1>Come on add the work contract</h1>'
+                templateUrl: 'views/add-work-contract.html'
             })
             .otherwise('/about');
 

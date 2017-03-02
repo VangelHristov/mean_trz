@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (next) {
-    if (this.startingDate > this.signingDate) {
+    if (this.startingDate < this.signingDate) {
         next(new Error('Start date is before signing date'));
     }
 

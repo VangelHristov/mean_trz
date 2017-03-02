@@ -6,7 +6,7 @@ const
   WorkContract = dbConnection.model('WorkContract');
 
 module.exports = {
-    model                  : WorkContract,
+    Model                  : WorkContract,
     ParentModel            : Dossier,
     parentModelName        : 'dossier',
     parentRefCollectionName: 'workContracts',

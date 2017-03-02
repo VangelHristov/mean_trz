@@ -33,7 +33,7 @@
                          })
                          .catch(error => notification.error(error.data.message));
 
-              ctrl.save = () => {
+              ctrl.saveDossier = () => {
                   dataContext.dossier
                              .edit(ctrl.data)
                              .$promise
@@ -42,7 +42,11 @@
               };
 
               ctrl.saveContract = () => {
-                  dataContext.wo
+                  dataContext.workContract
+                             .edit(ctrl.data.workContracts[0])
+                             .$promise
+                             .then(result => notification.success(result.message))
+                             .catch(err => notification.error(err.data.message));
               };
           }]);
 }());

@@ -17,7 +17,7 @@ module.exports = {
         'address.country'
     ],
     populate               : {
-        path: 'workContract'
+        path: 'workContracts'
     },
     ParentModel            : Company,
     parentModelName        : 'company',

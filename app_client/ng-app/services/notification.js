@@ -21,21 +21,26 @@
               "showEasing"       : "swing",
               "hideEasing"       : "linear",
               "showMethod"       : "fadeIn",
-              "hideMethod"       : "fadeOut"
+              "hideMethod"       : "fadeOut",
+              "body-output-type" : "trustedHtml"
           };
+
+          function addLineBreak(msg) {
+              return msg.replace(/(?:\r\n|\r|\n)/g, '<br>');
+          }
 
           return {
               success: function (msg) {
-                  toastr.success(msg);
+                  toastr.success(addLineBreak(msg));
               },
               info   : function (msg) {
-                  toastr.info(msg);
+                  toastr.info(addLineBreak(msg));
               },
               warning: function (msg) {
-                  toastr.warning(msg);
+                  toastr.warning(addLineBreak(msg));
               },
               error  : function (msg) {
-                  toastr.error(msg);
+                  toastr.error(addLineBreak(msg));
               }
           };
       }]);
