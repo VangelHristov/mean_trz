@@ -115,7 +115,6 @@ const
 
           model.create(data, (err, doc) => {
               if (err) {
-                  console.log(err);
                   return reject({status: 400, message: getErrorMessage(err, required)});
               }
 
