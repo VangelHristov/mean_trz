@@ -11,8 +11,6 @@ const
   helmet       = require('helmet'),
   passport     = require('passport');
 
-
-
 // connect to database
 require('./app_api/models/db');
 
