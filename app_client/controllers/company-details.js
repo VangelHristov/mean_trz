@@ -17,7 +17,7 @@
                   {
                       target: 'company-info',
                       icon  : 'fa-info-circle',
-                      label : 'За фирмата'
+                      label : 'Фирмени данни'
                   }
               ];
               ctrl.buttons = [

@@ -30,8 +30,10 @@ body a {
 }
 
 body a:hover {
+    font-weight: 300;
     text-transform: uppercase;
     cursor: pointer;
+    color:#000000;
 }
 
 /*tabs*/
@@ -222,7 +224,6 @@ body a:hover {
 
 trz-button-group a:first-child {
     margin-left: 30px;
-    margin-top: 20px;
 }
 
 trz-button-group .btn {
@@ -320,7 +321,8 @@ select.form-control {
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
     overflow: hidden;
     border-radius: 5px;
-    margin-bottom:25px;
+    position: relative;
+    top: -43px;
 }
 
 .trz-breadcrumb > a {
@@ -330,12 +332,12 @@ select.form-control {
     float: left;
     font-size: 12px;
     line-height: 36px;
-    color: black;
     /*need more margin on the left of links to accomodate the numbers*/
     padding: 0 10px 0 30px;
-    background: white;
     position: relative;
     transition: all 0.5s;
+    color:#fff;
+    background: #0d3349;
 }
 
 .trz-breadcrumb > a div {
@@ -350,7 +352,7 @@ select.form-control {
     border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
 }
 
-.trz-breadcrumb >*:first-child i {
+.trz-breadcrumb > *:first-child i {
     vertical-align: sub;
 }
 
@@ -361,12 +363,21 @@ select.form-control {
 }
 
 /*hover/active styles*/
-.trz-breadcrumb a.active, .trz-breadcrumb a:hover{
-    background: #9EEB62;
+.trz-breadcrumb a.active,
+.trz-breadcrumb a:hover {
+    background: #fff;
+    color:#0d3349;
 }
-.trz-breadcrumb a.active:after, .trz-breadcrumb a:hover:after {
-    background: #9EEB62;
+
+.trz-breadcrumb a.active:after,
+.trz-breadcrumb a:hover:after {
+    background: #ffffff;
 }
+
+/*.trz-breadcrumb * a.active:before,*/
+/*.trz-breadcrumb * a:hover:before {*/
+    /*background: #0d3349;*/
+/*}*/
 
 /*adding the arrows for the myBreadcrumbs using rotated pseudo elements*/
 .trz-breadcrumb > *:after {
@@ -381,27 +392,28 @@ select.form-control {
     length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
     if diagonal required = 1; length = 1/1.414 = 0.707*/
     transform: scale(0.707) rotate(45deg);
-    -ms-transform:scale(0.707) rotate(45deg);
-    -webkit-transform:scale(0.707) rotate(45deg);
+    -ms-transform: scale(0.707) rotate(45deg);
+    -webkit-transform: scale(0.707) rotate(45deg);
 
     /*we need to prevent the arrows from getting buried under the next link*/
     z-index: 1;
     /*background same as links but the gradient will be rotated to compensate with the transform applied*/
-    background: white;
+    background: #0d3349;
     /*stylish arrow design using box shadow*/
-    box-shadow:
-            2px -2px 0 2px rgba(0, 0, 0, 0.4),
-            3px -3px 0 2px rgba(255, 255, 255, 0.1);
+    box-shadow: 2px -2px 0 2px rgba(254, 254, 254, 0.38),
+    3px -3px 0 2px rgba(169, 169, 169, 0.75);
     /*
         5px - for rounded arrows and
         50px - to prevent hover glitches on the border created using shadows*/
     border-radius: 0 5px 0 50px;
     transition: all 0.5s;
 }
+
 /*we dont need an arrow after the last link*/
 .trz-breadcrumb > *:last-child:after {
     content: none;
 }
+
 /*we will use the :before element to show numbers*/
 .trz-breadcrumb > *:before {
     /*some styles now*/
@@ -413,21 +425,21 @@ select.form-control {
     position: absolute;
     top: 0;
     left: 30px;
-    background: white;
-    background: linear-gradient(#444, #222);
+    background: #0d3349;
+    /*background: linear-gradient(#444, #222);*/
     font-weight: bold;
     box-shadow: 0 0 0 1px #ccc;
 }
 
 .trz-breadcrumb > *:nth-child(n+2) {
-    display:none;
+    display: none;
 }
-
 
 @media (max-width: 767px) {
     .trz-breadcrumb > *:nth-last-child(-n+4) {
-        display:block;
+        display: block;
     }
+
     .trz-breadcrumb > * div {
         max-width: 100px;
     }
@@ -435,8 +447,9 @@ select.form-control {
 
 @media (min-width: 768px) {
     .trz-breadcrumb > *:nth-last-child(-n+6) {
-        display:block;
+        display: block;
     }
+
     .trz-breadcrumb > * div {
         max-width: 175px;
     }
