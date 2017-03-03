@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-      .module('app', ['ngResource', 'ngRoute', 'ngPageTitle']);
+      .module('app', ['ngResource', 'ngRoute', 'ngPageTitle', 'ui.bootstrap']);
 })();
