@@ -33,7 +33,7 @@ body a:hover {
     font-weight: 300;
     text-transform: uppercase;
     cursor: pointer;
-    color:#000000;
+    color: #000000;
 }
 
 /*tabs*/
@@ -321,8 +321,8 @@ select.form-control {
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
     overflow: hidden;
     border-radius: 5px;
-    position: relative;
-    top: -43px;
+    position: absolute;
+    top: 80px;
 }
 
 .trz-breadcrumb > a {
@@ -336,7 +336,7 @@ select.form-control {
     padding: 0 10px 0 30px;
     position: relative;
     transition: all 0.5s;
-    color:#fff;
+    color: #fff;
     background: #0d3349;
 }
 
@@ -359,14 +359,13 @@ select.form-control {
 .trz-breadcrumb > *:last-child {
     border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
     padding-right: 20px;
-    padding-right: 8px;
 }
 
 /*hover/active styles*/
 .trz-breadcrumb a.active,
 .trz-breadcrumb a:hover {
     background: #fff;
-    color:#0d3349;
+    color: #0d3349;
 }
 
 .trz-breadcrumb a.active:after,
@@ -376,7 +375,7 @@ select.form-control {
 
 /*.trz-breadcrumb * a.active:before,*/
 /*.trz-breadcrumb * a:hover:before {*/
-    /*background: #0d3349;*/
+/*background: #0d3349;*/
 /*}*/
 
 /*adding the arrows for the myBreadcrumbs using rotated pseudo elements*/
@@ -436,12 +435,12 @@ select.form-control {
 }
 
 @media (max-width: 767px) {
-    .trz-breadcrumb > *:nth-last-child(-n+4) {
-        display: block;
+    .desktops-and-tablets {
+        display: none;
     }
 
-    .trz-breadcrumb > * div {
-        max-width: 100px;
+    .mobile-only {
+        display: block;
     }
 }
 
@@ -453,4 +452,16 @@ select.form-control {
     .trz-breadcrumb > * div {
         max-width: 175px;
     }
+
+    .mobile-only {
+        display: none;
+    }
+
+    .desktops-and-tablets {
+        display: block;
+    }
+}
+
+[ng-view]{
+    padding-top:10px;
 }

@@ -1,0 +1,21 @@
+<div class="form-group row">
+    <label ng-for="{{id}}" class="col-lg-4 control-label">
+        {{label}}
+        <span ng-if="required" class="required"> *</span>
+    </label>
+    <div class="col-lg-4">
+        <div class="input-group">
+            <input ng-model="dateStr" id="{{id}}"
+                   name="{{id}}" ng-required="required" type="text"
+                   class="form-control input-md" datepicker-options="options"
+                   uib-datepicker-popup="{{format}}" is-open="isOpen"
+                   close-text="{{closeText}}" current-text="{{currentText}}"
+                   clear-text="{{clearText}}"/>
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" ng-click="open(id)">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>

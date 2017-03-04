@@ -12,24 +12,18 @@
 </head>
 <body ng-cloak ng-controller="UserController as user">
 
-    <trz-nav-bar></trz-nav-bar>
+<div class="mobile-only">
+    <h1>Резолюцията на вашето устройство е прекалено малка.</h1>
+</div>
 
+<div class="desktops-and-tablets">
+    <trz-nav-bar></trz-nav-bar>
     <trz-login-modal submit="user.logIn(data)"></trz-login-modal>
     <trz-register-modal submit="user.register(data)"></trz-register-modal>
     <trz-forgotten-password-modal submit="user.resetPassword(email)"></trz-forgotten-password-modal>
-
-    <div class="container-fluid special">
-        <div class="jumbotron">
-            <div class="row">
-                <div class="md-12">
-                    <main class="card" ng-view>
-                    </main>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <trz-view></trz-view>
     <trz-footer text="© Вангел Христов 2017"></trz-footer>
+</div>
 
 </body>
 <!--libs-->
@@ -69,6 +63,7 @@
 <script src="directives/dossier_details/directive.js"></script>
 <script src="directives/work_contract/directive.js"></script>
 <script src="directives/breadcrumb/directive.js"></script>
+<script src="directives/view/directive.js"></script>
 
 
 <script src="services/storage.js"></script>
