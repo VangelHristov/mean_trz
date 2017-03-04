@@ -32,8 +32,17 @@
                 <label for="signing-date" class="col-lg-4 control-label">Дата на сключване<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.signingDate" id="signing-date" name="signing-date" required="" type="text"
-                           class="form-control input-md datepicker"/>
+                    <div class="input-group">
+                        <input ng-model="datepicker.toDateObj(model.signingDate)"
+                               id="signing-date" name="signing-date"
+                               required="" type="text" class="form-control input-md"
+                                uib-datepicker-popup="datepicker.format"
+                                datepicker-options="datepicker.dateOptions"
+                                close-text="datepicker.closeText"/>
+                        <span class="input-group-btn">
+                            <button type="button" ng-click=""></button>
+                        </span>
+                    </div>
                 </div>
             </div>
             <!-- 4.Дата на започване-->
