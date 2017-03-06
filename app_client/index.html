@@ -5,9 +5,9 @@
     <title page-title></title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/toastr/toastr.min.css">
+    <link rel="stylesheet" href="uib-datepicker/ui-bootstrap-custom-2.5.0-csp.css">
     <link rel="stylesheet" href="css/layout.css">
 </head>
 <body ng-cloak ng-controller="UserController as user">
@@ -35,8 +35,9 @@
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/ng-page-title/dist/ng-page-title.js"></script>
 <script src="bower_components/angular-i18n/angular-locale_bg.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script src="uib-datepicker/ui-bootstrap-custom-tpls-2.5.0.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 
 <!--my scripts-->
 <script src="app.js"></script>
@@ -63,9 +64,6 @@
 <script src="directives/dossier_details/directive.js"></script>
 <script src="directives/work_contract/directive.js"></script>
 <script src="directives/breadcrumb/directive.js"></script>
-<script src="directives/input/directive.js"></script>
-<script src="directives/select/directive.js"></script>
-<script src="directives/buttons/submit/directive.js"></script>
 <script src="directives/view/directive.js"></script>
 
 
@@ -75,6 +73,7 @@
 <script src="services/modal-dismiss.js"></script>
 <script src="services/authentication-interceptor.js"></script>
 <script src="services/breadcrumb.js"></script>
+<script src="services/date-string-to-date-object.js"></script>
 
 
 <script src="constants/messages.js"></script>

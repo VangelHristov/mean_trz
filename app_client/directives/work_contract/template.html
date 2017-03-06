@@ -6,14 +6,16 @@
                 <label for="insured-type" class="col-lg-4 control-label">Вид осигурен<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input type="text" ng-model="model.typeInsured" id="insured-type" name="insured-type" class="form-control">
+                    <input type="text" ng-model="model.typeInsured" id="insured-type" name="insured-type"
+                           class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <label for="reason-for-contract" class="col-lg-4 control-label">Основание за сключване<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.reasonForContract" type="text" id="reason-for-contract" name="reason-for-contract" class="form-control">
+                    <input ng-model="model.reasonForContract" type="text" id="reason-for-contract"
+                           name="reason-for-contract" class="form-control">
                 </div>
             </div>
             <!-- 2.Номер на трудов договор-->
@@ -23,7 +25,8 @@
                     договор<span class="required"> *</span>
                 </label>
                 <div class="col-lg-4">
-                    <input ng-model="model.contractNumber" id="contract-number" name="contract-number" required="" type="text"
+                    <input ng-model="model.contractNumber" id="contract-number" name="contract-number" required=""
+                           type="text"
                            class="form-control input-md"/>
                 </div>
             </div>
@@ -33,14 +36,18 @@
                         class="required"> *</span></label>
                 <div class="col-lg-4">
                     <div class="input-group">
-                        <input ng-model="datepicker.toDateObj(model.signingDate)"
-                               id="signing-date" name="signing-date"
-                               required="" type="text" class="form-control input-md"
-                                uib-datepicker-popup="datepicker.format"
-                                datepicker-options="datepicker.dateOptions"
-                                close-text="datepicker.closeText"/>
+
+                        <input ng-model="model.signingDate" id="signing-date"
+                               type="text" class="form-control input-md"
+                               uib-datepicker-popup="{{datepicker.format}}"
+                               datepicker-options="datepicker.dateOptions"
+                               is-open="signing" close-text="{{datepicker.closeText}}"
+                                clear-text="{{datepicker.clearText}}" current-text="{{datepicker.currentText}}"/>
+
                         <span class="input-group-btn">
-                            <button type="button" ng-click=""></button>
+                            <button type="button" class="btn btn-default" ng-click="open('signing')">
+                                <i class="fa fa-calendar"></i>
+                            </button>
                         </span>
                     </div>
                 </div>
@@ -50,15 +57,30 @@
                 <label for="start-date" class="col-lg-4 control-label">Дата на започване<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.startingDate" id="start-date" name="start-date" required="" type="text"
-                           class="form-control input-md datepicker"/>
+                    <div class="input-group">
+
+                        <input ng-model="model.startingDate" id="start-date"
+                               type="text" class="form-control input-md"
+                               uib-datepicker-popup="{{datepicker.format}}"
+                               datepicker-options="datepicker.dateOptions"
+                               is-open="starting" close-text="{{datepicker.closeText}}"
+                               clear-text="{{datepicker.clearText}}" current-text="{{datepicker.currentText}}"/>
+
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open('starting')">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
                 </div>
             </div>
             <!-- 5.Основна заплата-->
             <div class="form-group">
-                <label for="principal-salary" class="col-lg-4 control-label">Основна заплата<span class="required"> *</span></label>
+                <label for="principal-salary" class="col-lg-4 control-label">Основна заплата<span
+                        class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.principalSalary" id="principal-salary" name="principal-salary" required="" type="text"
+                    <input ng-model="model.principalSalary" id="principal-salary" name="principal-salary" required=""
+                           type="text"
                            class="form-control input-md"/>
                 </div>
             </div>
@@ -69,28 +91,33 @@
                     договора
                 </label>
                 <div class="col-lg-4">
-                    <input ng-model="model.contractLengthInMonths" id="contract-length" name="contract-length" type="text" class="form-control input-md"/>
+                    <input ng-model="model.contractLengthInMonths" id="contract-length" name="contract-length"
+                           type="text" class="form-control input-md"/>
                 </div>
             </div>
             <!-- 7.Работно време-->
             <div class="form-group">
-                <label for="work-hours" class="col-lg-4 control-label">Работно време<span class="required"> *</span></label>
+                <label for="work-hours" class="col-lg-4 control-label">Работно време<span
+                        class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.workHours" id="work-hours" name="work-hours" required="" type="text" class="form-control input-md"/>
+                    <input ng-model="model.workHours" id="work-hours" name="work-hours" required="" type="text"
+                           class="form-control input-md"/>
                 </div>
             </div>
             <!-- 8.Длъжност НКПД-->
             <div class="form-group">
                 <label for="nkpd" class="col-lg-4 control-label">Длъжност НКПД<span class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.occupationCode"  id="nkpd" name="nkpd" required="" type="text" class="form-control input-md"/>
+                    <input ng-model="model.occupationCode" id="nkpd" name="nkpd" required="" type="text"
+                           class="form-control input-md"/>
                 </div>
             </div>
             <!-- 9.КИД-->
             <div class="form-group">
                 <label for="kid" class="col-lg-4 control-label">КИД<span class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.codeEconomicActivity" id="kid" name="kid" required="" type="text" class="form-control input-md"/>
+                    <input ng-model="model.codeEconomicActivity" id="kid" name="kid" required="" type="text"
+                           class="form-control input-md"/>
                 </div>
             </div>
             <!-- 10.Срок на предизвестие-->
@@ -107,15 +134,17 @@
                 <label for="payed-vacation" class="col-lg-4 control-label">Отпуск размер<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input  ng-model="model.payedVacationLengthInDays" id="payed-vacation" name="payed-vacation"
-                            required="" type="text" class="form-control input-md"/>
+                    <input ng-model="model.payedVacationLengthInDays" id="payed-vacation" name="payed-vacation"
+                           required="" type="text" class="form-control input-md"/>
                 </div>
             </div>
             <!-- 13.Общ стаж-->
             <div class="form-group">
-                <label for="work-experience" class="col-lg-4 control-label">Общ стаж<span class="required"> *</span></label>
+                <label for="work-experience" class="col-lg-4 control-label">Общ стаж<span
+                        class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.experience.total" id="work-experience" name="work-experience" required="" type="text"
+                    <input ng-model="model.experience.total" id="work-experience" name="work-experience" required=""
+                           type="text"
                            class="form-control input-md"/>
                 </div>
             </div>
@@ -126,7 +155,8 @@
                     специалност<span class="required"> *</span>
                 </label>
                 <div class="col-lg-4">
-                    <input ng-model="model.experience.speciality" id="speciality-experience" name="speciality-experience" required="" type="text"
+                    <input ng-model="model.experience.speciality" id="speciality-experience"
+                           name="speciality-experience" required="" type="text"
                            class="form-control input-md"/>
                 </div>
             </div>
@@ -135,15 +165,30 @@
                 <label for="insured-experience" class="col-lg-4 control-label">Осигурителен стаж<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.experience.insurable" id="insured-experience" name="insured-experience" required="" type="text"
+                    <input ng-model="model.experience.insurable" id="insured-experience" name="insured-experience"
+                           required="" type="text"
                            class="form-control input-md"/>
                 </div>
             </div>
             <!-- 16.Дата на прекратяване-->
             <div class="form-group">
-                <label for="end-date" class="col-lg-4 control-label">Дата на прекратяване</label>
+                <label for="termination-date" class="col-lg-4 control-label">Дата на прекратяване</label>
                 <div class="col-lg-4">
-                    <input ng-model="model.terminationDate" id="end-date" name="end-date" type="text" class="form-control input-md datepicker"/>
+                    <div class="input-group">
+
+                        <input ng-model="model.terminationDate" id="termination-date"
+                               type="text" class="form-control input-md"
+                               uib-datepicker-popup="{{datepicker.format}}"
+                               datepicker-options="datepicker.dateOptions"
+                               is-open="termination" close-text="{{datepicker.closeText}}"
+                               clear-text="{{datepicker.clearText}}" current-text="{{datepicker.currentText}}"/>
+
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open('termination')">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
                 </div>
             </div>
             <!-- Бутон `Зпази`-->

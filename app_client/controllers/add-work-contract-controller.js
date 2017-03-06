@@ -3,13 +3,12 @@
 
     angular
       .module('app')
-      .controller('AddWorkContractController', ['$routeParams', '$location', 'dataContext', 'notification', 'breadcrumb',
-          function ($routeParams, $location, dataContext, notification, breadcrumb) {
+      .controller('AddWorkContractController', ['$routeParams', '$location', 'dataContext', 'notification', 'breadcrumb','toDateObject',
+          function ($routeParams, $location, dataContext, notification, breadcrumb, toDateObject) {
               let ctrl = this;
               ctrl.breadcrumbs = breadcrumb.getAll();
               ctrl.data = {};
               ctrl.data.dossier = $routeParams.dossierId;
-
               ctrl.save = function () {
                   dataContext.workContract
                              .save(ctrl.data)

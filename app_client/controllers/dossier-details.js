@@ -3,10 +3,10 @@
 
     angular
       .module('app')
-      .controller('DossierDetailsController', ['dataContext', 'notification', '$routeParams', 'storage', 'breadcrumb',
-          function (dataContext, notification, $routeParams, storage, breadcrumb) {
+      .controller('DossierDetailsController', ['dataContext', 'notification', '$routeParams', 'storage', 'breadcrumb', 'toDateObject',
+          function (dataContext, notification, $routeParams, storage, breadcrumb, toDateObject) {
               let ctrl = this;
-              ctrl.id={};
+              ctrl.id = {};
               ctrl.data = {};
               ctrl.data.id = $routeParams.dossierId;
               ctrl.tabs = [
@@ -31,6 +31,8 @@
                          .then(dossier => {
                              ctrl.id.type = dossier.id.bulgarian ? 'bulgarian' : 'foreign';
                              ctrl.data = dossier;
+                             toDateObject(ctrl.data.workContracts[0], ['signingDate', 'startingDate'], ['terminationDate']);
+
                              storage.setDossierName(`${dossier.names.first} ${dossier.names.last}`);
 
                              ctrl.breadcrumbs = breadcrumb.getAll();

@@ -10,9 +10,6 @@
           currentText: 'Днес',
           closeText  : 'Затвори',
           clearText  : 'Изчисти',
-          toDateObj  : (str) => {
-              str = new Date(str);
-              return str;
-          }
+          format:'dd.MM.yyyy'
       });
 }());
