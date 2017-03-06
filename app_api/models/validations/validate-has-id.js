@@ -1,27 +1,29 @@
 'use strict';
 
+const errorMessages = require('./error-messages');
+
 module.exports = function (next) {
     let id = this.id;
 
     if (!id) {
-        next(new Error('No id'));
+        next(new Error(errorMessages.missingId));
 
     } else if (!id.bulgarian && !id.foreign) {
 
-        next(new Error('No id or lnch'));
+        next(new Error(errorMessages.missingId));
     } else if (id.bulgarian && id.foreign) {
 
-        next(new Error('Both egn and lch are provided'));
+        next(new Error(errorMessages.cantHaveBulgarianAndForeignId));
     } else if (id.bulgarian && !id.foreign) {
 
         if (!id.bulgarian.egn || !id.bulgarian.idCardNumber) {
 
-            next(new Error('No egn or id card number'));
+            next(new Error(errorMessages.missingId));
         }
     } else if (id.foreign && !id.bulgarian) {
         if (!id.foreign.lnch || !id.foreign.idCardNumber || !id.foreign.dob || !id.foreign.sex) {
 
-            next(new Error('Missing or incomplete lnch'));
+            next(new Error(errorMessages.incompleteForeignId));
         }
     }
 

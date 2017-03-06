@@ -4,16 +4,17 @@ const
   util = require('./util'),
   config = require('../config/user'),
   User = require('../models/db').model('User'),
+  invalidUsernameOrPassword = 'Невалидно име или парола.',
 
   userController = {
       register: (req, res) => {
           util
-            .create(User, {email: req.body.email}, config.required)
+            .create(User, {email: req.body.email})
             .then(user => {
                 user.setPassword(req.body.password);
                 return Promise.resolve(user);
             })
-            .then(user => util.save(user, config.required))
+            .then(user => util.save(user))
             .then(() => util.sendCreated(res))
             .catch(err => util.sendError(res, err));
       },
@@ -24,10 +25,10 @@ const
                   return util.sendError(res, err);
               }
               if (!user) {
-                  return util.sendError(res, {message: 'Invalid username or password.'});
+                  return util.sendError(res, {message: invalidUsernameOrPassword});
               }
               if (!user.validPassword(req.body.password)) {
-                  return util.sendError(res, {message: 'Invalid username or password'});
+                  return util.sendError(res, {message: invalidUsernameOrPassword});
               }
 
               util.sendSuccess(res, {data: user.generateJwt()});
@@ -43,7 +44,7 @@ const
 
       updateById: (req, res) => {
           util
-            .update(User, req.body, req.params.id, config.required)
+            .update(User, req.body, req.params.id)
             .then(() => util.sendSuccess(res))
             .catch(error => util.sendError(res, {message: util.getErrorMessage(error)}));
       }

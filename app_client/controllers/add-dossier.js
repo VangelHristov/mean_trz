@@ -3,8 +3,8 @@
 
     angular
       .module('app')
-      .controller('AddDossierController', ['dataContext', 'notification', '$routeParams', '$location','breadcrumb',
-          function (dataContext, notification, $routeParams, $location,breadcrumb) {
+      .controller('AddDossierController', ['dataContext', 'notification', '$routeParams', '$location', 'breadcrumb',
+          function (dataContext, notification, $routeParams, $location, breadcrumb) {
               let ctrl = this;
               ctrl.breadcrumbs = breadcrumb.getAll();
               ctrl.id = {
@@ -14,11 +14,16 @@
               ctrl.data.company = $routeParams.companyId;
               ctrl.save = function () {
 
-                  if (ctrl.id.type === 'bulgarian') {
+                  if(!ctrl.data){
+                      return notification.error('ERROR');
+                  }
+
+                  if (ctrl.data.id && ctrl.id.type === 'bulgarian') {
                       ctrl.data.id.foreign = undefined;
-                  } else {
+                  } else if(ctrl.data.id && ctrl.id.type === 'foreign'){
                       ctrl.data.id.buldarian = undefined;
                   }
+
                   dataContext
                     .dossier
                     .save(ctrl.data)
@@ -28,7 +33,11 @@
                         $location.path(`/companies/${ctrl.data.company}/dossiers/${result._id}/add-work-contract`);
                     })
                     .catch(error => {
-                        notification.error(error.data.message);
+                        if (error.data && error.data.message) {
+                            notification.error(error.data.message);
+                        } else {
+                            notification.error(error);
+                        }
                     });
               };
           }]);

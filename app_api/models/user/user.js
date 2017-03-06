@@ -1,32 +1,33 @@
 'use strict';
 
 const
-  mongoose       = require('mongoose'),
-  Schema         = mongoose.Schema,
-  objectId       = mongoose.Schema.Types.ObjectId,
-  patterns       = require('./../validations/patterns'),
-  crypto         = require('crypto'),
-  jwt            = require('jsonwebtoken'),
+  mongoose = require('mongoose'),
+  Schema = mongoose.Schema,
+  objectId = mongoose.Schema.Types.ObjectId,
+  patterns = require('./../validations/patterns'),
+  crypto = require('crypto'),
+  jwt = require('jsonwebtoken'),
   beautifyUnique = require('mongoose-beautiful-unique-validation'),
+  errorMessages = require('../validations/error-messages'),
 
-  userSchema     = new Schema({
+  userSchema = new Schema({
       hash     : String,
       salt     : String,
       email    : {
           type    : String,
-          required: [true, 'No email'],
-          match   : [patterns.email, 'Invalid email'],
-          unique  : 'Email not unique'
+          required: [true, errorMessages.missingEmail],
+          match   : [patterns.email, errorMessages.invalidEmail],
+          unique  : errorMessages.emailNotUnique
       },
       companies: [{type: objectId, ref: 'Company'}],
-      firstName: String,
-      lastName : String
+      firstName: {type: String, required: [true, errorMessages.missingFirstName]},
+      lastName : {type: String, required: [true, errorMessages.missingLastName]}
   });
 
 userSchema.plugin(beautifyUnique);
 
 userSchema.methods.setPassword = function (password) {
-    password  = password.toString();
+    password = password.toString();
     this.salt = crypto.randomBytes(16).toString('hex');
     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
 };
