@@ -3,8 +3,8 @@
 
     angular
       .module('app')
-      .controller('AddWorkContractController', ['$routeParams', '$location', 'dataContext', 'notification', 'breadcrumb','toDateObject',
-          function ($routeParams, $location, dataContext, notification, breadcrumb, toDateObject) {
+      .controller('AddWorkContractController', ['$routeParams', '$location', 'dataContext', 'notification', 'breadcrumb',
+          function ($routeParams, $location, dataContext, notification, breadcrumb) {
               let ctrl = this;
               ctrl.breadcrumbs = breadcrumb.getAll();
               ctrl.data = {};

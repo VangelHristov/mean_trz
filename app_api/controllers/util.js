@@ -101,7 +101,7 @@ const
                   return reject({status: 400, message: getErrorMessage(err)});
               }
 
-              return resolve({message: 'ok'});
+              return resolve({message: 'Успешен запис.'});
           });
       });
   },
@@ -112,7 +112,7 @@ const
           let missing = getMissingProperties(data, required);
 
           if (missing) {
-              return reject({status: 400, message: `Following props are required:\n ${missing}`});
+              return reject({status: 400, message: `Липсват следните задължителни полета:\n ${missing}`});
           }
 
           model.create(data, (err, doc) => {

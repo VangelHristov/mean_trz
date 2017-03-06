@@ -6,16 +6,20 @@
                 <label for="insured-type" class="col-lg-4 control-label">Вид осигурен<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input type="text" ng-model="model.typeInsured" id="insured-type" name="insured-type"
-                           class="form-control">
+                    <select ng-model="model.typeInsured" id="insured-type" name="insured-type"
+                            class="form-control">
+                        <option ng-repeat="option in typeInsured" value="{{option}}">{{option}}</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
                 <label for="reason-for-contract" class="col-lg-4 control-label">Основание за сключване<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.reasonForContract" type="text" id="reason-for-contract"
-                           name="reason-for-contract" class="form-control">
+                    <select ng-model="model.reasonForContract" id="reason-for-contract"
+                            name="reason-for-contract" class="form-control">
+                        <option ng-repeat="option in reasonForContract" value="{{option}}">{{option}}</option>
+                    </select>
                 </div>
             </div>
             <!-- 2.Номер на трудов договор-->
