@@ -1,0 +1,52 @@
+(function () {
+    'use strict';
+
+    angular
+      .module('app')
+      .constant('errorMessages', {
+          missingId                  : 'Моля попълнете полето егн/лнч.',
+          missingEmail               : 'Моля попълнете полето имейл.',
+          invalidEmail               : 'Невалиден имейл.',
+          emailNotUnique             : 'Имейлът вече е регистриран.',
+          missingFirstName           : 'Моля попълнете стойност за име.',
+          missingLastName            : 'Моля попълнете стойност за фамилия.',
+          missingBankName            : 'Моля попълнете стойност за име на банка.',
+          missingIban                : 'Моля попълнете стойност за iban.',
+          invalidIban                : 'Невалиден iban.',
+          missingBic                 : 'Моля попълнете стойност за bic.',
+          invalidBic                 : 'Невалиден bic.',
+          invalidPhoneNumber         : 'Невалиден телефонен номер.',
+          invalidLnch                : 'Невалиден ЛНЧ.',
+          minAge                     : 'Лицето е под минималната възраст.',
+          invalidIdCardNumber        : 'Невалиден номер на лична карта.',
+          mustBeCyrillic             : 'Всички символи трябва да са на кирилица.',
+          missingContractNumber      : 'Моля попълнете стойност за номер на договор.',
+          invalidWorkContract        : 'Номер на договор трябва да съдържа само цифри или да започва с главна буква последвана от една или повече цифри. ',
+          missingSigningDate         : 'Моля попълнете стойност за дата на сключване.',
+          missingStartingDate        : 'Моля попълнете стойност за дата на постъпване.',
+          missingSalary              : 'Моля попълнете стойност за основна заплата.',
+          salaryAmountBelowMinimum   : 'Основната заплата не може да бъде по-ниска от минималната заплата (460).',
+          invalidContractLength      : 'Срокът на договор не може да е по-малък от 1 месец.',
+          invalidWorkHours           : 'Работното време трябва да бъде между 1 и 8 часа.',
+          missingWorkHours           : 'Моля попълнете стойност за работно време',
+          missingOccupationCode      : 'Моля попълнете стойност за НКПД.',
+          invalidOccupationCode      : 'Невалиден НКПД.',
+          missingCodeEconomicActivity: 'Моля попълнете стойност за КИД.',
+          invalidCodeEconomicActivity: 'Невалиден КИД.',
+          invalidLEaveNoticeLength   : 'Срокът на предизвестие трябва да бъде положително число.',
+          missingVacationLength      : 'Моля попълнете стойност за размер на отпуск.',
+          invalidVacationLength      : 'Размерът на отпуск трябва да бъде минимум 20 дни.',
+          missingTotalExperience     : 'Моля попълнете стойност за размер на общ трудов стаж.',
+          invalidTotalExperience     : 'Размер на общ трудов стаж трябва да бъде положително число.',
+          invalidSpecialityExperience: 'Размер на стаж по специалност трябва да бъде положително число.',
+          missingSpecialityExperience: 'Моля попълнете стойност за размер на стаж по специалност.',
+          invalidInsurableExperience : 'Размер на осигурителен стаж трябва да бъде положително число.',
+          missingInsurableExperience : 'Моля попълнете стойност за размер на осигурителен стаж.',
+          missingDossierId           : 'Липсва номер на досие.',
+          invalidEgn                 : 'Невалидно ЕГН.',
+          invalidSigningDate         : 'Дата на сключване не може да бъде преди дата на постъпване.',
+          invalidStartingDate        : 'Дата на постъпване не може да бъде преди дата на сключване.',
+          invalidDateFormat          : 'Датата трябва да бъде във формат дд.мм.гггг. На пример 03.03.2017.',
+          invalidTerminationDate     : 'Дата на прекратяване не може да бъде преди дата на постъпване.'
+      });
+}());

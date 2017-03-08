@@ -93,6 +93,8 @@ body a:hover {
 .nav-tabs > li {
     width: 15%;
     text-align: center;
+    top:-10px;
+    margin-bottom:-11px;
 }
 
 .card {
@@ -463,4 +465,8 @@ select.form-control {
 
 [ng-view]{
     padding-top:10px;
+}
+
+.ng-touched.ng-invalid{
+    border-color:red;
 }

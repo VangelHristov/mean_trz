@@ -1,13 +1,13 @@
 <div class="tab-pane acive">
     <div class="panel-body">
-        <form class="form form-horizontal">
+        <form class="form form-horizontal" name="workContract" novalidate>
             <!-- 1.Вид осигурен-->
             <div class="form-group">
                 <label for="insured-type" class="col-lg-4 control-label">Вид осигурен<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
                     <select ng-model="model.typeInsured" id="insured-type" name="insured-type"
-                            class="form-control">
+                            class="form-control" ng-required="true">
                         <option ng-repeat="option in typeInsured" value="{{option}}">{{option}}</option>
                     </select>
                 </div>
@@ -17,7 +17,7 @@
                         class="required"> *</span></label>
                 <div class="col-lg-4">
                     <select ng-model="model.reasonForContract" id="reason-for-contract"
-                            name="reason-for-contract" class="form-control">
+                            name="reason-for-contract" class="form-control" ng-required="true">
                         <option ng-repeat="option in reasonForContract" value="{{option}}">{{option}}</option>
                     </select>
                 </div>
@@ -29,9 +29,18 @@
                     договор<span class="required"> *</span>
                 </label>
                 <div class="col-lg-4">
-                    <input ng-model="model.contractNumber" id="contract-number" name="contract-number" required=""
-                           type="text"
+                    <input ng-model="model.contractNumber" id="contract-number" name="contractNumber"
+                           type="text" ng-required="true" ng-pattern="validationPatterns.contractNumber"
                            class="form-control input-md"/>
+                    <div class="has-error"
+                         ng-show="workContract.contractNumber.$touched && workContract.contractNumber.$invalid">
+                        <div class="control-label" ng-show="workContract.contractNumber.$error.pattern">
+                            {{errors.invalidWorkContract}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.contractNumber.$error.required">
+                            {{errors.missingContractNumber}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 3.Дата на сключване-->
@@ -41,18 +50,27 @@
                 <div class="col-lg-4">
                     <div class="input-group">
 
-                        <input ng-model="model.signingDate" id="signing-date"
-                               type="text" class="form-control input-md"
+                        <input ng-model="model.signingDate" id="signing-date" name="signingDate"
+                               type="text" class="form-control input-md" ng-required="true"
                                uib-datepicker-popup="{{datepicker.format}}"
                                datepicker-options="datepicker.dateOptions"
                                is-open="signing" close-text="{{datepicker.closeText}}"
-                                clear-text="{{datepicker.clearText}}" current-text="{{datepicker.currentText}}"/>
+                               clear-text="{{datepicker.clearText}}" current-text="{{datepicker.currentText}}"/>
 
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="open('signing')">
                                 <i class="fa fa-calendar"></i>
                             </button>
                         </span>
+                    </div>
+                    <div class="has-error"
+                         ng-show="workContract.signingDate.$touched && workContract.signingDate.$invalid">
+                        <div class="control-label" ng-show="workContract.signingDate.$error.date">
+                            {{errors.invalidDateFormat}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.signingDate.$error.required">
+                            {{errors.missingSigningDate}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,9 +82,9 @@
                     <div class="input-group">
 
                         <input ng-model="model.startingDate" id="start-date"
-                               type="text" class="form-control input-md"
+                               type="text" class="form-control input-md" name="startingDate"
                                uib-datepicker-popup="{{datepicker.format}}"
-                               datepicker-options="datepicker.dateOptions"
+                               datepicker-options="datepicker.dateOptions" ng-required="true"
                                is-open="starting" close-text="{{datepicker.closeText}}"
                                clear-text="{{datepicker.clearText}}" current-text="{{datepicker.currentText}}"/>
 
@@ -76,6 +94,15 @@
                             </button>
                         </span>
                     </div>
+                    <div class="has-error"
+                         ng-show="workContract.startingDate.$touched && workContract.startingDate.$invalid">
+                        <div class="control-label" ng-show="workContract.startingDate.$error.date">
+                            {{errors.invalidDateFormat}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.startingDate.$error.required">
+                            {{errors.missingStartingDate}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 5.Основна заплата-->
@@ -83,9 +110,18 @@
                 <label for="principal-salary" class="col-lg-4 control-label">Основна заплата<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.principalSalary" id="principal-salary" name="principal-salary" required=""
-                           type="text"
+                    <input ng-model="model.principalSalary" id="principal-salary" name="principalSalary" \
+                           ng-required="true" type="text" ng-pattern="validationPatterns.salary"
                            class="form-control input-md"/>
+                    <div class="has-error"
+                         ng-show="workContract.principalSalary.$touched && workContract.principalSalary.$invalid">
+                        <div class="control-label" ng-show="workContract.principalSalary.$error.pattern">
+                            {{errors.salaryAmountBelowMinimum}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.principalSalary.$error.required">
+                            {{errors.missingSalary}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 6.Срок на договора-->
@@ -95,8 +131,14 @@
                     договора
                 </label>
                 <div class="col-lg-4">
-                    <input ng-model="model.contractLengthInMonths" id="contract-length" name="contract-length"
-                           type="text" class="form-control input-md"/>
+                    <input ng-model="model.contractLengthInMonths" id="contract-length" name="contractLength"
+                           type="text" class="form-control input-md" ng-pattern="validationPatterns.contractLength"/>
+                    <div class="has-error"
+                         ng-show="workContract.contractLength.$touched && workContract.contractLength.$invalid">
+                        <div class="control-label" ng-show="workContract.contractLength.$error.pattern">
+                            {{errors.invalidContractLength}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 7.Работно време-->
@@ -104,24 +146,49 @@
                 <label for="work-hours" class="col-lg-4 control-label">Работно време<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.workHours" id="work-hours" name="work-hours" required="" type="text"
-                           class="form-control input-md"/>
+                    <input ng-model="model.workHours" id="work-hours" name="workHours" ng-required="true" type="text"
+                           class="form-control input-md" ng-pattern="validationPatterns.workHours"/>
+                    <div class="has-error" ng-show="workContract.workHours.$touched && workContract.workHours.$invalid">
+                        <div class="control-label" ng-show="workContract.workHours.$error.pattern">
+                            {{errors.invalidWorkHours}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.workHours.$error.required">
+                            {{errors.missingWorkHours}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 8.Длъжност НКПД-->
             <div class="form-group">
                 <label for="nkpd" class="col-lg-4 control-label">Длъжност НКПД<span class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.occupationCode" id="nkpd" name="nkpd" required="" type="text"
-                           class="form-control input-md"/>
+                    <input ng-model="model.occupationCode" id="nkpd" name="nkpd" ng-required="true" type="text"
+                           class="form-control input-md" ng-pattern="validationPatterns.occupationCode"/>
+
+                    <div class="has-error" ng-show="workContract.nkpd.$touched && workContract.nkpd.$invalid">
+                        <div class="control-label" ng-show="workContract.nkpd.$error.pattern">
+                            {{errors.invalidOccupationCode}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.nkpd.$error.required">
+                            {{errors.missingOccupationCode}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 9.КИД-->
             <div class="form-group">
                 <label for="kid" class="col-lg-4 control-label">КИД<span class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.codeEconomicActivity" id="kid" name="kid" required="" type="text"
-                           class="form-control input-md"/>
+                    <input ng-model="model.codeEconomicActivity" id="kid" name="kid" ng-required="true" type="text"
+                           class="form-control input-md" ng-pattern="validationPatterns.codeEconomicActivity"/>
+                    <div class="has-error" ng-show="workContract.kid.$touched && workContract.kid.$invalid">
+                        <div class="control-label" ng-show="workContract.kid.$error.pattern">
+                            {{errors.invalidCodeEconomicActivity}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.kid.$error.required">
+                            {{errors.missingCodeEconomicActivity}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 10.Срок на предизвестие-->
@@ -129,17 +196,32 @@
                 <label for="notice" class="col-lg-4 control-label">Срок на предизвестие<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.leaveNoticeLengthInDays" id="notice" name="notice" required="" type="text"
-                           class="form-control input-md"/>
+                    <input ng-model="model.leaveNoticeLengthInDays" id="notice" name="notice" type="text"
+                           class="form-control input-md" ng-pattern="validationPatterns.notice"/>
+                    <div class="has-error" ng-show="workContract.notice.$touched && workContract.notice.$invalid">
+                        <div class="control-label" ng-show="workContract.notice.$error.pattern">
+                            {{errors.invalidLEaveNoticeLength}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 11.Отпуск размер-->
             <div class="form-group">
-                <label for="payed-vacation" class="col-lg-4 control-label">Отпуск размер<span
-                        class="required"> *</span></label>
+                <label for="payed-vacation" class="col-lg-4 control-label">Отпуск размер<span class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.payedVacationLengthInDays" id="payed-vacation" name="payed-vacation"
-                           required="" type="text" class="form-control input-md"/>
+                    <input ng-model="model.payedVacationLengthInDays" id="payed-vacation" name="payedVacation"
+                           ng-required="true" type="text" class="form-control input-md"
+                           ng-pattern="validationPatterns.vacation"/>
+
+                    <div class="has-error"
+                         ng-show="workContract.payedVacation.$touched && workContract.payedVacation.$invalid">
+                        <div class="control-label" ng-show="workContract.payedVacation.$error.pattern">
+                            {{errors.invalidVacationLength}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.payedVacation.$error.required">
+                            {{errors.missingVacationLength}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 13.Общ стаж-->
@@ -147,9 +229,19 @@
                 <label for="work-experience" class="col-lg-4 control-label">Общ стаж<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.experience.total" id="work-experience" name="work-experience" required=""
-                           type="text"
+                    <input ng-model="model.experience.total" id="work-experience" name="totalExperience"
+                           ng-required="true"
+                           type="text" ng-pattern="validationPatterns.yearsWorkExperience"
                            class="form-control input-md"/>
+                    <div class="has-error"
+                         ng-show="workContract.totalExperience.$touched && workContract.totalExperience.$invalid">
+                        <div class="control-label" ng-show="workContract.totalExperience.$error.pattern">
+                            {{errors.invalidTotalExperience}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.totalExperience.$error.required">
+                            {{errors.missingTotalExperience}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 14.Стаж по специалност-->
@@ -160,8 +252,17 @@
                 </label>
                 <div class="col-lg-4">
                     <input ng-model="model.experience.speciality" id="speciality-experience"
-                           name="speciality-experience" required="" type="text"
-                           class="form-control input-md"/>
+                           name="specialityExperience" ng-required="true" type="text"
+                           class="form-control input-md" ng-pattern="validationPatterns.yearsWorkExperience"/>
+                    <div class="has-error"
+                         ng-show="workContract.specialityExperience.$touched && workContract.specialityExperience.$invalid">
+                        <div class="control-label" ng-show="workContract.specialityExperience.$error.pattern">
+                            {{errors.invalidSpecialityExperience}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.specialityExperience.$error.required">
+                            {{errors.missingSpecialityExperience}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 15.Осигурителен стаж-->
@@ -169,9 +270,18 @@
                 <label for="insured-experience" class="col-lg-4 control-label">Осигурителен стаж<span
                         class="required"> *</span></label>
                 <div class="col-lg-4">
-                    <input ng-model="model.experience.insurable" id="insured-experience" name="insured-experience"
-                           required="" type="text"
-                           class="form-control input-md"/>
+                    <input ng-model="model.experience.insurable" id="insured-experience" name="insuredExperience"
+                           ng-required="true" type="text"
+                           class="form-control input-md" ng-pattern="validationPatterns.yearsWorkExperience"/>
+                    <div class="has-error"
+                         ng-show="workContract.insuredExperience.$touched && workContract.insuredExperience.$invalid">
+                        <div class="control-label" ng-show="workContract.insuredExperience.$error.pattern">
+                            {{errors.invalidInsurableExperience}}
+                        </div>
+                        <div class="control-label" ng-show="workContract.insuredExperience.$error.required">
+                            {{errors.missingInsurableExperience}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 16.Дата на прекратяване-->
@@ -180,7 +290,7 @@
                 <div class="col-lg-4">
                     <div class="input-group">
 
-                        <input ng-model="model.terminationDate" id="termination-date"
+                        <input ng-model="model.terminationDate" id="termination-date" name="terminationDate"
                                type="text" class="form-control input-md"
                                uib-datepicker-popup="{{datepicker.format}}"
                                datepicker-options="datepicker.dateOptions"
@@ -193,12 +303,20 @@
                             </button>
                         </span>
                     </div>
+                    <div class="has-error"
+                         ng-show="workContract.terminationDate.$touched && workContract.terminationDate.$invalid">
+                        <div class="control-label" ng-show="workContract.terminationDate.$error.date">
+                            {{errors.invalidDateFormat}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Бутон `Зпази`-->
             <div class="form-group">
                 <div class="col-lg-4 col-lg-offset-4">
-                    <button ng-click="submit()" type="button" class="btn btn-default">Запази</button>
+                    <button ng-click="submit()" type="button" class="btn btn-default"
+                            ng-disabled="workContract.$invalid">Запази
+                    </button>
                 </div>
             </div>
         </form>

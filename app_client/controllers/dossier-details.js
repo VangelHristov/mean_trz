@@ -52,7 +52,7 @@
                              .edit(ctrl.data.workContracts[0])
                              .$promise
                              .then(result => notification.success(result.message))
-                             .catch(err => notification.error(err.message));
+                             .catch(err => notification.error(err.message||err.data.message));
               };
           }]);
 }());

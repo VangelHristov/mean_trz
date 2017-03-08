@@ -9,7 +9,7 @@ module.exports = {
     typeInsured          : /^(0[1-9])|([1-8][\d])|(9[0-6])$/,
     postalCode           : /^[\d]{4}$/,
     phoneNumber          : /^[\d\-+\s()]+$/,
-    occupationCode       : /[\d]{2}.?[\d]?[\d]?/,
+    occupationCode       : /^[1-9][\d]{0,7}$/,
     iban                 : /^[A-Za-z\d]{22}$/,
     bic                  : /^([a-zA-Z]){4}([a-zA-Z]){2}([0-9a-zA-Z]){2}([0-9a-zA-Z]{3})?$/,
     password             : /^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%_.\-]).{8,20})$/,
