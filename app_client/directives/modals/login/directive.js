@@ -3,7 +3,7 @@
 
     angular
       .module('app')
-      .directive('trzLoginModal', function () {
+      .directive('trzLoginModal', ['validationPatterns', 'errorMessages', function (validationPatterns, errorMessages) {
           return {
               restrict   : 'E',
               templateUrl: 'directives/modals/login/template.html',
@@ -13,7 +13,9 @@
               link       : function (scope) {
                   scope.data = {};
                   scope.submitForm = () => scope.submit({data: scope.data});
+                  scope.errors = errorMessages;
+                  scope.patterns = validationPatterns;
               }
           };
-      });
+      }]);
 }());
