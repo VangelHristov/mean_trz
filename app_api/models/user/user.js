@@ -19,9 +19,7 @@ const
           match   : [patterns.email, errorMessages.invalidEmail],
           unique  : errorMessages.emailNotUnique
       },
-      companies: [{type: objectId, ref: 'Company'}],
-      firstName: {type: String, required: [true, errorMessages.missingFirstName]},
-      lastName : {type: String, required: [true, errorMessages.missingLastName]}
+      companies: [{type: objectId, ref: 'Company'}]
   });
 
 userSchema.plugin(beautifyUnique);

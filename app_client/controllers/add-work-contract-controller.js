@@ -17,7 +17,7 @@
                                  notification.success(result.message);
                                  $location.path(`companies/${$routeParams.companyId}`);
                              })
-                             .catch(error => notification.error(error.data.message));
+                             .catch(notification.error);
               };
           }]);
 }());

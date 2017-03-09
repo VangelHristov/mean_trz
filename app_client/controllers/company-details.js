@@ -36,7 +36,7 @@
                              .edit({id: ctrl.data._id}, ctrl.data)
                              .$promise
                              .then(result => notification.success(result.message))
-                             .catch(err => notification.error(err));
+                             .catch(notification.error);
               };
 
               dataContext.company
@@ -46,6 +46,7 @@
                              ctrl.data = company;
                              storage.setCompanyName(company.name);
                              ctrl.breadcrumbs = breadcrumb.getAll();
-                         });
+                         })
+                         .catch(notification.error);
           }]);
 }());

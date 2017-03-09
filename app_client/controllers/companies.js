@@ -3,7 +3,7 @@
 
     angular
       .module('app')
-      .controller('CompaniesController', ['dataContext', 'storage', function (dataContext, storage) {
+      .controller('CompaniesController', ['dataContext', 'storage', 'notification', function (dataContext, storage, notification) {
           let ctrl = this;
           ctrl.buttons = [
               {
@@ -16,6 +16,7 @@
           dataContext.user
                      .get({id: storage.getUserId()})
                      .$promise
-                     .then(user => ctrl.companies = user.companies);
+                     .then(user => ctrl.companies = user.companies)
+                     .catch(notification.error);
       }]);
 }());

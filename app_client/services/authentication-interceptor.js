@@ -6,7 +6,7 @@
       .factory('authenticationInterceptor', ['secureRoutes', 'storage', 'notification', '$location',
           function (secureRoutes, storage, notification, $location) {
               return {
-                  request     : function (config) {
+                  request      : function (config) {
 
                       if (secureRoutes.some((route) => route.test(config.url))) {
 
@@ -24,10 +24,11 @@
 
                       return config;
                   },
-                  response    : function (response) {
-                      return response;
-                  },
-                  requestError: function (error) {
+                  responseError: function (error) {
+                      if (error.data && error.data.message) {
+                          error.message = error.data.message;
+                      }
+
                       return error;
                   }
               };

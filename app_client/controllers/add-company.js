@@ -17,9 +17,7 @@
                                  notification.success(result.message);
                                  $location.path('/companies');
                              })
-                             .catch(error => {
-                                 notification.warning(error.data.message);
-                             });
+                             .catch(notification.error);
               };
           }]);
 }());

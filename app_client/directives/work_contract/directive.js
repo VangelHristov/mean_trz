@@ -14,7 +14,6 @@
                         submit: '&'
                     },
                     link       : (scope) => {
-                        scope.model = {};
                         scope.reasonForContract = reasonForWorkContract;
                         scope.typeInsured = typeInsured;
                         scope.validationPatterns = validationPatterns;

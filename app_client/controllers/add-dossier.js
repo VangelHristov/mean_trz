@@ -32,13 +32,7 @@
                         notification.success(result.message);
                         $location.path(`/companies/${ctrl.data.company}/dossiers/${result._id}/add-work-contract`);
                     })
-                    .catch(error => {
-                        if (error.data && error.data.message) {
-                            notification.error(error.data.message);
-                        } else {
-                            notification.error(error);
-                        }
-                    });
+                    .catch(notification.error);
               };
           }]);
 }());

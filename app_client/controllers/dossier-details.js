@@ -37,14 +37,16 @@
 
                              ctrl.breadcrumbs = breadcrumb.getAll();
                          })
-                         .catch(error => notification.error(error.message));
+                         .catch(notification.error);
 
               ctrl.saveDossier = () => {
                   dataContext.dossier
                              .edit(ctrl.data)
                              .$promise
-                             .then(result => notification.success(result.message))
-                             .catch(error => notification.error(error.message));
+                             .then(result => {
+                                 notification.success(result.message);
+                             })
+                             .catch(notification.error);
               };
 
               ctrl.saveContract = () => {
@@ -52,7 +54,7 @@
                              .edit(ctrl.data.workContracts[0])
                              .$promise
                              .then(result => notification.success(result.message))
-                             .catch(err => notification.error(err.message||err.data.message));
+                             .catch(notification.error);
               };
           }]);
 }());

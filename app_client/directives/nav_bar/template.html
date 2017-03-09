@@ -10,6 +10,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a ng-hide="user.isLoggedIn()" data-toggle="modal" data-target="#register-modal">Регистрация</a></li>
                 <li><a ng-hide="user.isLoggedIn()" data-toggle="modal" data-target="#login-modal">Вход</a></li>
+                <li><a ng-show="user.isLoggedIn()" href="#!/companies"> Начало</a></li>
                 <li><a ng-show="user.isLoggedIn()" ng-click="user.logOut()" > Изход</a></li>
             </ul>
         </div>

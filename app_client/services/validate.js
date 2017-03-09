@@ -136,7 +136,19 @@
                     return thirteenthDigit % 11 === 10 ? 0 : thirteenthDigit % 11;
                 }
 
-                switch (bulstat.length) {
+                if(!bulstat){
+                    return false;
+                }
+
+                if( Object.prototype.toString.call(bulstat) !== '[object String]'){
+                    bulstat = bulstat.toString().trim();
+
+                    if(!/^[\d]{9,13}$/.test(bulstat)){
+                        return false;
+                    }
+                }
+
+                switch (bulstat.trim().length) {
                     case 9 :
                         return getNinthDigit(bulstat) === +bulstat[8];
                     case 10:

@@ -8,15 +8,18 @@ const
 
   userController = {
       register: (req, res) => {
+
           util
-            .create(User, {email: req.body.email})
+            .create(User, {email: req.body.email}, config.required)
             .then(user => {
                 user.setPassword(req.body.password);
                 return Promise.resolve(user);
             })
             .then(user => util.save(user))
-            .then(() => util.sendCreated(res))
-            .catch(err => util.sendError(res, err));
+            .then((user) => util.sendCreated(res, user))
+            .catch(err => {
+                util.sendError(res, err);
+            });
       },
 
       auth: (req, res) => {

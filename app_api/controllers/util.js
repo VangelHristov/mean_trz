@@ -107,8 +107,8 @@ const
   },
 
   create = (model, data, required) => {
-
       return new Promise((resolve, reject) => {
+
           let missing = getMissingProperties(data, required);
 
           if (missing) {
