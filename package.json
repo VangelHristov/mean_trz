@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "engines": {
-    "node": "7.2.1",
+    "node": "6.9.2",
     "npm": "4.2.0"
   },
   "scripts": {
@@ -34,7 +34,9 @@
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
+    "browser-sync": "^2.18.8",
     "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
     "jspm": "^0.16.52",
     "nodemon": "^1.11.0",
     "requirejs": "^2.3.2"
