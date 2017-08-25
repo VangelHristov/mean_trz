@@ -12,11 +12,7 @@
 </head>
 <body ng-cloak ng-controller="UserController as user">
 
-<div class="mobile-only">
-    <h1>Резолюцията на вашето устройство е прекалено малка.</h1>
-</div>
-
-<div class="desktops-and-tablets">
+<div>
     <trz-nav-bar></trz-nav-bar>
     <trz-login-modal submit="user.logIn(data)"></trz-login-modal>
     <trz-register-modal submit="user.register(data)"></trz-register-modal>
