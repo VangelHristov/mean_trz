@@ -1,7 +1,21 @@
 'use strict';
 
 const
-  config = require('../config/dossiers'),
-  factory = require('./controller-factory');
+	ControllerFactory = require('./controller-factory'),
+	db = require('../models/db');
 
-module.exports = factory(config);
+const
+	Dossier = db.model('Dossier'),
+	Company = db.model('Company');
+
+module.exports = ControllerFactory(
+	{
+		Model                  : Dossier,
+		populate               : {
+			path: 'workContracts'
+		},
+		ParentModel            : Company,
+		parentModelName        : 'company',
+		parentRefCollectionName: 'dossiers'
+	}
+);

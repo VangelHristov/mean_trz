@@ -1,56 +1,62 @@
 'use strict';
 
 const
-  util = require('./util'),
-  config = require('../config/user'),
-  User = require('../models/db').model('User'),
-  invalidUsernameOrPassword = 'Невалидно име или парола.',
+	util = require('./util'),
+	db = require('../models/db');
 
-  userController = {
-      register: (req, res) => {
+const User = db.model('User');
 
-          util
-            .create(User, {email: req.body.email}, config.required)
-            .then(user => {
-                user.setPassword(req.body.password);
-                return Promise.resolve(user);
-            })
-            .then(user => util.save(user))
-            .then((user) => util.sendCreated(res, user))
-            .catch(err => {
-                util.sendError(res, err);
-            });
-      },
+const authError = {
+	message: 'Невалидно име или парола.',
+	status : 400
+};
 
-      auth: (req, res) => {
-          User.findOne({email: req.body.email}, (err, user) => {
-              if (err) {
-                  return util.sendError(res, err);
-              }
-              if (!user) {
-                  return util.sendError(res, {message: invalidUsernameOrPassword});
-              }
-              if (!user.validPassword(req.body.password)) {
-                  return util.sendError(res, {message: invalidUsernameOrPassword});
-              }
+const userController = {
+	register: function (req, res, next) {
+		return util
+			.create(User, {email: req.body.email})
+			.then(user => {
+				user.setPassword(req.body.password);
+				return util.save(user);
+			})
+			.then(user => {
+				return res
+					.status(200)
+					.json({data: user.generateJwt()});
+			})
+			.catch(err => next(err));
+	},
 
-              util.sendSuccess(res, {data: user.generateJwt()});
-          });
-      },
+	auth: (req, res, next) => {
+		return User
+			.findOne({email: req.body.email})
+			.then(user => {
+				return user && user.validPassword(req.body.password)
+					? res.json({data: user.generateJwt()})
+					: next(authError);
+			})
+			.catch(err => next(err));
+	},
 
-      getById: (req, res) => {
-          util
-            .find(User, req.params.id, config.populate, config.select)
-            .then(doc => util.sendSuccess(res, doc))
-            .catch((err) => util.sendError(res, err));
-      },
+	getById: (req, res, next) => {
+		let populate = {
+			path  : 'companies',
+			select: 'name bulstat director _id'
+		};
+		let select = '_id companies';
 
-      updateById: (req, res) => {
-          util
-            .update(User, req.body, req.params.id)
-            .then(() => util.sendSuccess(res))
-            .catch(error => util.sendError(res, {message: util.getErrorMessage(error)}));
-      }
-  };
+		return util
+			.find(User, req.params.id, populate, select)
+			.then(doc => res.json(doc))
+			.catch(err => next(err));
+	},
+
+	updateById: (req, res, next) => {
+		return util
+			.update(User, req.body, req.params.id)
+			.then(user => res.json(user))
+			.catch(err => next(err));
+	}
+};
 
 module.exports = userController;

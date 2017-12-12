@@ -14,7 +14,7 @@
                              .save(ctrl.data)
                              .$promise
                              .then(result => {
-                                 notification.success(result.message);
+                                 notification.success(result);
                                  $location.path('/companies');
                              })
                              .catch(notification.error);

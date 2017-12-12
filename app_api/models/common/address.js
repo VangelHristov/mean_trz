@@ -1,14 +1,34 @@
 'use strict';
 
 const
-  Schema                 = require('mongoose').Schema,
-  {cyrillic, postalCode} = require('./../validations/patterns');
+	{Schema} = require('mongoose'),
+	pattern = require('./../validations/patterns'),
+	msg = require('../validations/error-messages');
 
-module.exports = new Schema({
-    street    : {type: String, required: true, match: cyrillic},
-    city      : {type: String, required: true, match: cyrillic},
-    postalCode: {type: String, required: true, match: postalCode},
-    country   : {type: String, required: true, match: cyrillic}
-}, {
-    _id: false
-});
+module.exports = new Schema(
+	{
+		street    : {
+			type    : String,
+			required: true,
+			match   : [pattern.cyrillic, msg.nonCyrillic]
+		},
+		city      : {
+			type    : String,
+			required: true,
+			match   : [pattern.cyrillic, msg.nonCyrillic]
+		},
+		postalCode: {
+			type: String,
+			required: true,
+			match: [pattern.postalCode, msg.postalCode]
+		},
+		country   : {
+			type    : String,
+			required: true,
+			match   : [pattern.cyrillic, msg.nonCyrillic]
+		}
+	},
+	{
+		_id: false
+	}
+);

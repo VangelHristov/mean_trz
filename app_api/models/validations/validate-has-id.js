@@ -2,7 +2,7 @@
 
 const errorMessages = require('./error-messages');
 
-module.exports = function (next) {
+module.exports = function validate(next) {
     let id = this.id;
 
     if (!id) {

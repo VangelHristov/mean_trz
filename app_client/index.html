@@ -1,85 +1,88 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app = "app">
 <head>
-    <meta charset="UTF-8">
-    <title page-title></title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="bower_components/toastr/toastr.min.css">
-    <link rel="stylesheet" href="uib-datepicker/ui-bootstrap-custom-2.5.0-csp.css">
-    <link rel="stylesheet" href="css/layout.css">
+	<meta charset = "UTF-8">
+	<title page-title></title>
+	
+	<!--build:css main.min.css-->
+	<link rel = "stylesheet"
+	      href = "bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel = "stylesheet"
+	      href = "bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+	<link rel = "stylesheet"
+	      href = "bower_components/font-awesome/css/font-awesome.min.css">
+	<link rel = "stylesheet" href = "bower_components/toastr/toastr.min.css">
+	<link rel = "stylesheet"
+	      href = "uib-datepicker/ui-bootstrap-custom-2.5.0-csp.css">
+	<link rel = "stylesheet" href = "css/layout.css">
+	<!--endbuild-->
 </head>
-<body ng-cloak ng-controller="UserController as user">
+<body ng-cloak ng-controller = "UserController as user">
 
 <div>
-    <trz-nav-bar></trz-nav-bar>
-    <trz-login-modal submit="user.logIn(data)"></trz-login-modal>
-    <trz-register-modal submit="user.register(data)"></trz-register-modal>
-    <trz-forgotten-password-modal submit="user.resetPassword(email)"></trz-forgotten-password-modal>
-    <trz-view></trz-view>
-    <trz-footer text="© Вангел Христов 2017"></trz-footer>
+	<trz-nav-bar></trz-nav-bar>
+	<trz-login-modal submit = "user.logIn(data)"></trz-login-modal>
+	<trz-register-modal submit = "user.register(data)"></trz-register-modal>
+	<trz-forgotten-password-modal submit = "user.resetPassword(email)"></trz-forgotten-password-modal>
+	<trz-view></trz-view>
+	<trz-footer text = "© Вангел Христов 2017"></trz-footer>
 </div>
 
 </body>
-<!--libs-->
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="bower_components/toastr/toastr.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-resource/angular-resource.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/ng-page-title/dist/ng-page-title.js"></script>
-<script src="bower_components/angular-i18n/angular-locale_bg.js"></script>
-<script src="uib-datepicker/ui-bootstrap-custom-tpls-2.5.0.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<!--build:js main.min.js-->
+<script src = "bower_components/jquery/dist/jquery.js"></script>
+<script src = "bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src = "bower_components/toastr/toastr.js"></script>
+<script src = "bower_components/angular/angular.js"></script>
+<script src = "bower_components/angular-resource/angular-resource.js"></script>
+<script src = "bower_components/angular-route/angular-route.js"></script>
+<script src = "bower_components/ng-page-title/dist/ng-page-title.js"></script>
+<script src = "bower_components/angular-i18n/angular-locale_bg.js"></script>
+<script src = "uib-datepicker/ui-bootstrap-custom-tpls-2.5.0.js"></script>
+<script src = "bower_components/angular-animate/angular-animate.js"></script>
+<script src = "bower_components/angular-sanitize/angular-sanitize.js"></script>
 
-<!--my scripts-->
-<script src="app.js"></script>
-<script src="app.config.js"></script>
+<script src = "app.js"></script>
+<script src = "app.config.js"></script>
 
+<script src = "controllers/user.js"></script>
+<script src = "controllers/add-company.js"></script>
+<script src = "controllers/companies.js"></script>
+<script src = "controllers/company-details.js"></script>
+<script src = "controllers/add-dossier.js"></script>
+<script src = "controllers/dossier-details.js"></script>
+<script src = "controllers/add-work-contract-controller.js"></script>
 
-<script src="controllers/user.js"></script>
-<script src="controllers/add-company.js"></script>
-<script src="controllers/companies.js"></script>
-<script src="controllers/company-details.js"></script>
-<script src="controllers/add-dossier.js"></script>
-<script src="controllers/dossier-details.js"></script>
-<script src="controllers/add-work-contract-controller.js"></script>
+<script src = "directives/modals/login/directive.js"></script>
+<script src = "directives/modals/register/directive.js"></script>
+<script src = "directives/modals/forgotten_password/directive.js"></script>
+<script src = "directives/nav_bar/directive.js"></script>
+<script src = "directives/footer/directive.js"></script>
+<script src = "directives/company_details/directive.js"></script>
+<script src = "directives/buttons/button_group/directive.js"></script>
+<script src = "directives/tabs/directive.js"></script>
+<script src = "directives/dossier_details/directive.js"></script>
+<script src = "directives/work_contract/directive.js"></script>
+<script src = "directives/breadcrumb/directive.js"></script>
+<script src = "directives/view/directive.js"></script>
+<script src = "directives/validations/bulstat.js"></script>
 
-
-<script src="directives/modals/login/directive.js"></script>
-<script src="directives/modals/register/directive.js"></script>
-<script src="directives/modals/forgotten_password/directive.js"></script>
-<script src="directives/nav_bar/directive.js"></script>
-<script src="directives/footer/directive.js"></script>
-<script src="directives/company_details/directive.js"></script>
-<script src="directives/buttons/button_group/directive.js"></script>
-<script src="directives/tabs/directive.js"></script>
-<script src="directives/dossier_details/directive.js"></script>
-<script src="directives/work_contract/directive.js"></script>
-<script src="directives/breadcrumb/directive.js"></script>
-<script src="directives/view/directive.js"></script>
-<script src="directives/validations/bulstat.js"></script>
-
-
-<script src="services/storage.js"></script>
-<script src="services/data-context.js"></script>
-<script src="services/notification.js"></script>
-<script src="services/modal-dismiss.js"></script>
-<script src="services/authentication-interceptor.js"></script>
-<script src="services/breadcrumb.js"></script>
-<script src="services/date-string-to-date-object.js"></script>
-<script src="services/validate.js"></script>
+<script src = "services/storage.js"></script>
+<script src = "services/data-context.js"></script>
+<script src = "services/notification.js"></script>
+<script src = "services/modal-dismiss.js"></script>
+<script src = "services/authentication-interceptor.js"></script>
+<script src = "services/breadcrumb.js"></script>
+<script src = "services/date-string-to-date-object.js"></script>
+<script src = "services/validate.js"></script>
 
 
-<script src="constants/messages.js"></script>
-<script src="constants/secure-routes.js"></script>
-<script src="constants/datepicker-options.js"></script>
-<script src="constants/reason-for-work-contract.js"></script>
-<script src="constants/type-insured.js"></script>
-<script src="constants/validation-patterns.js"></script>
-<script src="constants/error-messages.js"></script>
-
+<script src = "constants/messages.js"></script>
+<script src = "constants/secure-routes.js"></script>
+<script src = "constants/datepicker-options.js"></script>
+<script src = "constants/reason-for-work-contract.js"></script>
+<script src = "constants/type-insured.js"></script>
+<script src = "constants/validation-patterns.js"></script>
+<script src = "constants/error-messages.js"></script>
+<!--endbuild-->
 </html>

@@ -31,16 +31,16 @@
 
           return {
               success: function (msg) {
-                  toastr.success(addLineBreak(msg));
+                  toastr.success(msg);
               },
               info   : function (msg) {
-                  toastr.info(addLineBreak(msg));
+                  toastr.info(msg);
               },
               warning: function (msg) {
-                  toastr.warning(addLineBreak(msg));
+                  toastr.warning(msg);
               },
               error  : function (msg) {
-                  toastr.error(addLineBreak(msg));
+                  toastr.error(msg);
               }
           };
       }]);

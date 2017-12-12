@@ -3,44 +3,44 @@
 const util = require('./util');
 
 module.exports = (config) => {
-    function getById(req, res) {
-        util
-          .find(config.Model, req.params.id, config.populate)
-          .then(doc => util.sendSuccess(res, doc))
-          .catch(error => util.sendError(res, {message: error.message}));
-    }
+	function getById(req, res, next) {
+		return util
+			.find(config.Model, req.params.id, config.populate)
+			.then(doc => res.json(doc))
+			.catch(err => next(err));
+	}
 
-    function updateById(req, res) {
-        util
-          .update(config.Model, req.body, req.params.id)
-          .then(doc => util.save(doc))
-          .then(result => util.sendSuccess(res, result))
-          .catch(error => util.sendError(res, {message: util.getErrorMessage(error)}));
-    }
+	function updateById(req, res, next) {
+		return util
+			.update(config.Model, req.body, req.params.id)
+			.then(doc => util.save(doc))
+			.then(doc => res.json(doc))
+			.catch(err => next(err));
+	}
 
-    function createNew(req, res) {
-        let docId = '';
+	function createNew(req, res, next) {
+		let docId;
 
-        util
-          .create(config.Model, req.body, config.required)
-          .then(doc => {
-              docId = doc._id;
+		return util
+			.create(config.Model, req.body)
+			.then(doc => {
+				docId = doc._id;
+				return util.find(
+					config.ParentModel,
+					req.body[config.parentModelName]
+				);
+			})
+			.then(parentDoc => {
+				parentDoc[config.parentRefCollectionName].push(docId);
+				return util.save(parentDoc);
+			})
+			.then(() => {
+				return res.json({_id: docId})
+			})
+			.catch(err => next(err));
+	}
 
-              return new Promise((resolve, reject) => {
-                  util.find(config.ParentModel, req.body[config.parentModelName])
-                      .then(resolve, (err) => reject({message: util.getErrorMessage(err)}));
-              });
-          })
-          .then(parentDoc => {
-              parentDoc[config.parentRefCollectionName].unshift(docId);
-              return Promise.resolve(parentDoc);
-          })
-          .then(parentDoc => util.save(parentDoc))
-          .then(() => util.sendCreated(res, {_id: docId}))
-          .catch(error => util.sendError(res, error));
-    }
-
-    return {
-        getById, updateById, createNew
-    };
+	return {
+		getById, updateById, createNew
+	};
 };

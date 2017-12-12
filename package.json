@@ -35,10 +35,21 @@
   },
   "devDependencies": {
     "browser-sync": "^2.18.8",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^4.0.0",
+    "gulp-ng-annotate": "^2.0.0",
     "gulp-nodemon": "^2.2.1",
+    "gulp-rev": "^8.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-uglify-es": "^0.1.8",
+    "gulp-usemin": "^0.3.28",
     "jspm": "^0.16.52",
+    "node-notifier": "^5.1.2",
     "nodemon": "^1.11.0",
+    "pump": "^2.0.0",
     "requirejs": "^2.3.2"
   },
   "jspm": {
