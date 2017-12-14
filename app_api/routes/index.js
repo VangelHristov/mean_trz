@@ -4,33 +4,54 @@ const {Router} = require('express');
 const jwt = require('express-jwt');
 
 const apiRouter = Router();
-const authentication = jwt({
-	secret      : process.env.JWT_SECRET,
-	userProperty: 'payload'
+const authenticate = jwt({
+	secret: process.env.JWT_SECRET,
+	userProperty: 'user'
 });
+const {validateObjectId, validateUser} = require('./validator');
 
 const userCtrl = require('../controllers/user-controller');
-apiRouter.post('/register', userCtrl.register);
-apiRouter.put('/auth', userCtrl.auth);
-apiRouter.get('/users/:id', authentication, userCtrl.getById);
-apiRouter.put('/users/:id', authentication, userCtrl.updateById);
+apiRouter.post('/register', validateUser, userCtrl.register);
+apiRouter.put('/auth', validateUser, userCtrl.auth);
+apiRouter.get('/users', authenticate, userCtrl.getById);
+apiRouter.put('/users', authenticate, userCtrl.updateById);
 
 const companyCtrl = require('../controllers/company-controller');
-apiRouter.post('/companies', authentication, companyCtrl.createNew);
-apiRouter.get('/companies/:id', authentication, companyCtrl.getById);
-apiRouter.put('/companies/:id', authentication, companyCtrl.updateById);
+apiRouter.post('/companies', authenticate, companyCtrl.createNew);
+apiRouter.get(
+	'/companies/:id',
+	[authenticate, validateObjectId],
+	companyCtrl.getById
+);
+apiRouter.put(
+	'/companies/:id',
+	[authenticate, validateObjectId],
+	companyCtrl.updateById
+);
 
 const dossierCtrl = require('../controllers/dossier-controller');
-apiRouter.post('/dossiers', authentication, dossierCtrl.createNew);
-apiRouter.get('/dossiers/:id', authentication, dossierCtrl.getById);
-apiRouter.put('/dossiers/:id', authentication, dossierCtrl.updateById);
+apiRouter.post('/dossiers', authenticate, dossierCtrl.createNew);
+apiRouter.get(
+	'/dossiers/:id',
+	[authenticate, validateObjectId],
+	dossierCtrl.getById
+);
+apiRouter.put(
+	'/dossiers/:id',
+	[authenticate, validateObjectId],
+	dossierCtrl.updateById
+);
 
 const workContractCtrl = require('../controllers/work-contract-controller');
-apiRouter.post('/work-contracts', authentication, workContractCtrl.createNew);
-apiRouter.get('/work-contracts/:id', authentication, workContractCtrl.getById);
+apiRouter.post('/work-contracts', authenticate, workContractCtrl.createNew);
+apiRouter.get(
+	'/work-contracts/:id',
+	[authenticate, validateObjectId],
+	workContractCtrl.getById
+);
 apiRouter.put(
 	'/work-contracts/:id',
-	authentication,
+	[authenticate, validateObjectId],
 	workContractCtrl.updateById
 );
 
@@ -38,7 +59,7 @@ apiRouter.use((err, req, res, next) => {
 	if (err.name === 'UnauthorizedError') {
 		return res
 			.status(401)
-			.json(err.message);
+			.json('Неоторизиран потребител');
 
 	}
 

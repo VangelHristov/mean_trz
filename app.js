@@ -7,14 +7,10 @@ const
 	logger = require('morgan'),
 	bodyParser = require('body-parser'),
 	compression = require('compression'),
-	helmet = require('helmet'),
-	passport = require('passport');
+	helmet = require('helmet');
 
 // connect to database
 require('./app_api/models/db');
-
-// configure passport
-require('./passport');
 
 const apiRoutes = require('./app_api/routes/index');
 
@@ -27,7 +23,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(favicon(path.join(__dirname, 'app_client/images', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'app_client')));
 app.use(compression());
-app.use(passport.initialize());
 
 // routes
 app.get('/', (req, res) => res.sendFile('./app_client/index.html'));

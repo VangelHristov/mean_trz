@@ -17,13 +17,13 @@
 	<link rel = "stylesheet" href = "css/layout.css">
 	<!--endbuild-->
 </head>
-<body ng-cloak ng-controller = "UserController as user">
+<body ng-cloak ng-controller = "UserController">
 
 <div>
 	<trz-nav-bar></trz-nav-bar>
-	<trz-login-modal submit = "user.logIn(data)"></trz-login-modal>
-	<trz-register-modal submit = "user.register(data)"></trz-register-modal>
-	<trz-forgotten-password-modal submit = "user.resetPassword(email)"></trz-forgotten-password-modal>
+	<trz-login-modal submit = "logIn(data)"></trz-login-modal>
+	<trz-register-modal submit = "register(data)"></trz-register-modal>
+	<trz-forgotten-password-modal submit = "resetPassword(email)"></trz-forgotten-password-modal>
 	<trz-view></trz-view>
 	<trz-footer text = "© Вангел Христов 2017"></trz-footer>
 </div>
@@ -78,7 +78,6 @@
 
 
 <script src = "constants/messages.js"></script>
-<script src = "constants/secure-routes.js"></script>
 <script src = "constants/datepicker-options.js"></script>
 <script src = "constants/reason-for-work-contract.js"></script>
 <script src = "constants/type-insured.js"></script>

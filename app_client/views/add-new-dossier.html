@@ -1,4 +1,5 @@
-<div ng-controller="AddDossierController as dossier">
-    <trz-breadcrumb breadcrumbs="dossier.breadcrumbs"></trz-breadcrumb>
-    <trz-dossier-details model="dossier" submit="dossier.save()"> </trz-dossier-details>
+<div ng-controller="AddDossierController">
+    <trz-breadcrumb breadcrumbs="breadcrumbs"></trz-breadcrumb>
+    <trz-dossier-details model="data" errors="errors" submit="save()">
+    </trz-dossier-details>
 </div>

@@ -2,7 +2,7 @@
 
 const util = require('./util');
 
-module.exports = (config) => {
+module.exports = function controllerFactory(config) {
 	function getById(req, res, next) {
 		return util
 			.find(config.Model, req.params.id, config.populate)
@@ -21,10 +21,14 @@ module.exports = (config) => {
 	function createNew(req, res, next) {
 		let docId;
 
+		// create a new document form the data in req.body, then
+		// find the parent document, then
+		// add the newly created document in the parent collection
 		return util
 			.create(config.Model, req.body)
 			.then(doc => {
 				docId = doc._id;
+
 				return util.find(
 					config.ParentModel,
 					req.body[config.parentModelName]
@@ -35,7 +39,7 @@ module.exports = (config) => {
 				return util.save(parentDoc);
 			})
 			.then(() => {
-				return res.json({_id: docId})
+				return res.json({_id: docId});
 			})
 			.catch(err => next(err));
 	}

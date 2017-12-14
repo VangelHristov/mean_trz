@@ -1,60 +1,88 @@
-(function () {
-    'use strict';
+(function dossierDetailsControllerModule() {
+	'use strict';
 
-    angular
-      .module('app')
-      .controller('DossierDetailsController', ['dataContext', 'notification', '$routeParams', 'storage', 'breadcrumb', 'toDateObject',
-          function (dataContext, notification, $routeParams, storage, breadcrumb, toDateObject) {
-              let ctrl = this;
-              ctrl.id = {};
-              ctrl.data = {};
-              ctrl.data.id = $routeParams.dossierId;
-              ctrl.tabs = [
-                  {
-                      icon  : 'fa-user',
-                      target: 'dossier-details',
-                      label : 'Лични данни'
-                  },
-                  {
-                      active: true,
-                      icon  : 'fa-briefcase',
-                      target: 'work-contract',
-                      label : 'Трудов договор'
-                  }
-              ];
-              ctrl.selected = 'work-contract';
-              ctrl.setActive = (id) => ctrl.selected = id;
-              ctrl.getActive = () => ctrl.selected;
-              dataContext.dossier
-                         .get({id: ctrl.data.id})
-                         .$promise
-                         .then(dossier => {
-                             ctrl.id.type = dossier.id.bulgarian ? 'bulgarian' : 'foreign';
-                             ctrl.data = dossier;
-                             toDateObject(ctrl.data.workContracts[0], ['signingDate', 'startingDate'], ['terminationDate']);
+	angular
+		.module('app')
+		.controller('DossierDetailsController', [
+			'$scope',
+			'dataContext',
+			'notification',
+			'$routeParams',
+			'storage',
+			'breadcrumb',
+			'toDateObject',
+			function dossierDetailsController(
+				$scope,
+				dataContext,
+				notification,
+				$routeParams,
+				storage,
+				breadcrumb,
+				toDateObject
+			) {
+				$scope.dossierId = $routeParams.dossierId;
+				$scope.data = {id: {type: ''}};
 
-                             storage.setDossierName(`${dossier.names.first} ${dossier.names.last}`);
+				$scope.tabs = [
+					{
+						icon  : 'fa-user',
+						target: 'dossier-details',
+						label : 'Лични данни'
+					},
+					{
+						active: true,
+						icon  : 'fa-briefcase',
+						target: 'work-contract',
+						label : 'Трудов договор'
+					}
+				];
 
-                             ctrl.breadcrumbs = breadcrumb.getAll();
-                         })
-                         .catch(notification.error);
+				$scope.selected = 'work-contract';
+				$scope.setActive = function setActive(id) {$scope.selected = id;};
+				$scope.getActive = () => $scope.selected;
 
-              ctrl.saveDossier = () => {
-                  dataContext.dossier
-                             .edit(ctrl.data)
-                             .$promise
-                             .then(result => {
-                                 notification.success(result.message);
-                             })
-                             .catch(notification.error);
-              };
+				dataContext
+					.dossier
+					.get({id: $scope.dossierId})
+					.$promise
+					.then(dossier => {
+						$scope.data = dossier;
+						$scope.data.id.type = dossier.id.bulgarian
+							? 'bulgarian'
+							: 'foreign';
 
-              ctrl.saveContract = () => {
-                  dataContext.workContract
-                             .edit(ctrl.data.workContracts[0])
-                             .$promise
-                             .then(result => notification.success(result.message))
-                             .catch(notification.error);
-              };
-          }]);
+						toDateObject(
+							$scope.data.workContracts[0],
+							['signingDate', 'startingDate'],
+							['terminationDate']
+						);
+
+						storage.setDossierName(`${dossier.names.first} ${dossier.names.last}`);
+						$scope.breadcrumbs = breadcrumb.getAll();
+					})
+					.catch(notification.error);
+
+				$scope.saveDossier = () => {
+					dataContext
+						.dossier
+						.edit($scope.data)
+						.$promise
+						.then(dossier => {
+							storage.setDossierName(`${dossier.names.first} ${dossier.names.last}`);
+							$scope.breadcrumbs = breadcrumb.getAll();
+							notification.success('Успешен запис.');
+						})
+						.catch(notification.error);
+				};
+
+				$scope.saveContract = () => {
+					dataContext
+						.workContract
+						.edit($scope.data.workContracts[0])
+						.$promise
+						.then(() => notification.success('Успешен запис'))
+						.catch(notification.error);
+				};
+			}
+		]);
 }());

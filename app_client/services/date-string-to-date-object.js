@@ -1,31 +1,31 @@
-(function () {
-    'use strict';
+(function dateStringToDateObjectModule() {
+	'use strict';
 
-    angular
-      .module('app')
-      .factory('toDateObject', function () {
-          return (sourceObject, required, optional) => {
-              if (!sourceObject) {
-                  return;
-              }
+	angular
+		.module('app')
+		.factory('toDateObject', function toDateObject() {
+			return (sourceObject, required, optional) => {
+				if (!sourceObject) {
+					return;
+				}
 
-              if (required) {
-                  required.forEach(prop => {
-                      if (sourceObject[prop]) {
-                          sourceObject[prop] = new Date(sourceObject[prop]);
-                      } else {
-                          sourceObject[prop] = new Date();
-                      }
-                  });
-              }
+				if (required) {
+					required.forEach(prop => {
+						if (sourceObject[prop]) {
+							sourceObject[prop] = new Date(sourceObject[prop]);
+						} else {
+							sourceObject[prop] = new Date();
+						}
+					});
+				}
 
-              if (optional) {
-                  optional.forEach(prop => {
-                      if (sourceObject[prop]) {
-                          sourceObject[prop] = new Date(sourceObject[prop]);
-                      }
-                  });
-              }
-          };
-      });
+				if (optional) {
+					optional.forEach(prop => {
+						if (sourceObject[prop]) {
+							sourceObject[prop] = new Date(sourceObject[prop]);
+						}
+					});
+				}
+			};
+		});
 }());

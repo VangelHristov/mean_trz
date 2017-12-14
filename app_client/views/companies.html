@@ -1,5 +1,5 @@
-<div ng-controller="CompaniesController as vm">
-    <trz-button-group buttons="vm.buttons"></trz-button-group>
+<div ng-controller="CompaniesController">
+    <trz-button-group buttons="buttons"></trz-button-group>
     <div class="tab-content">
         <div class="tab-pane active">
             <div class="panel-body">
@@ -12,7 +12,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="company in vm.companies">
+                    <tr ng-repeat="company in companies">
                         <td><a ng-href="#!/companies/{{company._id}}">{{company.name}}</a></td>
                         <td><a ng-href="#!/companies/{{company._id}}">{{company.bulstat}}</a></td>
                         <td>{{company.director}}</td>

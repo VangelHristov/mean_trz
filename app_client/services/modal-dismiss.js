@@ -1,9 +1,12 @@
-(function () {
-    'use strict';
+(function modalDismissFactoryModule() {
+	'use strict';
 
-    angular
-      .module('app')
-      .factory('modalDismiss', function () {
-          return () => $('.modal-dismiss').trigger('click');
-      });
+	angular
+		.module('app')
+		.factory('modalDismiss', function modalDismiss() {
+			return function dismiss() {
+				$('.modal-dismiss')
+					.trigger('click');
+			};
+		});
 }());

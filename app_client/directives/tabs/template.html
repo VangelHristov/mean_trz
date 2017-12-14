@@ -1,8 +1,10 @@
-<ul class="nav nav-tabs" role="tablist">
-    <li ng-repeat="tab in tabs" class="{{tab.active ? 'active' : ''}}" role="presentation">
-        <a href="" ng-click="set({id:tab.target})" data-toggle="tab">
-            <i class="fa {{tab.icon}}"></i>
-            <span>{{tab.label}}</span>
-        </a>
-    </li>
+<ul class = "nav nav-tabs" role = "tablist">
+	<li ng-repeat = "tab in tabs"
+	    class = "{{tab.active ? 'active' : ''}}"
+	    role = "presentation">
+		<a href = "" ng-click = "set({id:tab.target})" data-toggle = "tab">
+			<i class = "fa {{tab.icon}}"></i>
+			<span>{{tab.label}}</span>
+		</a>
+	</li>
 </ul>

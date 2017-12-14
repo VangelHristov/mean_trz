@@ -435,7 +435,6 @@ select.form-control {
     display: none;
 }
 
-
 @media (min-width: 768px) {
     .trz-breadcrumb > *:nth-last-child(-n+6) {
         display: block;
@@ -462,6 +461,10 @@ select.form-control {
     border-color: red;
 }
 
-has-errors {
+.has-errors {
     color: red;
+}
+
+#welcome {
+    width: 80%;
 }

@@ -1,52 +1,73 @@
-(function () {
-    'use strict';
+(function companyDetailsControllerModule() {
+	'use strict';
 
-    angular
-      .module('app')
-      .controller('CompanyDetailsController', ['$routeParams', 'dataContext', 'notification', 'storage', 'breadcrumb',
-          function ($routeParams, dataContext, notification, storage, breadcrumb) {
-              let ctrl = this;
-              ctrl.active = 'dossiers';
-              ctrl.tabs = [
-                  {
-                      target: 'dossiers',
-                      active: true,
-                      icon  : 'fa-folder',
-                      label : 'Досиета'
-                  },
-                  {
-                      target: 'company-info',
-                      icon  : 'fa-info-circle',
-                      label : 'Фирмени данни'
-                  }
-              ];
-              ctrl.buttons = [
-                  {
-                      href : `#!/companies/${$routeParams.companyId}/dossiers/add-new`,
-                      icon : 'fa-plus',
-                      label: 'Добави досие'
-                  }
-              ];
-              ctrl.setActive = (id) => ctrl.active = id;
+	angular
+		.module('app')
+		.controller('CompanyDetailsController', [
+			'$scope',
+			'$routeParams',
+			'dataContext',
+			'notification',
+			'storage',
+			'breadcrumb',
+			function CompanyDetailsController(
+				$scope,
+				$routeParams,
+				dataContext,
+				notification,
+				storage,
+				breadcrumb
+			) {
+				$scope.breadcrumbs = breadcrumb.getAll();
+				$scope.active = 'dossiers';
+				$scope.tabs = [
+					{
+						target: 'dossiers',
+						active: true,
+						icon  : 'fa-folder',
+						label : 'Досиета'
+					},
+					{
+						target: 'company-info',
+						icon  : 'fa-info-circle',
+						label : 'Фирмени данни'
+					}
+				];
+				$scope.companyId = $routeParams.companyId;
 
-              ctrl.getActive = () => ctrl.active;
+				$scope.buttons = [
+					{
+						href : `#!/companies/${$scope.companyId}/dossiers/add-new`,
+						icon : 'fa-plus',
+						label: 'Добави досие'
+					}
+				];
+				$scope.setActive = function setActive(id) {$scope.active = id;};
+				$scope.getActive = function getActive() {return $scope.active;};
 
-              ctrl.save = () => {
-                  dataContext.company
-                             .edit({id: ctrl.data._id}, ctrl.data)
-                             .$promise
-                             .then(result => notification.success(result.message))
-                             .catch(notification.error);
-              };
+				$scope.save = function save() {
+					dataContext
+						.company
+						.edit({id: $scope.data._id}, $scope.data)
+						.$promise
+						.then(company => {
+							notification.success('Успешен запис');
+							storage.setCompanyName(company.name);
+							$scope.breadcrumbs = breadcrumb.getAll();
+						})
+						.catch(notification.error);
+				};
 
-              dataContext.company
-                         .get({id: $routeParams.companyId})
-                         .$promise
-                         .then(company => {
-                             ctrl.data = company;
-                             storage.setCompanyName(company.name);
-                             ctrl.breadcrumbs = breadcrumb.getAll();
-                         })
-                         .catch(notification.error);
-          }]);
+				dataContext
+					.company
+					.get({id: $scope.companyId})
+					.$promise
+					.then(company => {
+						$scope.data = company;
+						storage.setCompanyName(company.name);
+						$scope.breadcrumbs = breadcrumb.getAll();
+					})
+					.catch(notification.error);
+			}
+		]);
 }());

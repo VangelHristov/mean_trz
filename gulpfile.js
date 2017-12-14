@@ -50,8 +50,7 @@ gulp.task('build', ['clean'], function build() {
 		'useMin',
 		'copyfonts',
 		'copyviews',
-		'imageMin',
-		'favicon'
+		'imageMin'
 	);
 });
 

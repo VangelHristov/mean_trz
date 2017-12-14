@@ -1,56 +1,66 @@
-(function () {
-    'use strict';
+(function localStorageFactoryModule() {
+	'use strict';
 
-    angular
-      .module('app')
-      .factory('storage', ['$window', function ($window) {
-          let
-            tagsToReplace = {
-                '<': '&lt;',
-                '>': '&gt;'
-            },
-            dataItemName = 'TRZ_TOKEN';
+	angular
+		.module('app')
+		.factory(
+			'storage',
+			[
+				'$window',
+				function storageFactory($window) {
+					const tokenId = 'sajkdhf789541239h48f213jt4982h5g20598hjd';
+					const companyId = '83jfr7wo54hg584we87546b564082307r54gt5429';
+					const dossierId = '048mx9psabv3780y2xmpq4yuty590h310748y27t0';
 
-          function replaceTag(tag) {
-              return tagsToReplace[tag] || tag;
-          }
+					const get = function (item) {
+						return $window.localStorage.getItem(item);
+					};
+					const set = function (item, value) {
+						return $window.localStorage.setItem(item, value);
+					};
+					const remove = function (item) {
+						return $window.localStorage.removeItem(item);
+					};
 
-          function escapeHtml(str) {
-              return str.replace(/[<>]/g, replaceTag);
-          }
+					const getPayload = function () {
+						let token = get(tokenId);
+						let payload = null;
 
-          function getToken() {
-              let token = $window.localStorage.getItem(dataItemName);
-              return token ? escapeHtml(token) : false;
-          }
+						if (token !== null) {
+							payload = JSON.parse($window.atob(token.split('.')[1]));
+						}
 
-          function setToken(token) {
-              $window.localStorage.setItem(dataItemName, token);
-          }
+						return payload;
+					};
 
-          function getPayload() {
-              let token = getToken();
-              return token ? JSON.parse($window.atob(token.split('.')[1])) : false;
-          }
+					const isLoggedIn = function () {
+						let payload = getPayload();
 
-          return {
-              getToken,
-              setToken,
-              isLoggedIn    : () => {
-                  let payload = getPayload();
+						if (payload) {
+							return payload.exp > Date.now() / 1000;
+						}
 
-                  if (payload) {
-                      return payload.exp > Date.now() / 1000;
-                  }
+						return false;
+					};
 
-                  return false;
-              },
-              getUserId     : () => getPayload()._id,
-              removeAllData : () => $window.localStorage.removeItem(dataItemName),
-              getCompanyName: () => $window.localStorage.getItem('company'),
-              setCompanyName: (name) => $window.localStorage.setItem('company', name),
-              getDossierName: () => $window.localStorage.getItem('dossier'),
-              setDossierName: (name) => $window.localStorage.setItem('dossier', name)
-          };
-      }]);
+					const removeAllData = function () {
+						remove(tokenId);
+						remove(companyId);
+						remove(dossierId);
+					};
+
+					return {
+						isLoggedIn    : isLoggedIn,
+						removeAllData : removeAllData,
+						getToken      : () => get(tokenId),
+						setToken      : (value) => set(tokenId, value),
+						getUserId     : () => getPayload()._id,
+						getCompanyName: () => get(companyId),
+						setCompanyName: (value) => set(companyId, value),
+						getDossierName: () => get(dossierId),
+						setDossierName: (value) => set(dossierId, value)
+					};
+				}
+			]
+		);
 }());

@@ -44,16 +44,15 @@ const userController = {
 			select: 'name bulstat director _id'
 		};
 		let select = '_id companies';
-
 		return util
-			.find(User, req.params.id, populate, select)
+			.find(User, req.user._id, populate, select)
 			.then(doc => res.json(doc))
 			.catch(err => next(err));
 	},
 
 	updateById: (req, res, next) => {
 		return util
-			.update(User, req.body, req.params.id)
+			.update(User, req.body, req.user._id)
 			.then(user => res.json(user))
 			.catch(err => next(err));
 	}

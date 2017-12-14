@@ -1,15 +1,15 @@
-(function () {
-    'use strict';
+(function footerDirectiveModule() {
+	'use strict';
 
-    angular
-      .module('app')
-      .directive('trzFooter', function () {
-          return {
-              restrict   : 'E',
-              templateUrl: 'directives/footer/template.html',
-              scope      : {
-                  text: '@'
-              }
-          };
-      });
+	angular
+		.module('app')
+		.directive('trzFooter', function trzFooter() {
+			return {
+				restrict   : 'E',
+				templateUrl: 'directives/footer/template.html',
+				scope      : {
+					text: '@'
+				}
+			};
+		});
 }());
