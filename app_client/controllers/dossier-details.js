@@ -26,11 +26,15 @@
 					{
 						label: 'Добави нов договор',
 						icon : 'fa fa-plus',
-						href : `#!/companies/${$routeParams.companyId}/dossiers/${$routeParams.dossierId}/add-work-contract`
+						href : [
+							'#!/companies/',
+							$routeParams.companyId,
+							'/dossiers/',
+							$routeParams.dossierId,
+							'/add-work-contract'
+						].join('')
 					}
 				];
-
-				$scope.data = {id: {type: ''}};
 
 				$scope.tabs = [
 					{
@@ -41,43 +45,46 @@
 					}
 				];
 
-				$scope.selected = 'dossier-details';
-				$scope.setActive = function setActive(id) {$scope.selected = id;};
-				$scope.getActive = () => $scope.selected;
-
 				dataContext
 					.dossier
 					.get({id: $routeParams.dossierId})
 					.$promise
 					.then(dossier => {
 						$scope.data = dossier;
+
 						$scope.data.id.type = dossier.id.bulgarian
 							? 'bulgarian'
 							: 'foreign';
 
 						let contractNumber = 0;
-						dossier.workContracts.forEach(function getDates(
-							contract,
-							index
-						) {
-							$scope.tabs.push(
-								{
-									icon  : 'fa-briefcase',
-									target: 'work-contract-' + index,
-									label : 'Трудов договор '+ String(++contractNumber)
-								});
+						dossier
+							.workContracts
+							.forEach(function parse(contract, index) {
+								$scope.tabs.push(
+									{
+										icon  : 'fa fa-briefcase',
+										target: 'work-contract-' + index,
+										label : 'Трудов договор ' + String(++contractNumber)
+									}
+								);
 
-							toDateObject(
-								contract,
-								['signingDate', 'startingDate'],
-								['terminationDate']
-							);
-						});
+								toDateObject(
+									contract,
+									['signingDate', 'startingDate'],
+									['terminationDate']
+								);
+							});
 
 						storage.setDossierName(`${dossier.names.first} ${dossier.names.last}`);
-						$scope.breadcrumbs = breadcrumb.getAll();
+						$scope.breadcrumbs = breadcrumb();
 					})
 					.catch(notification.error);
+
+				$scope.selected = 'dossier-details';
+
+				$scope.setActive = function setActive(id) {$scope.selected = id;};
+
+				$scope.getActive = () => $scope.selected;
 
 				$scope.saveDossier = () => {
 					dataContext
@@ -86,7 +93,7 @@
 						.$promise
 						.then(dossier => {
 							storage.setDossierName(`${dossier.names.first} ${dossier.names.last}`);
-							$scope.breadcrumbs = breadcrumb.getAll();
+							$scope.breadcrumbs = breadcrumb();
 							notification.success(notificationMsg.documentSaveSuccess);
 						})
 						.catch(notification.error);

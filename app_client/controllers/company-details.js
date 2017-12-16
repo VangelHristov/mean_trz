@@ -20,8 +20,10 @@
 				breadcrumb,
 				notificationMsg
 			) {
-				$scope.breadcrumbs = breadcrumb.getAll();
+				$scope.companyId = $routeParams.companyId;
+
 				$scope.active = 'dossiers';
+
 				$scope.tabs = [
 					{
 						target: 'dossiers',
@@ -35,7 +37,6 @@
 						label : 'Фирмени данни'
 					}
 				];
-				$scope.companyId = $routeParams.companyId;
 
 				$scope.buttons = [
 					{
@@ -44,6 +45,7 @@
 						label: 'Добави досие'
 					}
 				];
+
 				$scope.setActive = function setActive(id) {$scope.active = id;};
 				$scope.getActive = function getActive() {return $scope.active;};
 
@@ -55,7 +57,7 @@
 						.then(company => {
 							notification.success(notificationMsg.documentSaveSuccess);
 							storage.setCompanyName(company.name);
-							$scope.breadcrumbs = breadcrumb.getAll();
+							$scope.breadcrumbs = breadcrumb();
 						})
 						.catch(notification.error);
 				};
@@ -67,7 +69,7 @@
 					.then(company => {
 						$scope.data = company;
 						storage.setCompanyName(company.name);
-						$scope.breadcrumbs = breadcrumb.getAll();
+						$scope.breadcrumbs = breadcrumb();
 					})
 					.catch(notification.error);
 			}

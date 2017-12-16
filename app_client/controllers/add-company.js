@@ -39,7 +39,7 @@
 						}
 					};
 
-					$scope.breadcrumbs = breadcrumb.getAll();
+					$scope.breadcrumbs = breadcrumb();
 				}
 			]
 		);

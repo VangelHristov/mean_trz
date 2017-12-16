@@ -20,10 +20,12 @@
 				breadcrumb,
 				notificationMsg
 			) {
-				$scope.breadcrumbs = breadcrumb.getAll();
-				$scope.data = {
-					dossier: $routeParams.dossierId
-				};
+				let company = $routeParams.companyId;
+				let dossier = $routeParams.dossierId;
+
+				$scope.breadcrumbs = breadcrumb();
+
+				$scope.data = {dossier: $routeParams.dossierId};
 
 				$scope.save = function save() {
 					dataContext
@@ -32,7 +34,7 @@
 						.$promise
 						.then(() => {
 							notification.success(notificationMsg.documentSaveSuccess);
-							$location.path(`companies/${$routeParams.companyId}`);
+							$location.path(`companies/${company}/dossiers/${dossier}`);
 						})
 						.catch(notification.error);
 				};

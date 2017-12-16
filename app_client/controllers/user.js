@@ -36,7 +36,7 @@
 								notification.error(notificationMsg.invalidCredentials);
 							}
 						})
-						.catch(notification.error);
+						.catch(() => notification.error(notificationMsg.invalidCredentials));
 				};
 
 				$scope.logOut = function logOut() {
@@ -48,14 +48,15 @@
 				};
 
 				$scope.register = function register(data) {
-					dataContext.register
-					           .save(data)
-					           .$promise
-					           .then(function registerSuccess() {
-						           modalDismiss();
-						           notification.success(notificationMsg.registrationSuccess);
-					           })
-					           .catch(notification.error);
+					dataContext
+						.register
+						.save(data)
+						.$promise
+						.then(function registerSuccess() {
+							modalDismiss();
+							notification.success(notificationMsg.registrationSuccess);
+						})
+						.catch(notification.error);
 				};
 
 				$scope.resetPassword = function resetPassword(/*email*/) {
