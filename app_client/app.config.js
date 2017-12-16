@@ -57,13 +57,13 @@
 			'$location',
 			'storage',
 			'notification',
-			'messages',
+			'notificationMessages',
 			function run(
 				$rootScope,
 				$location,
 				storage,
 				notification,
-				messages
+				notificationMsg
 			) {
 				$rootScope.$on(
 					'$routeChangeStart',
@@ -71,7 +71,7 @@
 						if (requestedRoute.authorization && !storage.getToken()) {
 							event.preventDefault();
 							$location.path('/about');
-							notification.warning(messages.promptToLogIn);
+							notification.warning(notificationMsg.promptToLogIn);
 						}
 					}
 				);

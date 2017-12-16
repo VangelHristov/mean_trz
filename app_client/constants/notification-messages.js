@@ -3,13 +3,14 @@
 
 	angular
 		.module('app')
-		.constant('messages', {
+		.constant('notificationMessages', {
 			loginSuccess        : 'Успешен вход.',
 			invalidCredentials  : 'Грешно име или парола.',
 			logoutSuccess       : 'Успешен изход.',
 			registrationSuccess : 'Успешна регистрация.',
 			passwordResetSuccess: 'След неколко минути ще получите имейл с' +
 			' инструкции.',
-			promptToLogIn       : 'Моля влезте в профила си.'
+			promptToLogIn       : 'Моля влезте в профила си.',
+			documentSaveSuccess : 'Успешен запис'
 		});
 }());

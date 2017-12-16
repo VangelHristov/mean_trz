@@ -12,13 +12,15 @@
 				'notification',
 				'$location',
 				'breadcrumb',
+				'notificationMessages',
 				function addCompanyController(
 					$scope,
 					storage,
 					dataContext,
 					notification,
 					$location,
-					breadcrumb
+					breadcrumb,
+					notificationMsg
 				) {
 					$scope.company = {
 						data: {
@@ -29,8 +31,8 @@
 								.company
 								.save($scope.company.data)
 								.$promise
-								.then(result => {
-									notification.success(result);
+								.then(() => {
+									notification.success(notificationMsg.documentSaveSuccess);
 									$location.path('/companies');
 								})
 								.catch(notification.error);

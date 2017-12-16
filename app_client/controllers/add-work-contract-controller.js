@@ -10,13 +10,15 @@
 			'dataContext',
 			'notification',
 			'breadcrumb',
+			'notificationMessages',
 			function AddWorkContractController(
 				$scope,
 				$routeParams,
 				$location,
 				dataContext,
 				notification,
-				breadcrumb
+				breadcrumb,
+				notificationMsg
 			) {
 				$scope.breadcrumbs = breadcrumb.getAll();
 				$scope.data = {
@@ -28,8 +30,8 @@
 						.workContract
 						.save($scope.data)
 						.$promise
-						.then(result => {
-							notification.success(result.message);
+						.then(() => {
+							notification.success(notificationMsg.documentSaveSuccess);
 							$location.path(`companies/${$routeParams.companyId}`);
 						})
 						.catch(notification.error);

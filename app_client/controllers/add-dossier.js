@@ -11,6 +11,7 @@
 			'$location',
 			'breadcrumb',
 			'errorMessages',
+			'notificationMessages',
 			function addDossierController(
 				$scope,
 				dataContext,
@@ -18,7 +19,8 @@
 				$routeParams,
 				$location,
 				breadcrumb,
-				errorMessages
+				errorMessages,
+				notificationMsg
 			) {
 				$scope.errors = errorMessages;
 				$scope.breadcrumbs = breadcrumb.getAll();
@@ -33,7 +35,6 @@
 							' задължителни полета.');
 					}
 
-
 					if ($scope.data.id.type === 'bulgarian') {
 						$scope.data.id.foreign = undefined;
 					} else if ($scope.data.id.type === 'foreign') {
@@ -46,7 +47,7 @@
 						.save($scope.data)
 						.$promise
 						.then(result => {
-							notification.success('Успешен запис.');
+							notification.success(notificationMsg.documentSaveSuccess);
 							$location.path(`/companies/${$scope.data.company}/dossiers/${result._id}/add-work-contract`);
 						})
 						.catch(notification.error);

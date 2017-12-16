@@ -10,13 +10,15 @@
 			'notification',
 			'storage',
 			'breadcrumb',
+			'notificationMessages',
 			function CompanyDetailsController(
 				$scope,
 				$routeParams,
 				dataContext,
 				notification,
 				storage,
-				breadcrumb
+				breadcrumb,
+				notificationMsg
 			) {
 				$scope.breadcrumbs = breadcrumb.getAll();
 				$scope.active = 'dossiers';
@@ -51,7 +53,7 @@
 						.edit({id: $scope.data._id}, $scope.data)
 						.$promise
 						.then(company => {
-							notification.success('Успешен запис');
+							notification.success(notificationMsg.documentSaveSuccess);
 							storage.setCompanyName(company.name);
 							$scope.breadcrumbs = breadcrumb.getAll();
 						})

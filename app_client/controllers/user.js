@@ -10,7 +10,7 @@
 			'dataContext',
 			'notification',
 			'modalDismiss',
-			'messages',
+			'notificationMessages',
 			function userController(
 				$scope,
 				$location,
@@ -18,7 +18,7 @@
 				dataContext,
 				notification,
 				modalDismiss,
-				messages
+				notificationMsg
 			) {
 				$scope.isLoggedIn = storage.isLoggedIn;
 				$scope.logIn = function logIn(data) {
@@ -30,10 +30,10 @@
 							if (result.data) {
 								modalDismiss();
 								storage.setToken(result.data);
-								notification.success(messages.loginSuccess);
+								notification.success(notificationMsg.loginSuccess);
 								$location.path('/companies');
 							} else {
-								notification.error(messages.invalidCredentials);
+								notification.error(notificationMsg.invalidCredentials);
 							}
 						})
 						.catch(notification.error);
@@ -43,7 +43,7 @@
 					$scope.email = '';
 					$scope.password = '';
 					storage.removeAllData();
-					notification.success(messages.logoutSuccess);
+					notification.success(notificationMsg.logoutSuccess);
 					$location.path('/about');
 				};
 
@@ -53,15 +53,15 @@
 					           .$promise
 					           .then(function registerSuccess() {
 						           modalDismiss();
-						           notification.success(messages.registrationSuccess);
+						           notification.success(notificationMsg.registrationSuccess);
 					           })
 					           .catch(notification.error);
 				};
 
 				$scope.resetPassword = function resetPassword(/*email*/) {
 					modalDismiss();
-					notification.success(messages.passwordResetSuccess);
-				}
+					notification.success(notificationMsg.passwordResetSuccess);
+				};
 			}
 		]);
 }());

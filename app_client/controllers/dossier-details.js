@@ -11,6 +11,7 @@
 			'storage',
 			'breadcrumb',
 			'toDateObject',
+			'notificationMessages',
 			function dossierDetailsController(
 				$scope,
 				dataContext,
@@ -18,32 +19,35 @@
 				$routeParams,
 				storage,
 				breadcrumb,
-				toDateObject
+				toDateObject,
+				notificationMsg
 			) {
-				$scope.dossierId = $routeParams.dossierId;
+				$scope.dossierButtons = [
+					{
+						label: 'Добави нов договор',
+						icon : 'fa fa-plus',
+						href : `#!/companies/${$routeParams.companyId}/dossiers/${$routeParams.dossierId}/add-work-contract`
+					}
+				];
+
 				$scope.data = {id: {type: ''}};
 
 				$scope.tabs = [
 					{
 						icon  : 'fa-user',
 						target: 'dossier-details',
-						label : 'Лични данни'
-					},
-					{
-						active: true,
-						icon  : 'fa-briefcase',
-						target: 'work-contract',
-						label : 'Трудов договор'
+						label : 'Лични данни',
+						active: true
 					}
 				];
 
-				$scope.selected = 'work-contract';
+				$scope.selected = 'dossier-details';
 				$scope.setActive = function setActive(id) {$scope.selected = id;};
 				$scope.getActive = () => $scope.selected;
 
 				dataContext
 					.dossier
-					.get({id: $scope.dossierId})
+					.get({id: $routeParams.dossierId})
 					.$promise
 					.then(dossier => {
 						$scope.data = dossier;
@@ -51,11 +55,24 @@
 							? 'bulgarian'
 							: 'foreign';
 
-						toDateObject(
-							$scope.data.workContracts[0],
-							['signingDate', 'startingDate'],
-							['terminationDate']
-						);
+						let contractNumber = 0;
+						dossier.workContracts.forEach(function getDates(
+							contract,
+							index
+						) {
+							$scope.tabs.push(
+								{
+									icon  : 'fa-briefcase',
+									target: 'work-contract-' + index,
+									label : 'Трудов договор '+ String(++contractNumber)
+								});
+
+							toDateObject(
+								contract,
+								['signingDate', 'startingDate'],
+								['terminationDate']
+							);
+						});
 
 						storage.setDossierName(`${dossier.names.first} ${dossier.names.last}`);
 						$scope.breadcrumbs = breadcrumb.getAll();
@@ -70,17 +87,17 @@
 						.then(dossier => {
 							storage.setDossierName(`${dossier.names.first} ${dossier.names.last}`);
 							$scope.breadcrumbs = breadcrumb.getAll();
-							notification.success('Успешен запис.');
+							notification.success(notificationMsg.documentSaveSuccess);
 						})
 						.catch(notification.error);
 				};
 
-				$scope.saveContract = () => {
+				$scope.saveContract = (index) => {
 					dataContext
 						.workContract
-						.edit($scope.data.workContracts[0])
+						.edit($scope.data.workContracts[index])
 						.$promise
-						.then(() => notification.success('Успешен запис'))
+						.then(() => notification.success(notificationMsg.documentSaveSuccess))
 						.catch(notification.error);
 				};
 			}
