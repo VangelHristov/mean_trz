@@ -7,13 +7,16 @@
 		<div class = "trz-form-container">
 			<h1>Забравена парола</h1>
 			<br>
-			<form ng-submit = "submitForm()" name = "reset" novalidate>
+			<form ng-submit = "submitForm()"
+			      name = "reset"
+			      novalidate>
 				<input type = "email"
 				       placeholder = "Имейл"
 				       name = "resetEmail"
 				       ng-model = "email"
 				       ng-required = "true"
-				       ng-pattern = "patterns.email">
+				       ng-pattern = "patterns.email"
+				       autofocus>
 				
 				<div class = "has-errors"
 				     ng-show = "reset.resetEmail.$touched && reset.resetEmail.$invalid">

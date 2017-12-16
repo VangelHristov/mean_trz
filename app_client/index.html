@@ -23,7 +23,7 @@
 	<trz-nav-bar></trz-nav-bar>
 	<trz-login-modal submit = "logIn(data)"></trz-login-modal>
 	<trz-register-modal submit = "register(data)"></trz-register-modal>
-	<trz-forgotten-password-modal submit = "resetPassword(email)"></trz-forgotten-password-modal>
+	<trz-forgotten-password-modal submit = "resetPassword()"></trz-forgotten-password-modal>
 	<trz-view></trz-view>
 	<trz-footer text = "© Вангел Христов 2017"></trz-footer>
 </div>
@@ -41,6 +41,7 @@
 <script src = "uib-datepicker/ui-bootstrap-custom-tpls-2.5.0.js"></script>
 <script src = "bower_components/angular-animate/angular-animate.js"></script>
 <script src = "bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src = "bower_components/angular-messages/angular-messages.js"></script>
 
 <script src = "app.js"></script>
 <script src = "app.config.js"></script>
@@ -66,6 +67,8 @@
 <script src = "directives/breadcrumb/directive.js"></script>
 <script src = "directives/view/directive.js"></script>
 <script src = "directives/validations/bulstat.js"></script>
+<script src = "directives/validations/egn.js"></script>
+<script src = "directives/validations/iban.js"></script>
 
 <script src = "services/storage.js"></script>
 <script src = "services/data-context.js"></script>

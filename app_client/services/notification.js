@@ -8,21 +8,21 @@
 				let toastr = $window.toastr;
 
 				toastr.options = {
-					"closeButton"      : false,
+					"closeButton"      : true,
 					"debug"            : false,
 					"newestOnTop"      : true,
-					"progressBar"      : true,
-					"positionClass"    : "toast-top-right",
+					"progressBar"      : false,
 					"preventDuplicates": false,
 					"onclick"          : null,
-					"showDuration"     : "5000",
+					"positionClass"    : "toast-top-right",
+					"showDuration"     : "3000",
 					"hideDuration"     : "3000",
 					"timeOut"          : "5000",
 					"extendedTimeOut"  : "1000",
 					"showEasing"       : "swing",
-					"hideEasing"       : "linear",
-					"showMethod"       : "fadeIn",
-					"hideMethod"       : "fadeOut",
+					"hideEasing"       : "swing",
+					"showMethod"       : "slideDown",
+					"hideMethod"       : "slideUp",
 					"body-output-type" : "trustedHtml"
 				};
 

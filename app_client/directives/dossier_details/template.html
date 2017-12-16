@@ -1,6 +1,9 @@
 <div class = "tab-pane">
 	<div class = "panel-body">
-		<form ng-submit = "submit()" class = "form form-horizontal">
+		<form ng-submit = "submit()"
+		      class = "form form-horizontal"
+		      name = "dossierDetails"
+		      novalidate>
 			
 			<!-- 1.Име-->
 			<div class = "form-group">
@@ -10,10 +13,26 @@
 				<div class = "col-lg-4">
 					<input ng-model = "model.names.first"
 					       id = "first-name"
-					       name = "first-name"
+					       name = "firstName"
 					       required = ""
 					       type = "text"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       ng-pattern = "patterns.address"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages =
+						     "dossierDetails.firstName.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.mustBeCyrillic}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 2.Презиме-->
@@ -24,9 +43,19 @@
 				<div class = "col-lg-4">
 					<input ng-model = "model.names.middle"
 					       id = "middle-name"
-					       name = "middle-name"
+					       name = "middleName"
 					       type = "text"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       ng-pattern = "patterns.address"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.middleName.$error">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.mustBeCyrillic}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 3.Фамилия-->
@@ -38,10 +67,25 @@
 				<div class = "col-lg-4">
 					<input ng-model = "model.names.last"
 					       id = "last-name"
-					       name = "last-name"
+					       name = "lastName"
 					       required = ""
 					       type = "text"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       ng-pattern = "patterns.address"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.lastName.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.mustBeCyrillic}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!--Вид ID-->
@@ -52,10 +96,10 @@
 				<div id = "type-of-id-number" class = "col-lg-4">
 					<label for = "bulgarian-id" class = "radio-inline">
 						<input id = "bulgarian-id"
-						       name = "id-type"
+						       name = "idType"
 						       ng-model = "model.id.type"
 						       value = "bulgarian"
-						       checked = "checked"
+						       checked
 						       type = "radio"/>
 						егн
 					</label>
@@ -83,23 +127,53 @@
 						       name = "egn"
 						       required = ""
 						       type = "text"
-						       class = "form-control input-md"/>
+						       class = "form-control input-md"
+						       validate-egn/>
+						
+						<div class = "has-error"
+						     role = "alert"
+						     ng-messages = "dossierDetails.egn.$error &&
+						      dossierDetails.$submitted">
+							<div class = "control-label"
+							     ng-message = "egn">
+								{{errors.invalidValue}}
+							</div>
+							<div class = "control-label"
+							     ng-message = "required">
+								{{errors.requiredField}}
+							</div>
+						</div>
 					</div>
 				</div>
 				<!--ЛКН-->
 				<div class = "form-group">
-					<label for = "bulgarian-id-card-number"
+					<label for = "bulgarian-id-card"
 					       class = "col-lg-4 control-label">Лична карта номер
 						<span
 							class = "required"> *</span>
 					</label>
 					<div class = "col-lg-4">
 						<input ng-model = "model.id.bulgarian.idCardNumber"
-						       id = "bulgarian-id-card-number"
-						       name = "bulgarian-id-card-number"
+						       id = "bulgarian-id-card"
+						       name = "bulgarianIdCard"
 						       required = ""
 						       type = "text"
-						       class = "form-control input-md"/>
+						       class = "form-control input-md"
+						       ng-pattern = "patterns.bulgarianIdCardNumber"/>
+						
+						<div class = "has-error"
+						     role = "alert"
+						     ng-messages = "dossierDetails.bulgarianIdCard.$error &&
+						      dossierDetails.$submitted">
+							<div class = "control-label"
+							     ng-message = "pattern">
+								{{errors.invalidValue}}
+							</div>
+							<div class = "control-label"
+							     ng-message = "required">
+								{{errors.requiredField}}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -107,9 +181,9 @@
 			<div ng-show = "model.id.type === 'foreign'">
 				<!--ЛНЧ-->
 				<div class = "form-group">
-					<label for = "lnch" class = "col-lg-4 control-label">ЛНЧ
-						<span
-							class = "required"> *</span>
+					<label for = "lnch" class = "col-lg-4 control-label">
+						ЛНЧ
+						<span class = "required"> *</span>
 					</label>
 					<div class = "col-lg-4">
 						<input ng-model = "model.id.foreign.lnch"
@@ -117,7 +191,22 @@
 						       name = "lnch"
 						       required = ""
 						       type = "text"
-						       class = "form-control input-md"/>
+						       class = "form-control input-md"
+						       ng-pattern = "patterns.lnch"/>
+						
+						<div class = "has-error"
+						     role = "alert"
+						     ng-messages = "dossierDetails.lnch.$error &&
+						      dossierDetails.$submitted">
+							<div class = "control-label"
+							     ng-message = "pattern">
+								{{errors.invalidValue}}
+							</div>
+							<div class = "control-label"
+							     ng-message = "required">
+								{{errors.requiredField}}
+							</div>
+						</div>
 					</div>
 				</div>
 				<!--ЛКН-->
@@ -130,43 +219,81 @@
 					<div class = "col-lg-4">
 						<input ng-model = "model.id.foreign.idCardNumber"
 						       id = "foreign-id-card-number"
-						       name = "bulgarian-id-card-number"
+						       name = "foreignIdCard"
 						       required = ""
 						       type = "text"
-						       class = "form-control input-md"/>
+						       class = "form-control input-md"
+						       ng-pattern = "patterns.foreignIdCardNumber"/>
+						
+						<div class = "has-error"
+						     role = "alert"
+						     ng-messages = "dossierDetails.foreignIdCard.$error &&
+						      dossierDetails.$submitted">
+							<div class = "control-label"
+							     ng-message = "pattern">
+								{{errors.invalidValue}}
+							</div>
+							<div class = "control-label"
+							     ng-message = "required">
+								{{errors.requiredField}}
+							</div>
+						</div>
 					</div>
 				</div>
 				<!-- Пол-->
 				<div class = "form-group">
 					<label for = "sex"
-					       class = "col-lg-4 control-label margin-top">Пол
-						<span
-							class = "required"> *</span>
+					       class = "col-lg-4 control-label margin-top">Пол *
 					</label>
-					<div class = "col-lg-4">
-						<input ng-model = "model.id.foreign.sex"
-						       id = "sex"
-						       name = "id"
-						       required = ""
-						       type = "text"
-						       class = "form-control input-md margin-top"/>
+					<div id = "sex" class = "col-lg-4">
+						<label for = "male" class = "radio-inline">
+							<input id = "male"
+							       name = "male"
+							       ng-model = "model.id.foreign.sex"
+							       value = "Мъж"
+							       checked
+							       type = "radio"/>
+							Мъж
+						</label>
+						<label for = "female" class = "radio-inline">
+							<input id = "female"
+							       name = "female"
+							       ng-model = "model.id.foreign.sex"
+							       value = "Жена"
+							       type = "radio"/>
+							Жена
+						</label>
 					</div>
 				</div>
 				<!-- Дата на раждане-->
 				<div class = "form-group">
-					<label for = "id"
-					       class = "col-lg-4 control-label margin-top">Дата на
-						раждане
-						<span
-							class = "required"> *</span>
+					<label for = "dob"
+					       class = "col-lg-4 control-label margin-top">
+						Дата на раждане
+						<span class = "required"> *</span>
 					</label>
 					<div class = "col-lg-4">
 						<input ng-model = "model.id.foreign.dob"
-						       id = "id"
-						       name = "id"
+						       id = "dob"
+						       name = "dob"
 						       required = ""
 						       type = "text"
-						       class = "form-control input-md margin-top"/>
+						       class = "form-control input-md margin-top"
+						       ng-pattern = "patterns.dob"/>
+						
+						<div class = "has-error"
+						     role = "alert"
+						     ng-messages = "dossierDetails.dob.$error &&
+						      dossierDetails.$submitted">
+							<div class = "control-label"
+							     ng-message = "pattern">
+								{{errors.invalidDateFormat}}
+							</div>
+							<div class = "control-label"
+							     ng-message = "required">
+								{{errors.requiredField}}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -183,7 +310,22 @@
 					       name = "street"
 					       required = ""
 					       type = "text"
-					       class = "form-control input-md margin-top"/>
+					       class = "form-control input-md margin-top"
+					       ng-pattern = "patterns.address"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.street.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.mustBeCyrillic}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 8.Град-->
@@ -197,7 +339,22 @@
 					       name = "city"
 					       required = ""
 					       type = "text"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       ng-pattern = "patterns.address"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.city.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.mustBeCyrillic}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 9.Пощенски код-->
@@ -210,10 +367,25 @@
 				<div class = "col-lg-4">
 					<input ng-model = "model.address.postalCode"
 					       id = "postal-code"
-					       name = "postal-code"
+					       name = "postalCode"
 					       required = ""
 					       type = "text"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       ng-pattern = "patterns.postalCode"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.postalCode.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidPostalCode}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 10.Държава-->
@@ -227,7 +399,22 @@
 					       name = "country"
 					       required = ""
 					       type = "text"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       ng-pattern = "patterns.address"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.country.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.mustBeCyrillic}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 11.Образование-->
@@ -240,7 +427,6 @@
 					        id = "education"
 					        name = "education"
 					        class = "form-control margin-top">
-						<option value = "">Моля изберете</option>
 						<option value = "Начално">Начално</option>
 						<option value = "Основно">Основно</option>
 						<option value = "Средно">Средно</option>
@@ -264,7 +450,18 @@
 					       id = "phone"
 					       name = "phone"
 					       type = "text"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       ng-pattern = "patterns.phoneNumber"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.phone.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 13.Имейл-->
@@ -276,19 +473,66 @@
 					       id = "email"
 					       name = "email"
 					       type = "email"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       ng-pattern = "patterns.email"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.email.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 14.Банка-->
 			<div class = "form-group">
-				<label for = "bank" class = "col-lg-4 control-label">Банка
+				<label for = "showBankAccount"
+				       class = "col-lg-4 control-label">Банкова сметка
+				</label>
+				<div class = "col-lg-4">
+					<label for = "showBankAccount" class = "radio-inline">
+						<input id = "showBankAccount"
+						       ng-model = "showBankAccount"
+						       value = "true"
+						       type = "radio"/>
+						да
+					</label>
+					<label for = "doNotShowBankAccount" class = "radio-inline">
+						<input id = "doNotShowBankAccount"
+						       ng-model = "showBankAccount"
+						       value = "false"
+						       type = "radio"
+						       checked/>
+						не
+					</label>
+				</div>
+			</div>
+			
+			<div class = "form-group">
+				<label for = "bank"
+				       class = "col-lg-4 control-label">
+					Име на банка
 				</label>
 				<div class = "col-lg-4">
 					<input ng-model = "model.bankAccount.bank"
 					       id = "bank"
 					       name = "bank"
 					       type = "text"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       required = ""/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.bank.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 15.iban-->
@@ -300,18 +544,51 @@
 					       id = "iban"
 					       name = "iban"
 					       type = "text"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       validate-iban
+					       required = ""/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.iban.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "iban">
+							{{errors.invalidValue}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 16.bic-->
 			<div class = "form-group">
-				<label for = "bic" class = "col-lg-4 control-label">BIC</label>
+				<label for = "bic" class = "col-lg-4 control-label">BIC
+				</label>
 				<div class = "col-lg-4">
 					<input ng-model = "model.bankAccount.bic"
 					       id = "bic"
 					       name = "bic"
 					       type = "text"
-					       class = "form-control input-md"/>
+					       class = "form-control input-md"
+					       required = ""
+					       ng-pattern = "patterns.bic"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "dossierDetails.bic.$error &&
+						      dossierDetails.$submitted">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			
@@ -320,7 +597,8 @@
 				<div class = "col-lg-4 col-lg-offset-4">
 					<button ng-click = "submit()"
 					        type = "button"
-					        class = "btn btn-default">Запази
+					        class = "btn btn-default"
+					        ng-disabled = "dossierDetails.$invalid">Запази
 					</button>
 				</div>
 			</div>

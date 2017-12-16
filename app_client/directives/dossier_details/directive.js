@@ -8,9 +8,10 @@
 				restrict   : 'AE',
 				templateUrl: 'directives/dossier_details/template.html',
 				scope      : {
-					model : '=',
-					errors: '=',
-					submit: '&'
+					model   : '=',
+					errors  : '=',
+					submit  : '&',
+					patterns: '='
 				}
 			};
 		});

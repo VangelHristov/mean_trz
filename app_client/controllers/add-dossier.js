@@ -12,6 +12,7 @@
 			'breadcrumb',
 			'errorMessages',
 			'notificationMessages',
+			'validationPatterns',
 			function addDossierController(
 				$scope,
 				dataContext,
@@ -20,16 +21,20 @@
 				$location,
 				breadcrumb,
 				errorMessages,
-				notificationMsg
+				notificationMsg,
+				validationPatterns
 			) {
 				$scope.errors = errorMessages;
+				$scope.patterns = validationPatterns;
+
 				$scope.breadcrumbs = breadcrumb();
+
 				$scope.data = {
 					company: $routeParams.companyId,
 					id     : {type: 'bulgarian', bulgarian: {}, foreign: {}}
 				};
-				$scope.save = function save() {
 
+				$scope.save = function save() {
 					if (!$scope.data) {
 						return notification.error(errorMessages.missingRequiredFields);
 					}

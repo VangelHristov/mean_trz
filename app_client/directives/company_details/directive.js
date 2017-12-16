@@ -6,19 +6,15 @@
 		.directive(
 			'companyDetails',
 			[
-				'validationPatterns',
-				'errorMessages',
-				function companyDetails(validationPatterns, errorMessages) {
+				function companyDetails() {
 					return {
 						restrict   : 'EA',
 						templateUrl: 'directives/company_details/template.html',
 						scope      : {
-							company: '=',
-							save   : '&'
-						},
-						link       : (scope) => {
-							scope.validationPatterns = validationPatterns;
-							scope.errors = errorMessages;
+							company : '=',
+							save    : '&',
+							patterns: '=',
+							errors  : '='
 						}
 					};
 				}

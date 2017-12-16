@@ -12,6 +12,8 @@
 			'breadcrumb',
 			'toDateObject',
 			'notificationMessages',
+			'validationPatterns',
+			'errorMessages',
 			function dossierDetailsController(
 				$scope,
 				dataContext,
@@ -20,8 +22,13 @@
 				storage,
 				breadcrumb,
 				toDateObject,
-				notificationMsg
+				notificationMsg,
+				validationPatterns,
+				errorMessages
 			) {
+				$scope.patterns = validationPatterns;
+				$scope.errors = errorMessages;
+
 				$scope.dossierButtons = [
 					{
 						label: 'Добави нов договор',

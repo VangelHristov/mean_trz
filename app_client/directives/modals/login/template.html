@@ -7,14 +7,17 @@
 		<div class = "trz-form-container">
 			<h1>Вход</h1>
 			<br>
-			<form ng-submit = "submitForm(data)" name = "login" novalidate>
+			<form ng-submit = "submitForm(data)"
+			      name = "login"
+			      novalidate>
 				<input type = "email"
 				       name = "loginEmail"
 				       ng-model = "data.email"
 				       placeholder = "Имейл"
 				       ng-required = "true"
-				       ng-pattern = "patterns.email">
-
+				       ng-pattern = "patterns.email"
+				       autofocus>
+				
 				<div class = "has-errors"
 				     ng-show = "login.loginEmail.$touched && login.loginEmail.$invalid">
 					<div ng-show = "login.loginEmail.$error.pattern">
@@ -30,7 +33,7 @@
 				       placeholder = "Парола"
 				       ng-required = "true"
 				       ng-pattern = "patterns.password">
-
+				
 				<div class = "has-errors"
 				     ng-show = "login.loginPassword.$touched && login.loginPassword.$invalid">
 					<div ng-show = "login.loginPassword.$error.pattern">

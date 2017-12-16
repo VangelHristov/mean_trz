@@ -9,8 +9,11 @@
 		<div class = "tab-pane active"
 		     ng-show = "getActive() === 'company-info'">
 			<div class = "panel-body">
-				<company-details company = "data"
-				                 save = "save()"></company-details>
+				<company-details
+					company = "data"
+					save = "save()"
+					patterns = "patterns"
+					errors = "errors"></company-details>
 			</div>
 		</div>
 		<div ng-show = "getActive() === 'dossiers'" class = "tab-pane active">

@@ -5,7 +5,8 @@
 		      name = "companyDetails"
 		      novalidate>
 			<div class = "form-group">
-				<label for = "name" class = "control-label col-md-4 margin-top">
+				<label for = "name"
+				       class = "control-label col-md-4 margin-top">
 					Име
 					<span class = "required">*</span>
 				</label>
@@ -13,18 +14,19 @@
 					<input ng-model = "company.name"
 					       id = "name"
 					       name = "name"
-					       ng-required = "true"
+					       ng-required = ""
 					       type = "text"
 					       class = "form-control"
-					       ng-pattern = "validationPatterns.address"/>
-					<div class = "has-error"
-					     ng-show = "companyDetails.name.$touched && companyDetails.name.$invalid">
+					       ng-pattern = "patterns.address"/>
+					<div role = "alert"
+					     ng-messages = "companyDetails.name.$error"
+					     class = "has-error">
 						<div class = "control-label"
-						     ng-show = "companyDetails.name.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "companyDetails.name.$error.required">
+						     ng-message = "required">
 							{{errors.requiredField}}
 						</div>
 					</div>
@@ -32,24 +34,26 @@
 			</div>
 			<div class = "form-group">
 				<label for = "eik" class = "control-label col-md-4">
-					ЕИК/Булстат<span class = "required">*</span>
+					ЕИК/Булстат
+					<span class = "required">*</span>
 				</label>
 				<div class = "col-md-4">
 					<input ng-model = "company.bulstat"
 					       id = "eik"
 					       name = "eik"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control"
 					       validate-bulstat/>
-					<div class = "has-error"
-					     ng-show = "companyDetails.eik.$touched && companyDetails.eik.$invalid">
+					<div role = "alert"
+					     ng-messages = "companyDetails.eik.$error"
+					     class = "has-error">
 						<div class = "control-label"
-						     ng-show = "companyDetails.eik.$error.bulstat">
+						     ng-message = "bulstat">
 							{{errors.invalidValue}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "companyDetails.eik.$error.required">
+						     ng-message = "required">
 							{{errors.requiredField}}
 						</div>
 					</div>
@@ -64,19 +68,20 @@
 					<input ng-model = "company.director"
 					       id = "director"
 					       name = "director"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control"
-					       ng-pattern = "validationPatterns.cyrillic"/>
+					       ng-pattern = "patterns.cyrillic"/>
 					
 					<div class = "has-error"
-					     ng-show = "companyDetails.director.$touched && companyDetails.director.$invalid">
+					     role = "alert"
+					     ng-messages = "companyDetails.director.$error">
 						<div class = "control-label"
-						     ng-show = "companyDetails.director.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "companyDetails.director.$error.required">
+						     ng-message = "required">
 							{{errors.requiredField}}
 						</div>
 					</div>
@@ -93,24 +98,24 @@
 					<input ng-model = "company.mainEconomicActivity"
 					       id = "main-economic-activity"
 					       name = "mainEconomicActivity"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control"/>
 					
 					<div class = "has-error"
-					     ng-show = "companyDetails.mainEconomicActivity.$touched &&
-					     companyDetails.mainEconomicActivity.$invalid">
-						
+					     role = "alert"
+					     ng-messages =
+						     "companyDetails.mainEconomicActivity.$error">
 						<div class = "control-label"
-						     ng-show = "companyDetails.mainEconomicActivity.$error.required">
+						     ng-message = "required">
 							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class = "form-group">
-				<label for = "pkpv" class = "control-label col-md-4">Процент за
-					клас прослужено време
+				<label for = "pkpv" class = "control-label col-md-4">
+					Процент за клас прослужено време
 					<span class = "required">*</span>
 				</label>
 				<div class = "col-md-4">
@@ -118,18 +123,19 @@
 					       id = "pkpv"
 					       type = "text"
 					       name = "pkpv"
-					       ng-required = "true"
+					       required = ""
 					       class = "form-control"
-					       ng-pattern = "validationPatterns.pkpv"/>
+					       ng-pattern = "patterns.pkpv"/>
 					
 					<div class = "has-error"
-					     ng-show = "companyDetails.pkpv.$touched && companyDetails.pkpv.$invalid">
+					     role = "alert"
+					     ng-messages = "companyDetails.pkpv.$error">
 						<div class = "control-label"
-						     ng-show = "companyDetails.pkpv.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.invalidValue}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "companyDetails.pkpv.$error.required">
+						     ng-message = "required">
 							{{errors.requiredField}}
 						</div>
 					</div>
@@ -143,19 +149,20 @@
 					<input ng-model = "company.address.street"
 					       id = "address"
 					       name = "address"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control"
-					       ng-pattern = "validationPatterns.address"/>
+					       ng-pattern = "patterns.address"/>
 					
 					<div class = "has-error"
-					     ng-show = "companyDetails.address.$touched && companyDetails.address.$invalid">
+					     ng-messages = "companyDetails.address.$error"
+					     role = "alert">
 						<div class = "control-label"
-						     ng-show = "companyDetails.address.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "companyDetails.address.$error.required">
+						     ng-message = "required">
 							{{errors.requiredField}}
 						</div>
 					</div>
@@ -169,19 +176,20 @@
 					<input ng-model = "company.address.city"
 					       id = "city"
 					       name = "city"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control"
-					       ng-pattern = "validationPatterns.cyrillic"/>
+					       ng-pattern = "patterns.cyrillic"/>
 					
 					<div class = "has-error"
-					     ng-show = "companyDetails.city.$touched && companyDetails.city.$invalid">
+					     role = "alert"
+					     ng-messages = "companyDetails.city.$error">
 						<div class = "control-label"
-						     ng-show = "companyDetails.city.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "companyDetails.city.$error.required">
+						     ng-message = "required">
 							{{errors.requiredField}}
 						</div>
 					</div>
@@ -197,19 +205,20 @@
 					<input ng-model = "company.address.postalCode"
 					       id = "postal-code"
 					       name = "postalCode"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control"
-					       ng-pattern = "validationPatterns.postalCode"/>
+					       ng-pattern = "patterns.postalCode"/>
 					
 					<div class = "has-error"
-					     ng-show = "companyDetails.postalCode.$touched && companyDetails.postalCode.$invalid">
+					     role = "alert"
+					     ng-messages = "companyDetails.postalCode.$error">
 						<div class = "control-label"
-						     ng-show = "companyDetails.postalCode.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.invalidValue}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "companyDetails.postalCode.$error.required">
+						     ng-message = "required">
 							{{errors.requiredField}}
 						</div>
 					</div>
@@ -223,19 +232,20 @@
 					<input ng-model = "company.address.country"
 					       id = "country"
 					       name = "country"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control"
-					       ng-pattern = "validationPatterns.cyrillic"/>
+					       ng-pattern = "patterns.cyrillic"/>
 					
 					<div class = "has-error"
-					     ng-show = "companyDetails.country.$touched && companyDetails.country.$invalid">
+					     role = "alert"
+					     ng-messages = "companyDetails.country.$error">
 						<div class = "control-label"
-						     ng-show = "companyDetails.country.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "companyDetails.country.$error.required">
+						     ng-message = "required">
 							{{errors.requiredField}}
 						</div>
 					</div>
@@ -245,7 +255,8 @@
 				<div class = "col-md-offset-4 col-md-4">
 					<button type = "submit"
 					        class = "btn btn-default"
-					        ng-disabled = "companyDetails.$invalid">Запази
+					        ng-disabled = "companyDetails.$invalid">
+						Запази
 					</button>
 				</div>
 			</div>

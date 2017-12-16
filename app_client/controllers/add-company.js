@@ -13,6 +13,8 @@
 				'$location',
 				'breadcrumb',
 				'notificationMessages',
+				'validationPatterns',
+				'errorMessages',
 				function addCompanyController(
 					$scope,
 					storage,
@@ -20,26 +22,26 @@
 					notification,
 					$location,
 					breadcrumb,
-					notificationMsg
+					notificationMsg,
+					validationPatterns,
+					errorMessages
 				) {
-					$scope.company = {
-						data: {
-							user: storage.getUserId()
-						},
-						save: function () {
-							dataContext
-								.company
-								.save($scope.company.data)
-								.$promise
-								.then(() => {
-									notification.success(notificationMsg.documentSaveSuccess);
-									$location.path('/companies');
-								})
-								.catch(notification.error);
-						}
-					};
-
+					$scope.patterns = validationPatterns;
+					$scope.errors = errorMessages;
+					$scope.data = {user: storage.getUserId()};
 					$scope.breadcrumbs = breadcrumb();
+
+					$scope.save = function save() {
+						dataContext
+							.company
+							.save($scope.data)
+							.$promise
+							.then(() => {
+								notification.success(notificationMsg.documentSaveSuccess);
+								$location.path('/companies');
+							})
+							.catch(notification.error);
+					};
 				}
 			]
 		);

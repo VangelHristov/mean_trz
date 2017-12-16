@@ -11,6 +11,8 @@
 			'storage',
 			'breadcrumb',
 			'notificationMessages',
+			'validationPatterns',
+			'errorMessages',
 			function CompanyDetailsController(
 				$scope,
 				$routeParams,
@@ -18,10 +20,13 @@
 				notification,
 				storage,
 				breadcrumb,
-				notificationMsg
+				notificationMsg,
+				validationPatterns,
+				errorMessages
 			) {
+				$scope.patterns = validationPatterns;
+				$scope.errors = errorMessages;
 				$scope.companyId = $routeParams.companyId;
-
 				$scope.active = 'dossiers';
 
 				$scope.tabs = [

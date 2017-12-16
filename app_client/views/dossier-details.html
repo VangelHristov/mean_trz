@@ -1,6 +1,6 @@
 <div ng-controller = "DossierDetailsController">
 	<trz-breadcrumb breadcrumbs = "breadcrumbs"></trz-breadcrumb>
-	<trz-button-group buttons="dossierButtons"></trz-button-group>
+	<trz-button-group buttons = "dossierButtons"></trz-button-group>
 	<br>
 	<br>
 	<trz-tabs tabs = "tabs" set = "setActive(id)"></trz-tabs>
@@ -9,7 +9,9 @@
 		     ng-show = "selected === 'dossier-details'">
 			<trz-dossier-details
 				model = "data"
-				submit = "saveDossier()"></trz-dossier-details>
+				submit = "saveDossier()"
+				errors = "errors"
+				patterns = "patterns"></trz-dossier-details>
 		</div>
 		<div class = "tab-pane active"
 		     ng-repeat = "contract in data.workContracts"

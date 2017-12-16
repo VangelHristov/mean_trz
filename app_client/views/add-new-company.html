@@ -1,4 +1,8 @@
-<div ng-controller="AddCompanyController">
-    <trz-breadcrumb breadcrumbs="breadcrumbs"></trz-breadcrumb>
-    <company-details company="company"></company-details>
+<div ng-controller = "AddCompanyController">
+	<trz-breadcrumb breadcrumbs = "breadcrumbs"></trz-breadcrumb>
+	<company-details
+		company = "data"
+		save = "save()"
+		patterns = "patterns"
+		errors = "errors"></company-details>
 </div>
