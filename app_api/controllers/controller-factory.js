@@ -20,6 +20,7 @@ module.exports = function controllerFactory(config) {
 
 	function createNew(req, res, next) {
 		let docId;
+		let document;
 
 		// create a new document form the data in req.body, then
 		// find the parent document, then
@@ -28,6 +29,7 @@ module.exports = function controllerFactory(config) {
 			.create(config.Model, req.body)
 			.then(doc => {
 				docId = doc._id;
+				document = doc;
 
 				return util.find(
 					config.ParentModel,
@@ -39,7 +41,7 @@ module.exports = function controllerFactory(config) {
 				return util.save(parentDoc);
 			})
 			.then(() => {
-				return res.json({_id: docId});
+				return res.json(document);
 			})
 			.catch(err => next(err));
 	}

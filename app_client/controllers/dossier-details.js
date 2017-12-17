@@ -101,7 +101,7 @@
 						.then(dossier => {
 							storage.setDossierName(`${dossier.names.first} ${dossier.names.last}`);
 							$scope.breadcrumbs = breadcrumb();
-							notification.success(notificationMsg.documentSaveSuccess);
+							notification.info(notificationMsg.documentSaveSuccess);
 						})
 						.catch(notification.error);
 				};
@@ -111,7 +111,7 @@
 						.workContract
 						.edit($scope.data.workContracts[index])
 						.$promise
-						.then(() => notification.success(notificationMsg.documentSaveSuccess))
+						.then(() => notification.info(notificationMsg.documentSaveSuccess))
 						.catch(notification.error);
 				};
 			}

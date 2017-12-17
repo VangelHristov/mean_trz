@@ -20,6 +20,7 @@
 					       ng-pattern = "patterns.address"/>
 					<div role = "alert"
 					     ng-messages = "companyDetails.name.$error"
+					     ng-if = "companyDetails.name.$dirty"
 					     class = "has-error">
 						<div class = "control-label"
 						     ng-message = "pattern">
@@ -47,6 +48,7 @@
 					       validate-bulstat/>
 					<div role = "alert"
 					     ng-messages = "companyDetails.eik.$error"
+					     ng-if = "companyDetails.eik.$dirty"
 					     class = "has-error">
 						<div class = "control-label"
 						     ng-message = "bulstat">
@@ -75,7 +77,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "companyDetails.director.$error">
+					     ng-messages = "companyDetails.director.$error"
+					     ng-if = "companyDetails.director.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
@@ -105,7 +108,8 @@
 					<div class = "has-error"
 					     role = "alert"
 					     ng-messages =
-						     "companyDetails.mainEconomicActivity.$error">
+						     "companyDetails.mainEconomicActivity.$error"
+					     ng-if = "companyDetails.mainEconomicActivity.$dirty">
 						<div class = "control-label"
 						     ng-message = "required">
 							{{errors.requiredField}}
@@ -129,7 +133,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "companyDetails.pkpv.$error">
+					     ng-messages = "companyDetails.pkpv.$error"
+					     ng-if = "companyDetails.pkpv.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.invalidValue}}
@@ -156,6 +161,7 @@
 					
 					<div class = "has-error"
 					     ng-messages = "companyDetails.address.$error"
+					     ng-if = "companyDetails.address.$dirty"
 					     role = "alert">
 						<div class = "control-label"
 						     ng-message = "pattern">
@@ -183,7 +189,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "companyDetails.city.$error">
+					     ng-messages = "companyDetails.city.$error"
+					     ng-if = "companyDetails.city.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
@@ -212,7 +219,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "companyDetails.postalCode.$error">
+					     ng-messages = "companyDetails.postalCode.$error"
+					     ng-if = "companyDetails.postalCode.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.invalidValue}}
@@ -239,7 +247,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "companyDetails.country.$error">
+					     ng-messages = "companyDetails.country.$error"
+					     ng-if = "companyDetails.country.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}

@@ -22,13 +22,14 @@
 					}
 				];
 
-				dataContext.user
-				           .get()
-				           .$promise
-				           .then(user => {
-					           $scope.companies = user.companies;
-				           })
-				           .catch(notification.error);
+				dataContext
+					.user
+					.get()
+					.$promise
+					.then(user => {
+						$scope.companies = user.companies;
+					})
+					.catch(notification.error);
 			}
 		]);
 }());

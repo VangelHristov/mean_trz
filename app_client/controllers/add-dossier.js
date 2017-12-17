@@ -53,8 +53,8 @@
 						.save($scope.data)
 						.$promise
 						.then(dossier => {
-							notification.success(notificationMsg.documentSaveSuccess);
-							storage.setDossierName(dossier._id);
+							notification.info(notificationMsg.documentSaveSuccess);
+							storage.setDossierName(`${dossier.names.first} ${dossier.names.last}`);
 							$location.path([
 									'/companies/',
 									$scope.data.company,

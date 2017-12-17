@@ -33,7 +33,7 @@
 						.save($scope.data)
 						.$promise
 						.then(() => {
-							notification.success(notificationMsg.documentSaveSuccess);
+							notification.info(notificationMsg.documentSaveSuccess);
 							$location.path(`companies/${company}/dossiers/${dossier}`);
 						})
 						.catch(notification.error);

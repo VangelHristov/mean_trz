@@ -20,9 +20,7 @@ const userController = {
 				return util.save(user);
 			})
 			.then(user => {
-				return res
-					.status(200)
-					.json({data: user.generateJwt()});
+				return res.json({data: user.generateJwt()});
 			})
 			.catch(err => next(err));
 	},

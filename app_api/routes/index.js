@@ -72,7 +72,7 @@ apiRouter.use((err, req, res, next) => {
 
 		return res
 			.status(400)
-			.json(errMsg);
+			.json(errMsg.join('\n'));
 	}
 
 	return next(err);

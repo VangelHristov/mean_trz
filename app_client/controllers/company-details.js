@@ -60,7 +60,7 @@
 						.edit({id: $scope.data._id}, $scope.data)
 						.$promise
 						.then(company => {
-							notification.success(notificationMsg.documentSaveSuccess);
+							notification.info(notificationMsg.documentSaveSuccess);
 							storage.setCompanyName(company.name);
 							$scope.breadcrumbs = breadcrumb();
 						})

@@ -26,22 +26,20 @@
 					"body-output-type" : "trustedHtml"
 				};
 
-				//function addLineBreak(msg) {
-				//	return msg.replace(/(?:\r\n|\r|\n)/g, '<br>');
-				//}
+				function format(msg) {
+					msg = msg.data || msg;
+					return msg.replace(/(?:\r\n|\r|\n)/g, '<br>');
+				}
 
 				return {
-					success: function (msg) {
-						toastr.success(msg);
-					},
 					info   : function (msg) {
-						toastr.info(msg);
+						toastr.info(format(msg));
 					},
 					warning: function (msg) {
-						toastr.warning(msg);
+						toastr.warning(format(msg), 'Внимание!');
 					},
 					error  : function (msg) {
-						toastr.error(msg);
+						toastr.error(format(msg), 'Грешка!');
 					}
 				};
 			}

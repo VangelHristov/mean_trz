@@ -21,30 +21,16 @@
 				notificationMsg
 			) {
 				$scope.isLoggedIn = storage.isLoggedIn;
-				$scope.logIn = function logIn(data) {
-					dataContext
-						.auth
-						.authenticate(data)
-						.$promise
-						.then(function loginSuccess(result) {
-							if (result.data) {
-								modalDismiss();
-								storage.setToken(result.data);
-								notification.success(notificationMsg.loginSuccess);
-								$location.path('/companies');
-							} else {
-								notification.error(notificationMsg.invalidCredentials);
-							}
-						})
-						.catch(() => notification.error(notificationMsg.invalidCredentials));
-				};
 
-				$scope.logOut = function logOut() {
-					$scope.email = '';
-					$scope.password = '';
-					storage.removeAllData();
-					notification.success(notificationMsg.logoutSuccess);
-					$location.path('/about');
+				let registerOrLoginSuccess = function (result) {
+					if (result.data) {
+						modalDismiss();
+						storage.setToken(result.data);
+						notification.info(notificationMsg.loginSuccess);
+						$location.path('/companies');
+					} else {
+						notification.error(notificationMsg.invalidCredentials);
+					}
 				};
 
 				$scope.register = function register(data) {
@@ -52,16 +38,30 @@
 						.register
 						.save(data)
 						.$promise
-						.then(function registerSuccess() {
-							modalDismiss();
-							notification.success(notificationMsg.registrationSuccess);
-						})
+						.then(registerOrLoginSuccess)
 						.catch(notification.error);
+				};
+
+				$scope.logIn = function logIn(data) {
+					dataContext
+						.auth
+						.authenticate(data)
+						.$promise
+						.then(registerOrLoginSuccess)
+						.catch(() => notification.error(notificationMsg.invalidCredentials));
 				};
 
 				$scope.resetPassword = function resetPassword(/*email*/) {
 					modalDismiss();
 					notification.success(notificationMsg.passwordResetSuccess);
+				};
+
+				$scope.logOut = function logOut() {
+					$scope.email = '';
+					$scope.password = '';
+					storage.removeAllData();
+					notification.info(notificationMsg.logoutSuccess);
+					$location.path('/about');
 				};
 			}
 		]);
