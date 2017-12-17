@@ -51,7 +51,7 @@ const userController = {
 	updateById: (req, res, next) => {
 		return util
 			.update(User, req.body, req.user._id)
-			.then(user => res.json(user))
+			.then(user => res.json({_id: user._id, email: user.email}))
 			.catch(err => next(err));
 	}
 };
