@@ -21,9 +21,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages =
-						     "dossierDetails.firstName.$error &&
-						      dossierDetails.$submitted">
+					     ng-messages ="dossierDetails.firstName.$error"
+					     ng-if="dossierDetails.firstName.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
@@ -50,7 +49,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.middleName.$error">
+					     ng-messages = "dossierDetails.middleName.$error"
+					     ng-if="dossierDetails.middleName.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
@@ -75,8 +75,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.lastName.$error &&
-						      dossierDetails.$submitted">
+					     ng-messages = "dossierDetails.lastName.$error"
+					     ng-if="dossierDetails.lastName.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
@@ -132,8 +132,8 @@
 						
 						<div class = "has-error"
 						     role = "alert"
-						     ng-messages = "dossierDetails.egn.$error &&
-						      dossierDetails.$submitted">
+						     ng-messages = "dossierDetails.egn.$error"
+						     ng-if="dossierDetails.egn.$dirty">
 							<div class = "control-label"
 							     ng-message = "egn">
 								{{errors.invalidValue}}
@@ -163,8 +163,8 @@
 						
 						<div class = "has-error"
 						     role = "alert"
-						     ng-messages = "dossierDetails.bulgarianIdCard.$error &&
-						      dossierDetails.$submitted">
+						     ng-messages = "dossierDetails.bulgarianIdCard.$error"
+						     ng-if="dossierDetails.bulgarianIdCard.$dirty">
 							<div class = "control-label"
 							     ng-message = "pattern">
 								{{errors.invalidValue}}
@@ -178,7 +178,7 @@
 				</div>
 			</div>
 			
-			<div ng-show = "model.id.type === 'foreign'">
+			<div ng-if = "model.id.type === 'foreign'">
 				<!--ЛНЧ-->
 				<div class = "form-group">
 					<label for = "lnch" class = "col-lg-4 control-label">
@@ -189,15 +189,15 @@
 						<input ng-model = "model.id.foreign.lnch"
 						       id = "lnch"
 						       name = "lnch"
-						       required = ""
+						       ng-required = "model.id.type === 'foreign'"
 						       type = "text"
 						       class = "form-control input-md"
 						       ng-pattern = "patterns.lnch"/>
 						
 						<div class = "has-error"
 						     role = "alert"
-						     ng-messages = "dossierDetails.lnch.$error &&
-						      dossierDetails.$submitted">
+						     ng-messages = "dossierDetails.lnch.$error"
+						     ng-if="dossierDetails.lnch.$dirty">
 							<div class = "control-label"
 							     ng-message = "pattern">
 								{{errors.invalidValue}}
@@ -220,15 +220,15 @@
 						<input ng-model = "model.id.foreign.idCardNumber"
 						       id = "foreign-id-card-number"
 						       name = "foreignIdCard"
-						       required = ""
+						       ng-required = "model.id.type === 'foreign'"
 						       type = "text"
 						       class = "form-control input-md"
 						       ng-pattern = "patterns.foreignIdCardNumber"/>
 						
 						<div class = "has-error"
 						     role = "alert"
-						     ng-messages = "dossierDetails.foreignIdCard.$error &&
-						      dossierDetails.$submitted">
+						     ng-messages = "dossierDetails.foreignIdCard.$error"
+						     ng-if="dossierDetails.foreignIdCard.$dirty">
 							<div class = "control-label"
 							     ng-message = "pattern">
 								{{errors.invalidValue}}
@@ -251,7 +251,6 @@
 							       name = "male"
 							       ng-model = "model.id.foreign.sex"
 							       value = "Мъж"
-							       checked
 							       type = "radio"/>
 							Мъж
 						</label>
@@ -276,15 +275,15 @@
 						<input ng-model = "model.id.foreign.dob"
 						       id = "dob"
 						       name = "dob"
-						       required = ""
+						       ng-required = "model.id.type === 'foreign'"
 						       type = "text"
 						       class = "form-control input-md margin-top"
 						       ng-pattern = "patterns.dob"/>
 						
 						<div class = "has-error"
 						     role = "alert"
-						     ng-messages = "dossierDetails.dob.$error &&
-						      dossierDetails.$submitted">
+						     ng-messages = "dossierDetails.dob.$error"
+						     ng-if="dossierDetails.dob.$dirty">
 							<div class = "control-label"
 							     ng-message = "pattern">
 								{{errors.invalidDateFormat}}
@@ -315,8 +314,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.street.$error &&
-						      dossierDetails.$submitted">
+					     ng-messages = "dossierDetails.street.$error"
+					     ng-if="dossierDetails.street.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
@@ -344,8 +343,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.city.$error &&
-						      dossierDetails.$submitted">
+					     ng-messages = "dossierDetails.city.$error"
+					     ng-if="dossierDetails.city.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
@@ -375,8 +374,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.postalCode.$error &&
-						      dossierDetails.$submitted">
+					     ng-messages = "dossierDetails.postalCode.$error"
+					     ng-if="dossierDetails.postalCode.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.invalidPostalCode}}
@@ -404,8 +403,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.country.$error &&
-						      dossierDetails.$submitted">
+					     ng-messages = "dossierDetails.country.$error"
+					     ng-if="dossierDetails.country.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.mustBeCyrillic}}
@@ -429,7 +428,7 @@
 					        class = "form-control margin-top">
 						<option value = "Начално">Начално</option>
 						<option value = "Основно">Основно</option>
-						<option value = "Средно">Средно</option>
+						<option value = "Средно" selected>Средно</option>
 						<option value = "Средно специално">Средно специално
 						</option>
 						<option value = "Професионален Бакалавър">Професионален
@@ -455,8 +454,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.phone.$error &&
-						      dossierDetails.$submitted">
+					     ng-messages = "dossierDetails.phone.$error"
+					     ng-if="dossierDetails.phone.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.invalidValue}}
@@ -478,8 +477,8 @@
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.email.$error &&
-						      dossierDetails.$submitted">
+					     ng-messages = "dossierDetails.email.$error"
+					     ng-if="dossierDetails.email.$dirty">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.invalidValue}}
@@ -493,25 +492,29 @@
 				       class = "col-lg-4 control-label">Банкова сметка
 				</label>
 				<div class = "col-lg-4">
-					<label for = "showBankAccount" class = "radio-inline">
+					<label for = "showBankAccount"
+					       class = "radio-inline">
 						<input id = "showBankAccount"
-						       ng-model = "showBankAccount"
+						       ng-model = "bankAccount.show"
 						       value = "true"
-						       type = "radio"/>
+						       type = "radio"
+						       ng-checked = "bankAccount.show"/>
 						да
 					</label>
-					<label for = "doNotShowBankAccount" class = "radio-inline">
+					<label for = "doNotShowBankAccount"
+					       class = "radio-inline">
 						<input id = "doNotShowBankAccount"
-						       ng-model = "showBankAccount"
+						       ng-model = "bankAccount.show"
 						       value = "false"
 						       type = "radio"
-						       checked/>
+						       ng-checked = "!bankAccount.show"/>
 						не
 					</label>
 				</div>
 			</div>
 			
-			<div class = "form-group">
+			<div class = "form-group"
+			     ng-if = "bankAccount.show === 'true'">
 				<label for = "bank"
 				       class = "col-lg-4 control-label">
 					Име на банка
@@ -522,12 +525,12 @@
 					       name = "bank"
 					       type = "text"
 					       class = "form-control input-md"
-					       required = ""/>
+					       ng-required = "bankAccount.show === 'true'"/>
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.bank.$error &&
-						      dossierDetails.$submitted">
+					     ng-messages = "dossierDetails.bank.$error"
+					     ng-if="dossierDetails.bank.$dirty">
 						<div class = "control-label"
 						     ng-message = "required">
 							{{errors.requiredField}}
@@ -536,7 +539,8 @@
 				</div>
 			</div>
 			<!-- 15.iban-->
-			<div class = "form-group">
+			<div class = "form-group"
+			     ng-if = "bankAccount.show === 'true'">
 				<label for = "iban" class = "col-lg-4 control-label">IBAN
 				</label>
 				<div class = "col-lg-4">
@@ -546,12 +550,12 @@
 					       type = "text"
 					       class = "form-control input-md"
 					       validate-iban
-					       required = ""/>
+					       ng-required = "bankAccount.show === 'true'"/>
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.iban.$error &&
-						      dossierDetails.$submitted">
+					     ng-if="dossierDetails.iban.$dirty"
+					     ng-messages = "dossierDetails.iban.$error">
 						<div class = "control-label"
 						     ng-message = "iban">
 							{{errors.invalidValue}}
@@ -564,7 +568,8 @@
 				</div>
 			</div>
 			<!-- 16.bic-->
-			<div class = "form-group">
+			<div class = "form-group"
+			     ng-if = "bankAccount.show === 'true'">
 				<label for = "bic" class = "col-lg-4 control-label">BIC
 				</label>
 				<div class = "col-lg-4">
@@ -573,13 +578,13 @@
 					       name = "bic"
 					       type = "text"
 					       class = "form-control input-md"
-					       required = ""
+					       ng-required = "bankAccount.show === 'true'"
 					       ng-pattern = "patterns.bic"/>
 					
 					<div class = "has-error"
 					     role = "alert"
-					     ng-messages = "dossierDetails.bic.$error &&
-						      dossierDetails.$submitted">
+					     ng-if="dossierDetails.bic.$dirty"
+					     ng-messages = "dossierDetails.bic.$error">
 						<div class = "control-label"
 						     ng-message = "pattern">
 							{{errors.invalidValue}}

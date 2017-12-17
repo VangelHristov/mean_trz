@@ -13,6 +13,7 @@
 			'errorMessages',
 			'notificationMessages',
 			'validationPatterns',
+			'storage',
 			function addDossierController(
 				$scope,
 				dataContext,
@@ -22,7 +23,8 @@
 				breadcrumb,
 				errorMessages,
 				notificationMsg,
-				validationPatterns
+				validationPatterns,
+				storage
 			) {
 				$scope.errors = errorMessages;
 				$scope.patterns = validationPatterns;
@@ -50,13 +52,14 @@
 						.dossier
 						.save($scope.data)
 						.$promise
-						.then(result => {
+						.then(dossier => {
 							notification.success(notificationMsg.documentSaveSuccess);
+							storage.setDossierName(dossier._id);
 							$location.path([
 									'/companies/',
 									$scope.data.company,
 									'/dossiers/',
-									result._id,
+									dossier._id,
 									'/add-work-contract'
 								].join('')
 							);

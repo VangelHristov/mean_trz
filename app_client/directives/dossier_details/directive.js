@@ -12,6 +12,9 @@
 					errors  : '=',
 					submit  : '&',
 					patterns: '='
+				},
+				link       : (scope) => {
+					scope.bankAccount = {show: false};
 				}
 			};
 		});

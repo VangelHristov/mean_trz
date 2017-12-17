@@ -11,13 +11,22 @@
 				<div class = "col-lg-4">
 					<select ng-model = "model.typeInsured"
 					        id = "insured-type"
-					        name = "insured-type"
+					        name = "typeInsured"
 					        class = "form-control"
-					        ng-required = "true">
+					        required = "">
 						<option ng-repeat = "option in typeInsured"
 						        value = "{{option}}">{{option}}
 						</option>
 					</select>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.typeInsured.$error"
+					     ng-if = "workContract.typeInsured.$dirty">
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class = "form-group">
@@ -29,13 +38,22 @@
 				<div class = "col-lg-4">
 					<select ng-model = "model.reasonForContract"
 					        id = "reason-for-contract"
-					        name = "reason-for-contract"
+					        name = "reasonForContract"
 					        class = "form-control"
 					        ng-required = "true">
 						<option ng-repeat = "option in reasonForContract"
 						        value = "{{option}}">{{option}}
 						</option>
 					</select>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.reasonForContract.$error"
+					     ng-if = "workContract.reasonForContract.$dirty">
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- 2.Номер на трудов договор-->
@@ -50,18 +68,21 @@
 					       id = "contract-number"
 					       name = "contractNumber"
 					       type = "text"
-					       ng-required = "true"
+					       required = ""
 					       ng-pattern = "validationPatterns.contractNumber"
 					       class = "form-control input-md"/>
+					
 					<div class = "has-error"
-					     ng-show = "workContract.contractNumber.$touched && workContract.contractNumber.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.contractNumber.$error"
+					     ng-if = "workContract.contractNumber.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.contractNumber.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.invalidWorkContract}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.contractNumber.$error.required">
-							{{errors.missingContractNumber}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
@@ -81,7 +102,7 @@
 						       name = "signingDate"
 						       type = "text"
 						       class = "form-control input-md"
-						       ng-required = "true"
+						       required = ""
 						       uib-datepicker-popup = "{{datepicker.format}}"
 						       datepicker-options = "datepicker.dateOptions"
 						       is-open = "signing"
@@ -98,24 +119,25 @@
                         </span>
 					</div>
 					<div class = "has-error"
-					     ng-show = "workContract.signingDate.$touched && workContract.signingDate.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.signingDate.$error"
+					     ng-if = "workContract.signingDate.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.signingDate.$error.date">
+						     ng-message = "date">
 							{{errors.invalidDateFormat}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.signingDate.$error.required">
-							{{errors.missingSigningDate}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- 4.Дата на започване-->
 			<div class = "form-group">
-				<label for = "start-date" class = "col-lg-4 control-label">Дата
-					на постъпване
-					<span
-						class = "required"> *</span>
+				<label for = "start-date" class = "col-lg-4 control-label">
+					Дата на постъпване
+					<span class = "required"> *</span>
 				</label>
 				<div class = "col-lg-4">
 					<div class = "input-group">
@@ -127,7 +149,7 @@
 						       name = "startingDate"
 						       uib-datepicker-popup = "{{datepicker.format}}"
 						       datepicker-options = "datepicker.dateOptions"
-						       ng-required = "true"
+						       required = ""
 						       is-open = "starting"
 						       close-text = "{{datepicker.closeText}}"
 						       clear-text = "{{datepicker.clearText}}"
@@ -142,14 +164,16 @@
                         </span>
 					</div>
 					<div class = "has-error"
-					     ng-show = "workContract.startingDate.$touched && workContract.startingDate.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.startingDate.$error"
+					     ng-if = "workContract.startingDate.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.startingDate.$error.date">
+						     ng-message = "date">
 							{{errors.invalidDateFormat}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.startingDate.$error.required">
-							{{errors.missingStartingDate}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
@@ -165,20 +189,21 @@
 					<input ng-model = "model.principalSalary"
 					       id = "principal-salary"
 					       name = "principalSalary"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       ng-pattern = "validationPatterns.salary"
 					       class = "form-control input-md"/>
 					<div class = "has-error"
-					     ng-show = "workContract.principalSalary.$touched &&
-					     workContract.principalSalary.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.principalSalary.$error"
+					     ng-if = "workContract.principalSalary.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.principalSalary.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.salaryAmountBelowMinimum}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.principalSalary.$error.required">
-							{{errors.missingSalary}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
@@ -186,8 +211,7 @@
 			<!-- 6.Срок на договора-->
 			<div class = "form-group">
 				<label for = "contract-length" class = "col-lg-4 control-label">
-					Срок на
-					договора
+					Срок на договора
 				</label>
 				<div class = "col-lg-4">
 					<input ng-model = "model.contractLengthInMonths"
@@ -197,9 +221,11 @@
 					       class = "form-control input-md"
 					       ng-pattern = "validationPatterns.contractLength"/>
 					<div class = "has-error"
-					     ng-show = "workContract.contractLength.$touched && workContract.contractLength.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.contractLength.$error"
+					     ng-if = "workContract.contractLength.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.contractLength.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.invalidContractLength}}
 						</div>
 					</div>
@@ -209,26 +235,27 @@
 			<div class = "form-group">
 				<label for = "work-hours" class = "col-lg-4 control-label">
 					Работно време
-					<span
-						class = "required"> *</span>
+					<span class = "required"> *</span>
 				</label>
 				<div class = "col-lg-4">
 					<input ng-model = "model.workHours"
 					       id = "work-hours"
 					       name = "workHours"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control input-md"
 					       ng-pattern = "validationPatterns.workHours"/>
 					<div class = "has-error"
-					     ng-show = "workContract.workHours.$touched && workContract.workHours.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.workHours.$error"
+					     ng-if = "workContract.workHours.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.workHours.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.invalidWorkHours}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.workHours.$error.required">
-							{{errors.missingWorkHours}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
@@ -243,20 +270,22 @@
 					<input ng-model = "model.occupationCode"
 					       id = "nkpd"
 					       name = "nkpd"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control input-md"
 					       ng-pattern = "validationPatterns.occupationCode"/>
 					
 					<div class = "has-error"
-					     ng-show = "workContract.nkpd.$touched && workContract.nkpd.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.nkpd.$error"
+					     ng-if = "workContract.nkpd.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.nkpd.$error.pattern">
-							{{errors.invalidOccupationCode}}
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.nkpd.$error.required">
-							{{errors.missingOccupationCode}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
@@ -270,29 +299,30 @@
 					<input ng-model = "model.codeEconomicActivity"
 					       id = "kid"
 					       name = "kid"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control input-md"
 					       ng-pattern = "validationPatterns.codeEconomicActivity"/>
 					<div class = "has-error"
-					     ng-show = "workContract.kid.$touched && workContract.kid.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.kid.$error"
+					     ng-if = "workContract.kid.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.kid.$error.pattern">
-							{{errors.invalidCodeEconomicActivity}}
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.kid.$error.required">
-							{{errors.missingCodeEconomicActivity}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- 10.Срок на предизвестие-->
 			<div class = "form-group">
-				<label for = "notice" class = "col-lg-4 control-label">Срок на
-					предизвестие
-					<span
-						class = "required"> *</span>
+				<label for = "notice" class = "col-lg-4 control-label">
+					Срок на предизвестие
+					<span class = "required"> *</span>
 				</label>
 				<div class = "col-lg-4">
 					<input ng-model = "model.leaveNoticeLengthInDays"
@@ -302,10 +332,12 @@
 					       class = "form-control input-md"
 					       ng-pattern = "validationPatterns.notice"/>
 					<div class = "has-error"
-					     ng-show = "workContract.notice.$touched && workContract.notice.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.notice.$error"
+					     ng-if = "workContract.notice.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.notice.$error.pattern">
-							{{errors.invalidLEaveNoticeLength}}
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
 						</div>
 					</div>
 				</div>
@@ -320,20 +352,22 @@
 					<input ng-model = "model.payedVacationLengthInDays"
 					       id = "payed-vacation"
 					       name = "payedVacation"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control input-md"
 					       ng-pattern = "validationPatterns.vacation"/>
 					
 					<div class = "has-error"
-					     ng-show = "workContract.payedVacation.$touched && workContract.payedVacation.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.payedVacation.$error"
+					     ng-if = "workContract.payedVacation.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.payedVacation.$error.pattern">
+						     ng-message = "pattern">
 							{{errors.invalidVacationLength}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.payedVacation.$error.required">
-							{{errors.missingVacationLength}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
@@ -349,19 +383,21 @@
 					<input ng-model = "model.experience.total"
 					       id = "work-experience"
 					       name = "totalExperience"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       ng-pattern = "validationPatterns.yearsWorkExperience"
 					       class = "form-control input-md"/>
 					<div class = "has-error"
-					     ng-show = "workContract.totalExperience.$touched && workContract.totalExperience.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.totalExperience.$error"
+					     ng-if = "workContract.totalExperience.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.totalExperience.$error.pattern">
-							{{errors.invalidTotalExperience}}
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.totalExperience.$error.required">
-							{{errors.missingTotalExperience}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
@@ -378,19 +414,21 @@
 					<input ng-model = "model.experience.speciality"
 					       id = "speciality-experience"
 					       name = "specialityExperience"
-					       ng-required = "true"
+					       required = ""
 					       type = "text"
 					       class = "form-control input-md"
 					       ng-pattern = "validationPatterns.yearsWorkExperience"/>
 					<div class = "has-error"
-					     ng-show = "workContract.specialityExperience.$touched && workContract.specialityExperience.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.specialityExperience.$error"
+					     ng-if = "workContract.specialityExperience.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.specialityExperience.$error.pattern">
-							{{errors.invalidSpecialityExperience}}
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.specialityExperience.$error.required">
-							{{errors.missingSpecialityExperience}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
@@ -411,14 +449,16 @@
 					       class = "form-control input-md"
 					       ng-pattern = "validationPatterns.yearsWorkExperience"/>
 					<div class = "has-error"
-					     ng-show = "workContract.insuredExperience.$touched && workContract.insuredExperience.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.insuredExperience.$error"
+					     ng-if = "workContract.insuredExperience.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.insuredExperience.$error.pattern">
-							{{errors.invalidInsurableExperience}}
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
 						</div>
 						<div class = "control-label"
-						     ng-show = "workContract.insuredExperience.$error.required">
-							{{errors.missingInsurableExperience}}
+						     ng-message = "required">
+							{{errors.requiredField}}
 						</div>
 					</div>
 				</div>
@@ -426,7 +466,8 @@
 			<!-- 16.Дата на прекратяване-->
 			<div class = "form-group">
 				<label for = "termination-date"
-				       class = "col-lg-4 control-label">Дата на прекратяване
+				       class = "col-lg-4 control-label">
+					Дата на прекратяване
 				</label>
 				<div class = "col-lg-4">
 					<div class = "input-group">
@@ -452,9 +493,11 @@
                         </span>
 					</div>
 					<div class = "has-error"
-					     ng-show = "workContract.terminationDate.$touched && workContract.terminationDate.$invalid">
+					     role = "alert"
+					     ng-messages = "workContract.terminationDate.$error"
+					     ng-if = "workContract.terminationDate.$dirty">
 						<div class = "control-label"
-						     ng-show = "workContract.terminationDate.$error.date">
+						     ng-message = "date">
 							{{errors.invalidDateFormat}}
 						</div>
 					</div>
@@ -466,7 +509,8 @@
 					<button ng-click = "submit()"
 					        type = "button"
 					        class = "btn btn-default"
-					        ng-disabled = "workContract.$invalid">Запази
+					        ng-disabled = "workContract.$invalid">
+						Запази
 					</button>
 				</div>
 			</div>
