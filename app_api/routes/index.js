@@ -2,21 +2,28 @@
 
 const {Router} = require('express');
 const jwt = require('express-jwt');
+const {validateObjectId, validateUser} = require('./validator');
 
 const apiRouter = Router();
 const authenticate = jwt({
-	secret: process.env.JWT_SECRET,
+	secret      : process.env.JWT_SECRET,
 	userProperty: 'user'
 });
-const {validateObjectId, validateUser} = require('./validator');
 
-const userCtrl = require('../controllers/user-controller');
+let db;
+if (process.env.NODE_ENV === 'production') {
+	db = require('../models/db');
+} else {
+	db = require('../models/db');
+}
+
+const userCtrl = require('../controllers/user-controller')(db);
 apiRouter.post('/register', validateUser, userCtrl.register);
 apiRouter.put('/auth', validateUser, userCtrl.auth);
 apiRouter.get('/users', authenticate, userCtrl.getById);
 apiRouter.put('/users', authenticate, userCtrl.updateById);
 
-const companyCtrl = require('../controllers/company-controller');
+const companyCtrl = require('../controllers/company-controller')(db);
 apiRouter.post('/companies', authenticate, companyCtrl.createNew);
 apiRouter.get(
 	'/companies/:id',
@@ -29,7 +36,7 @@ apiRouter.put(
 	companyCtrl.updateById
 );
 
-const dossierCtrl = require('../controllers/dossier-controller');
+const dossierCtrl = require('../controllers/dossier-controller')(db);
 apiRouter.post('/dossiers', authenticate, dossierCtrl.createNew);
 apiRouter.get(
 	'/dossiers/:id',
@@ -42,7 +49,7 @@ apiRouter.put(
 	dossierCtrl.updateById
 );
 
-const workContractCtrl = require('../controllers/work-contract-controller');
+const workContractCtrl = require('../controllers/work-contract-controller')(db);
 apiRouter.post('/work-contracts', authenticate, workContractCtrl.createNew);
 apiRouter.get(
 	'/work-contracts/:id',

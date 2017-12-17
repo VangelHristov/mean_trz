@@ -1,21 +1,17 @@
 'use strict';
 
-const
-	ControllerFactory = require('./controller-factory'),
-	db = require('../models/db');
+const ControllerFactory = require('./controller-factory');
 
-const
-	Dossier = db.model('Dossier'),
-	Company = db.model('Company');
-
-module.exports = ControllerFactory(
-	{
-		Model                  : Dossier,
-		populate               : {
-			path: 'workContracts'
-		},
-		ParentModel            : Company,
-		parentModelName        : 'company',
-		parentRefCollectionName: 'dossiers'
-	}
-);
+module.exports = function getController(db) {
+	return ControllerFactory(
+		{
+			Model                  : db.model('Dossier'),
+			populate               : {
+				path: 'workContracts'
+			},
+			ParentModel            : db.model('Company'),
+			parentModelName        : 'company',
+			parentRefCollectionName: 'dossiers'
+		}
+	);
+};
