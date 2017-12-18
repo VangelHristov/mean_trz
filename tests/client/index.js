@@ -1,8 +1,6 @@
 (function clientTestModule() {
 	'use strict';
 
-	window.mocha.setup('qunit');
-
 	const {test, suite, beforeEach, afterEach} = window;
 	const {assert} = window.chai;
 

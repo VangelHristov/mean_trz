@@ -36,8 +36,6 @@ gulp.task('nodemon', ['test'], function nodemonTask(cb) {
 		env   : {NODE_ENV: "development", JWT_SECRET: '123'}
 	})
 		.on('start', function nodemonStart() {
-			// to avoid nodemon being started multiple times
-			// thanks @matthisk
 			if (!started) {
 				cb();
 				started = true;
@@ -48,6 +46,8 @@ gulp.task('nodemon', ['test'], function nodemonTask(cb) {
 gulp.task('test', ['test-server', 'test-client'], () => {});
 
 gulp.task('test-client', () => {
+	process.env.NODE_ENV = 'testing';
+
 	return run(
 		[
 			'./node_modules/karma/bin/karma',
@@ -59,7 +59,9 @@ gulp.task('test-client', () => {
 });
 
 gulp.task('test-server', () => {
-	return run(
+	process.env.NODE_ENV = 'testing';
+
+	run(
 		[
 			'./node_modules/mocha/bin/mocha',
 			'tests/server/*.js',

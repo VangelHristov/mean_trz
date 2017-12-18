@@ -4,7 +4,7 @@ module.exports = function karmaConfig(config) {
 	config.set({
 		autoWatch    : false,
 		basePath     : '../',
-		browsers     : [/*'Chrome',*/ 'Firefox'],
+		browsers     : ['Firefox'],
 		client       : {
 			mocha: {
 				opts: 'tests/mocha.opts'
@@ -100,7 +100,6 @@ module.exports = function karmaConfig(config) {
 			require('karma-mocha'),
 			require('karma-chai'),
 			require('karma-sinon'),
-			require('karma-chrome-launcher'),
 			require('karma-firefox-launcher'),
 			require('karma-mocha-reporter'),
 			require('karma-notify-reporter')
@@ -108,7 +107,7 @@ module.exports = function karmaConfig(config) {
 		reporters    : ['mocha', 'notify'],
 		mochaReporter: {
 			showDiff: true,
-			output: 'autowatch'
+			output: 'full'
 		},
 		singleRun    : true
 	});

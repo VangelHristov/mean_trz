@@ -1,4 +1,6 @@
---reporter mocha-notifier-reporter
 --recursive
 --colors
 --ui qunit
+--reporter mocha-multi
+--reporter-options mocha-notifier-reporter=-,spec=-
+--colors
