@@ -13,7 +13,8 @@ let gulp = require('gulp'),
 	notify = require('node-notifier'),
 	imageMin = require('gulp-imagemin'),
 	sourceMaps = require('gulp-sourcemaps'),
-	htmlMin = require('gulp-htmlmin');
+	htmlMin = require('gulp-htmlmin'),
+	run = require('gulp-run');
 
 gulp.task('default', ['browser-sync'], function defaultTask() {
 });
@@ -26,11 +27,14 @@ gulp.task('browser-sync', ['nodemon'], function browserSyncTask() {
 		port   : 3001
 	});
 });
-gulp.task('nodemon', function nodemonTask(cb) {
+gulp.task('nodemon', ['test'], function nodemonTask(cb) {
 
 	let started = false;
 
-	return nodemon({script: 'bin/www', env: {NODE_ENV: "development", JWT_SECRET:'123'}})
+	return nodemon({
+		script: 'bin/www',
+		env   : {NODE_ENV: "development", JWT_SECRET: '123'}
+	})
 		.on('start', function nodemonStart() {
 			// to avoid nodemon being started multiple times
 			// thanks @matthisk
@@ -39,6 +43,30 @@ gulp.task('nodemon', function nodemonTask(cb) {
 				started = true;
 			}
 		});
+});
+
+gulp.task('test', ['test-server', 'test-client'], () => {});
+
+gulp.task('test-client', () => {
+	return run(
+		[
+			'./node_modules/karma/bin/karma',
+			'start',
+			'tests/karma.config.js'
+		].join(' ')
+	)
+		.exec();
+});
+
+gulp.task('test-server', () => {
+	return run(
+		[
+			'./node_modules/mocha/bin/mocha',
+			'tests/server/*.js',
+			'--opts tests/mocha.opts'
+		].join(' ')
+	)
+		.exec();
 });
 
 gulp.task('clean', function cleanDist() {

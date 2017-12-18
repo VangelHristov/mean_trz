@@ -1,0 +1,4 @@
+--reporter mocha-notifier-reporter
+--recursive
+--colors
+--ui qunit
