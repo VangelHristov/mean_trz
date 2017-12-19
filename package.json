@@ -11,7 +11,6 @@
     "production": "forever ./bin/www"
   },
   "dependencies": {
-    "angular-resource": "^1.6.7",
     "body-parser": "^1.18.2",
     "compression": "^1.6.2",
     "crypto": "^1.0.1",
