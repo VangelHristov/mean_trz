@@ -2,31 +2,28 @@
 
 const sinon = require('sinon');
 
-let json, res, next, request, usersCollection, companiesCollection,
-	dossierCollection, workContractsCollection, dbDocument, validationError,
+let statusStub, jsonStub, response, next, request, dbDocument, validationError,
 	dbCreate, objectId, nonExistingId, querySelect, queryPopulate,
-	queryExec,
-	dbFindById, dbQuery, dbSave, dbModel;
+	queryExec, dbFindById, dbQuery, dbSave, dbModel;
 
-const get = function () {
-	json = sinon.spy();
-	res = {};
-	res.json = json;
+const init = function () {
+	jsonStub = sinon.stub();
+	jsonStub.returnsArg(0);
+
+	statusStub = sinon.stub();
+	statusStub.returns({json: jsonStub});
+
+	response = {status: statusStub, json: jsonStub};
 
 	next = sinon.spy();
 
 	request = {body: {}, params: {}};
 
-	usersCollection = sinon.spy();
-	companiesCollection = sinon.spy();
-	dossierCollection = sinon.spy();
-	workContractsCollection = sinon.spy();
-
 	dbDocument = {
-		users        : {push: usersCollection},
-		companies    : {push: companiesCollection},
-		dossiers     : {push: dossierCollection},
-		workContracts: {push: workContractsCollection}
+		users        : {push: sinon.spy()},
+		companies    : {push: sinon.spy()},
+		dossiers     : {push: sinon.spy()},
+		workContracts: {push: sinon.spy()}
 	};
 
 	validationError = {name: 'ValidationError'};
@@ -40,7 +37,9 @@ const get = function () {
 	nonExistingId = '987654321';
 
 	querySelect = sinon.spy();
+
 	queryPopulate = sinon.spy();
+
 	queryExec = sinon.stub();
 	queryExec.resolves(dbDocument);
 
@@ -68,17 +67,12 @@ const get = function () {
 	dbDocument.save = dbSave;
 
 	return {
-		res,
+		response,
 		request,
 		next,
-		json,
 		objectId,
 		nonExistingId,
 		dbDocument,
-		usersCollection,
-		companiesCollection,
-		dossierCollection,
-		workContractsCollection,
 		dbCreate,
 		dbFindById,
 		dbSave,
@@ -87,26 +81,27 @@ const get = function () {
 		queryPopulate,
 		queryExec,
 		dbQuery,
-		dbModel
+		dbModel,
+		reset: function () {
+			request.body = {};
+			request.params = {};
+
+			statusStub.resetHistory();
+			jsonStub.resetHistory();
+			dbCreate.resetHistory();
+			queryExec.resetHistory();
+			dbFindById.resetHistory();
+			dbSave.resetHistory();
+
+			next.reset();
+			querySelect.reset();
+			queryPopulate.reset();
+			dbDocument.users.push.reset();
+			dbDocument.companies.push.reset();
+			dbDocument.dossiers.push.reset();
+			dbDocument.workContracts.push.reset();
+		}
 	};
 };
 
-const reset = function () {
-	request.body = {};
-	request.params = {};
-
-	json.reset();
-	next.reset();
-	usersCollection.reset();
-	companiesCollection.reset();
-	dossierCollection.reset();
-	workContractsCollection.reset();
-	dbCreate.reset();
-	querySelect.reset();
-	queryPopulate.reset();
-	queryExec.reset();
-	dbFindById.reset();
-	dbSave.reset();
-};
-
-module.exports = {get, reset};
+module.exports = init();

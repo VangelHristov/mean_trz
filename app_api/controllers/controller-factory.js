@@ -6,16 +6,16 @@ module.exports = function controllerFactory(config) {
 	function getById(req, res, next) {
 		return util
 			.find(config.Model, req.params.id, config.populate)
-			.then(res.json)
-			.catch(next);
+			.then(doc => res.json(doc))
+			.catch(err => next(err));
 	}
 
 	function updateById(req, res, next) {
 		return util
 			.update(config.Model, req.body, req.params.id)
-			.then(util.save)
-			.then(res.json)
-			.catch(next);
+			.then(doc => util.save(doc))
+			.then(doc => res.json(doc))
+			.catch(err => next(err));
 	}
 
 	function createNew(req, res, next) {
@@ -43,7 +43,7 @@ module.exports = function controllerFactory(config) {
 			.then(() => {
 				return res.json(document);
 			})
-			.catch(next);
+			.catch(err => next(err));
 	}
 
 	return {
