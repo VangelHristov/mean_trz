@@ -3,7 +3,7 @@
 const sinon = require('sinon');
 
 let statusStub, jsonStub, response, next, request, dbDocument, validationError,
-	dbCreate, objectId, nonExistingId, querySelect, queryPopulate,
+	dbCreate, queryId, promiseId, querySelect, queryPopulate,
 	queryExec, dbFindById, dbQuery, dbSave, dbModel;
 
 const init = function () {
@@ -20,6 +20,7 @@ const init = function () {
 	request = {body: {}, params: {}};
 
 	dbDocument = {
+		name         : 'document',
 		users        : {push: sinon.spy()},
 		companies    : {push: sinon.spy()},
 		dossiers     : {push: sinon.spy()},
@@ -33,8 +34,8 @@ const init = function () {
 	        .resolves(dbDocument);
 	dbCreate.throws(validationError);
 
-	objectId = '123456789';
-	nonExistingId = '987654321';
+	queryId = '123456789';
+	promiseId = '987654321';
 
 	querySelect = sinon.spy();
 
@@ -50,8 +51,10 @@ const init = function () {
 	};
 
 	dbFindById = sinon.stub();
-	dbFindById.withArgs(objectId)
+	dbFindById.withArgs(queryId)
 	          .returns(dbQuery);
+	dbFindById.withArgs(promiseId)
+	          .resolves(dbDocument);
 	dbFindById.returns(null);
 
 	dbModel = {
@@ -59,10 +62,7 @@ const init = function () {
 		create  : dbCreate
 	};
 
-	dbSave = sinon.stub();
-	dbSave.withArgs(dbDocument)
-	      .resolves(dbDocument);
-	dbSave.throws(validationError);
+	dbSave = (doc) => Promise.resolve(doc);
 
 	dbDocument.save = dbSave;
 
@@ -70,8 +70,8 @@ const init = function () {
 		response,
 		request,
 		next,
-		objectId,
-		nonExistingId,
+		queryId,
+		promiseId,
 		dbDocument,
 		dbCreate,
 		dbFindById,
@@ -91,14 +91,13 @@ const init = function () {
 			dbCreate.resetHistory();
 			queryExec.resetHistory();
 			dbFindById.resetHistory();
-			dbSave.resetHistory();
 
 			next.reset();
 			querySelect.reset();
 			queryPopulate.reset();
 			dbDocument.users.push.reset();
-			dbDocument.companies.push.reset();
 			dbDocument.dossiers.push.reset();
+			dbDocument.companies.push.reset();
 			dbDocument.workContracts.push.reset();
 		}
 	};
