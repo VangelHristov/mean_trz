@@ -1,6 +1,8 @@
 /* eslint-disable no-sync */
 'use strict';
 
+require('dotenv').config();
+
 const
 	mongoose = require('mongoose'),
 	patterns = require('./../validations/patterns'),

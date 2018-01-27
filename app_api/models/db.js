@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 'use strict';
 
+require('dotenv').config();
+
 const
 	userSchema = require('./user/user'),
 	companySchema = require('./company/company'),

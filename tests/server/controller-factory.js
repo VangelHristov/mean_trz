@@ -61,3 +61,18 @@ test('updateById updates document with provided values', (done) => {
 			done();
 		});
 });
+
+test('createNew returns newly created document', (done) => {
+	mock.request.body = {
+		user: mock.queryId,
+		name: 'test document'
+	};
+
+	controller
+		.createNew(mock.request, mock.response, mock.next)
+		.then(doc => {
+			assert.deepEqual(doc, mock.dbDocument);
+			assert.isTrue(mock.next.notCalled);
+			done();
+		});
+});

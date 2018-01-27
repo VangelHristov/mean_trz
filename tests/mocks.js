@@ -19,7 +19,11 @@ const init = function () {
 
 	request = {body: {}, params: {}};
 
+	queryId = '123456789';
+	promiseId = '987654321';
+
 	dbDocument = {
+		_id          : promiseId,
 		name         : 'document',
 		users        : {push: sinon.spy()},
 		companies    : {push: sinon.spy()},
@@ -30,12 +34,7 @@ const init = function () {
 	validationError = {name: 'ValidationError'};
 
 	dbCreate = sinon.stub();
-	dbCreate.withArgs(dbDocument)
-	        .resolves(dbDocument);
-	dbCreate.throws(validationError);
-
-	queryId = '123456789';
-	promiseId = '987654321';
+	dbCreate.resolves(dbDocument);
 
 	querySelect = sinon.spy();
 
