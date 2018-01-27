@@ -1,0 +1,66 @@
+<div class = "modal fade"
+     id = "login-modal"
+     tabindex = "-1"
+     role = "dialog"
+     aria-hidden = "true">
+	<div class = "modal-dialog">
+		<div class = "trz-form-container">
+			<h1>Вход</h1>
+			<br>
+			<form ng-submit = "submitForm(data)"
+			      name = "login"
+			      novalidate>
+				<input type = "email"
+				       name = "loginEmail"
+				       ng-model = "data.email"
+				       placeholder = "Имейл"
+				       ng-required = "true"
+				       ng-pattern = "patterns.email"
+				       autofocus>
+				
+				<div class = "has-errors"
+				     ng-show = "login.loginEmail.$touched && login.loginEmail.$invalid">
+					<div ng-show = "login.loginEmail.$error.pattern">
+						{{errors.invalidValue}}
+					</div>
+					<div ng-show = "login.loginEmail.$error.required">
+						{{errors.requiredField}}
+					</div>
+				</div>
+				<input type = "password"
+				       name = "loginPassword"
+				       ng-model = "data.password"
+				       placeholder = "Парола"
+				       ng-required = "true"
+				       ng-pattern = "patterns.password">
+				
+				<div class = "has-errors"
+				     ng-show = "login.loginPassword.$touched && login.loginPassword.$invalid">
+					<div ng-show = "login.loginPassword.$error.pattern">
+						{{errors.passwordRequirements}}
+					</div>
+					<div ng-show = "login.loginPassword.$error.required">
+						{{errors.requiredField}}
+					</div>
+				</div>
+				<input type = "submit"
+				       name = "login"
+				       class = "trz-form-submit"
+				       ng-disabled = "login.$invalid"
+				       value = "Вход">
+			</form>
+			<div class = "modal-dismiss hidden" data-dismiss = "modal"></div>
+			<div class = "trz-form-help">
+				<a data-toggle = "modal"
+				   data-dismiss = "modal"
+				   data-target = "#register-modal">Регистрация
+				</a>
+				-
+				<a data-dismiss = "modal"
+				   data-toggle = "modal"
+				   data-target = "#forgotten-password-modal">Забравена парола
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

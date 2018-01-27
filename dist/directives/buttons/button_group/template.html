@@ -1,0 +1,17 @@
+<div>
+	<div class = "row">
+		<div class = "col-xs-11">
+			<a ng-repeat = "button in buttons"
+			   ng-href = "{{button.href || ''}}"
+			   data-toggle = "{{button.target || ''}}"
+			   data-target = "{{button.target|| ''}}"
+			   class = "btn light col-lg-2"
+			   type = "button">
+				<i class = "fa {{button.icon}}"></i>
+				{{button.label}}
+			</a>
+		</div>
+	</div>
+
+	<div class = "divider"></div>
+</div>

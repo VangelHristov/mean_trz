@@ -20,12 +20,17 @@ app.use(helmet({hidePoweredBy: true}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(favicon(path.join(__dirname, 'app_client/images', 'favicon.ico')));
-app.use(express.static(path.join(__dirname, 'app_client')));
 app.use(compression());
+if (process.env.NODE_ENV === 'production') {
+	app.use(favicon(path.join(__dirname, 'dist/images', 'favicon.ico')));
+	app.use(express.static(path.join(__dirname, 'dist')));
+	app.get('/', (req, res) => res.sendFile('./dist/index.html'));
+} else {
+	app.use(favicon(path.join(__dirname, 'app_client/images', 'favicon.ico')));
+	app.use(express.static(path.join(__dirname, 'app_client')));
+	app.get('/', (req, res) => res.sendFile('./app_client/index.html'));
+}
 
-// routes
-app.get('/', (req, res) => res.sendFile('./app_client/index.html'));
 app.use('/api', apiRoutes);
 
 app.use(function catch404(req, res, next) {

@@ -3,17 +3,15 @@
 <head>
 	<meta charset = "UTF-8">
 	<title page-title></title>
+	<!--WARNING BUG IN USEMIN:  EACH LINK TAG NEED TO BE IN 1 LINE,
+		otherwise the generated css will be broken-->
 	
 	<!--build:css main.min.css-->
-	<link rel = "stylesheet"
-	      href = "bower_components/bootstrap/dist/css/bootstrap.min.css">
-	<link rel = "stylesheet"
-	      href = "bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-	<link rel = "stylesheet"
-	      href = "bower_components/font-awesome/css/font-awesome.min.css">
-	<link rel = "stylesheet" href = "bower_components/toastr/toastr.min.css">
-	<link rel = "stylesheet"
-	      href = "uib-datepicker/ui-bootstrap-custom-2.5.0-csp.css">
+	<link rel = "stylesheet" href = "bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel = "stylesheet" href = "bower_components/bootstrap/dist/css/bootstrap-theme.css">
+	<link rel = "stylesheet" href = "bower_components/font-awesome/css/font-awesome.css">
+	<link rel = "stylesheet" href = "bower_components/toastr/toastr.css">
+	<link rel = "stylesheet" href = "uib-datepicker/ui-bootstrap-custom-2.5.0-csp.css">
 	<link rel = "stylesheet" href = "css/layout.css">
 	<!--endbuild-->
 </head>
@@ -42,10 +40,8 @@
 <script src = "bower_components/angular-animate/angular-animate.js"></script>
 <script src = "bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src = "bower_components/angular-messages/angular-messages.js"></script>
-
 <script src = "app.js"></script>
 <script src = "app.config.js"></script>
-
 <script src = "controllers/user.js"></script>
 <script src = "controllers/add-company.js"></script>
 <script src = "controllers/companies.js"></script>
@@ -53,6 +49,22 @@
 <script src = "controllers/add-dossier.js"></script>
 <script src = "controllers/dossier-details.js"></script>
 <script src = "controllers/add-work-contract-controller.js"></script>
+<script src = "services/storage.js"></script>
+<script src = "services/data-context.js"></script>
+<script src = "services/notification.js"></script>
+<script src = "services/modal-dismiss.js"></script>
+<script src = "services/authentication-interceptor.js"></script>
+<script src = "services/breadcrumb.js"></script>
+<script src = "services/date-string-to-date-object.js"></script>
+<script src = "services/validate.js"></script>
+<script src = "constants/notification-messages.js"></script>
+<script src = "constants/datepicker-options.js"></script>
+<script src = "constants/reason-for-work-contract.js"></script>
+<script src = "constants/type-insured.js"></script>
+<script src = "constants/validation-patterns.js"></script>
+<script src = "constants/error-messages.js"></script>
+<!--endbuild-->
+
 
 <script src = "directives/modals/login/directive.js"></script>
 <script src = "directives/modals/register/directive.js"></script>
@@ -69,22 +81,4 @@
 <script src = "directives/validations/bulstat.js"></script>
 <script src = "directives/validations/egn.js"></script>
 <script src = "directives/validations/iban.js"></script>
-
-<script src = "services/storage.js"></script>
-<script src = "services/data-context.js"></script>
-<script src = "services/notification.js"></script>
-<script src = "services/modal-dismiss.js"></script>
-<script src = "services/authentication-interceptor.js"></script>
-<script src = "services/breadcrumb.js"></script>
-<script src = "services/date-string-to-date-object.js"></script>
-<script src = "services/validate.js"></script>
-
-
-<script src = "constants/notification-messages.js"></script>
-<script src = "constants/datepicker-options.js"></script>
-<script src = "constants/reason-for-work-contract.js"></script>
-<script src = "constants/type-insured.js"></script>
-<script src = "constants/validation-patterns.js"></script>
-<script src = "constants/error-messages.js"></script>
-<!--endbuild-->
 </html>

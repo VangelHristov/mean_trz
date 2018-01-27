@@ -80,6 +80,7 @@ gulp.task('build', ['clean'], function build() {
 		'useMin',
 		'copyfonts',
 		'copyviews',
+		'copyDirectives',
 		'imageMin'
 	);
 });
@@ -125,6 +126,11 @@ gulp.task('copyviews', function copyViews() {
 	return gulp.src('./app_client/views/*.html')
 	           .pipe(htmlMin({collapseWhitespace: true}))
 	           .pipe(gulp.dest('./dist/views'));
+});
+
+gulp.task('copyDirectives', function copyDirect(){
+	return gulp.src('./app_client/directives/**/*.*')
+		.pipe(gulp.dest('./dist/directives'));
 });
 
 gulp.task('imageMin', function imagemin() {

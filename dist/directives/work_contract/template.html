@@ -1,0 +1,519 @@
+<div class = "tab-pane acive">
+	<div class = "panel-body">
+		<form class = "form form-horizontal" name = "workContract" novalidate>
+			<!-- 1.Вид осигурен-->
+			<div class = "form-group">
+				<label for = "insured-type" class = "col-lg-4 control-label">Вид
+					осигурен
+					<span
+						class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<select ng-model = "model.typeInsured"
+					        id = "insured-type"
+					        name = "typeInsured"
+					        class = "form-control"
+					        required = "">
+						<option ng-repeat = "option in typeInsured"
+						        value = "{{option}}">{{option}}
+						</option>
+					</select>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.typeInsured.$error"
+					     ng-if = "workContract.typeInsured.$dirty">
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class = "form-group">
+				<label for = "reason-for-contract"
+				       class = "col-lg-4 control-label">Основание за сключване
+					<span
+						class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<select ng-model = "model.reasonForContract"
+					        id = "reason-for-contract"
+					        name = "reasonForContract"
+					        class = "form-control"
+					        ng-required = "true">
+						<option ng-repeat = "option in reasonForContract"
+						        value = "{{option}}">{{option}}
+						</option>
+					</select>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.reasonForContract.$error"
+					     ng-if = "workContract.reasonForContract.$dirty">
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 2.Номер на трудов договор-->
+			<div class = "form-group">
+				<label for = "contract-number" class = "col-lg-4 control-label">
+					Номер на трудов
+					договор
+					<span class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.contractNumber"
+					       id = "contract-number"
+					       name = "contractNumber"
+					       type = "text"
+					       required = ""
+					       ng-pattern = "validationPatterns.contractNumber"
+					       class = "form-control input-md"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.contractNumber.$error"
+					     ng-if = "workContract.contractNumber.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidWorkContract}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 3.Дата на сключване-->
+			<div class = "form-group">
+				<label for = "signing-date" class = "col-lg-4 control-label">
+					Дата на сключване
+					<span
+						class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<div class = "input-group">
+						
+						<input ng-model = "model.signingDate"
+						       id = "signing-date"
+						       name = "signingDate"
+						       type = "text"
+						       class = "form-control input-md"
+						       required = ""
+						       uib-datepicker-popup = "{{datepicker.format}}"
+						       datepicker-options = "datepicker.dateOptions"
+						       is-open = "signing"
+						       close-text = "{{datepicker.closeText}}"
+						       clear-text = "{{datepicker.clearText}}"
+						       current-text = "{{datepicker.currentText}}"/>
+						
+						<span class = "input-group-btn">
+                            <button type = "button"
+                                    class = "btn btn-default"
+                                    ng-click = "open('signing')">
+                                <i class = "fa fa-calendar"></i>
+                            </button>
+                        </span>
+					</div>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.signingDate.$error"
+					     ng-if = "workContract.signingDate.$dirty">
+						<div class = "control-label"
+						     ng-message = "date">
+							{{errors.invalidDateFormat}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 4.Дата на започване-->
+			<div class = "form-group">
+				<label for = "start-date" class = "col-lg-4 control-label">
+					Дата на постъпване
+					<span class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<div class = "input-group">
+						
+						<input ng-model = "model.startingDate"
+						       id = "start-date"
+						       type = "text"
+						       class = "form-control input-md"
+						       name = "startingDate"
+						       uib-datepicker-popup = "{{datepicker.format}}"
+						       datepicker-options = "datepicker.dateOptions"
+						       required = ""
+						       is-open = "starting"
+						       close-text = "{{datepicker.closeText}}"
+						       clear-text = "{{datepicker.clearText}}"
+						       current-text = "{{datepicker.currentText}}"/>
+						
+						<span class = "input-group-btn">
+                            <button type = "button"
+                                    class = "btn btn-default"
+                                    ng-click = "open('starting')">
+                                <i class = "fa fa-calendar"></i>
+                            </button>
+                        </span>
+					</div>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.startingDate.$error"
+					     ng-if = "workContract.startingDate.$dirty">
+						<div class = "control-label"
+						     ng-message = "date">
+							{{errors.invalidDateFormat}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 5.Основна заплата-->
+			<div class = "form-group">
+				<label for = "principal-salary"
+				       class = "col-lg-4 control-label">Основна заплата
+					<span
+						class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.principalSalary"
+					       id = "principal-salary"
+					       name = "principalSalary"
+					       required = ""
+					       type = "text"
+					       ng-pattern = "validationPatterns.salary"
+					       class = "form-control input-md"/>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.principalSalary.$error"
+					     ng-if = "workContract.principalSalary.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.salaryAmountBelowMinimum}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 6.Срок на договора-->
+			<div class = "form-group">
+				<label for = "contract-length" class = "col-lg-4 control-label">
+					Срок на договора
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.contractLengthInMonths"
+					       id = "contract-length"
+					       name = "contractLength"
+					       type = "text"
+					       class = "form-control input-md"
+					       ng-pattern = "validationPatterns.contractLength"/>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.contractLength.$error"
+					     ng-if = "workContract.contractLength.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidContractLength}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 7.Работно време-->
+			<div class = "form-group">
+				<label for = "work-hours" class = "col-lg-4 control-label">
+					Работно време
+					<span class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.workHours"
+					       id = "work-hours"
+					       name = "workHours"
+					       required = ""
+					       type = "text"
+					       class = "form-control input-md"
+					       ng-pattern = "validationPatterns.workHours"/>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.workHours.$error"
+					     ng-if = "workContract.workHours.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidWorkHours}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 8.Длъжност НКПД-->
+			<div class = "form-group">
+				<label for = "nkpd" class = "col-lg-4 control-label">Длъжност
+					НКПД
+					<span class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.occupationCode"
+					       id = "nkpd"
+					       name = "nkpd"
+					       required = ""
+					       type = "text"
+					       class = "form-control input-md"
+					       ng-pattern = "validationPatterns.occupationCode"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.nkpd.$error"
+					     ng-if = "workContract.nkpd.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 9.КИД-->
+			<div class = "form-group">
+				<label for = "kid" class = "col-lg-4 control-label">КИД
+					<span class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.codeEconomicActivity"
+					       id = "kid"
+					       name = "kid"
+					       required = ""
+					       type = "text"
+					       class = "form-control input-md"
+					       ng-pattern = "validationPatterns.codeEconomicActivity"/>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.kid.$error"
+					     ng-if = "workContract.kid.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 10.Срок на предизвестие-->
+			<div class = "form-group">
+				<label for = "notice" class = "col-lg-4 control-label">
+					Срок на предизвестие
+					<span class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.leaveNoticeLengthInDays"
+					       id = "notice"
+					       name = "notice"
+					       type = "text"
+					       class = "form-control input-md"
+					       ng-pattern = "validationPatterns.notice"/>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.notice.$error"
+					     ng-if = "workContract.notice.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 11.Отпуск размер-->
+			<div class = "form-group">
+				<label for = "payed-vacation" class = "col-lg-4 control-label">
+					Отпуск размер
+					<span class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.payedVacationLengthInDays"
+					       id = "payed-vacation"
+					       name = "payedVacation"
+					       required = ""
+					       type = "text"
+					       class = "form-control input-md"
+					       ng-pattern = "validationPatterns.vacation"/>
+					
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.payedVacation.$error"
+					     ng-if = "workContract.payedVacation.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidVacationLength}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 13.Общ стаж-->
+			<div class = "form-group">
+				<label for = "work-experience" class = "col-lg-4 control-label">
+					Общ стаж
+					<span
+						class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.experience.total"
+					       id = "work-experience"
+					       name = "totalExperience"
+					       required = ""
+					       type = "text"
+					       ng-pattern = "validationPatterns.yearsWorkExperience"
+					       class = "form-control input-md"/>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.totalExperience.$error"
+					     ng-if = "workContract.totalExperience.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 14.Стаж по специалност-->
+			<div class = "form-group">
+				<label for = "speciality-experience"
+				       class = "col-lg-4 control-label">
+					Стаж по
+					специалност
+					<span class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.experience.speciality"
+					       id = "speciality-experience"
+					       name = "specialityExperience"
+					       required = ""
+					       type = "text"
+					       class = "form-control input-md"
+					       ng-pattern = "validationPatterns.yearsWorkExperience"/>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.specialityExperience.$error"
+					     ng-if = "workContract.specialityExperience.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 15.Осигурителен стаж-->
+			<div class = "form-group">
+				<label for = "insured-experience"
+				       class = "col-lg-4 control-label">Осигурителен стаж
+					<span
+						class = "required"> *</span>
+				</label>
+				<div class = "col-lg-4">
+					<input ng-model = "model.experience.insurable"
+					       id = "insured-experience"
+					       name = "insuredExperience"
+					       ng-required = "true"
+					       type = "text"
+					       class = "form-control input-md"
+					       ng-pattern = "validationPatterns.yearsWorkExperience"/>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.insuredExperience.$error"
+					     ng-if = "workContract.insuredExperience.$dirty">
+						<div class = "control-label"
+						     ng-message = "pattern">
+							{{errors.invalidValue}}
+						</div>
+						<div class = "control-label"
+						     ng-message = "required">
+							{{errors.requiredField}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 16.Дата на прекратяване-->
+			<div class = "form-group">
+				<label for = "termination-date"
+				       class = "col-lg-4 control-label">
+					Дата на прекратяване
+				</label>
+				<div class = "col-lg-4">
+					<div class = "input-group">
+						
+						<input ng-model = "model.terminationDate"
+						       id = "termination-date"
+						       name = "terminationDate"
+						       type = "text"
+						       class = "form-control input-md"
+						       uib-datepicker-popup = "{{datepicker.format}}"
+						       datepicker-options = "datepicker.dateOptions"
+						       is-open = "termination"
+						       close-text = "{{datepicker.closeText}}"
+						       clear-text = "{{datepicker.clearText}}"
+						       current-text = "{{datepicker.currentText}}"/>
+						
+						<span class = "input-group-btn">
+                            <button type = "button"
+                                    class = "btn btn-default"
+                                    ng-click = "open('termination')">
+                                <i class = "fa fa-calendar"></i>
+                            </button>
+                        </span>
+					</div>
+					<div class = "has-error"
+					     role = "alert"
+					     ng-messages = "workContract.terminationDate.$error"
+					     ng-if = "workContract.terminationDate.$dirty">
+						<div class = "control-label"
+						     ng-message = "date">
+							{{errors.invalidDateFormat}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Бутон `Зпази`-->
+			<div class = "form-group">
+				<div class = "col-lg-4 col-lg-offset-4">
+					<button ng-click = "submit()"
+					        type = "button"
+					        class = "btn btn-default"
+					        ng-disabled = "workContract.$invalid">
+						Запази
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

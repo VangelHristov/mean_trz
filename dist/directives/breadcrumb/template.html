@@ -1,0 +1,8 @@
+<div class = "trz-breadcrumb">
+	<a ng-repeat = "breadcrumb in breadcrumbs"
+	   ng-href = "{{breadcrumb.href}}"
+	   ng-class = "$last?'active':''"
+	   class = "light">
+		<div>{{breadcrumb.label}}</div>
+	</a>
+</div>
